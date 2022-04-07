@@ -1,0 +1,76 @@
+{
+  "name": "FiHub Rapid Smart Contract List",
+  "logoURI": "ipfs://QmXmGmc6imTfnBuhJ72eCsopZZZaSXqKFgaMziNUts7GRR",
+  "keywords": [
+    "audited",
+    "verified",
+    "special tokens"
+  ],
+  "tags": {
+    "AMM": {
+      "name": "AMM",
+      "description": "An Automated Market Maker Protocol relies on smart contracts to automate price matching or discovery"
+    },
+    "uniswapV2": {
+      "name": "Uniswap V2 AMM",
+      "description": "An AMM using Uniswap's V2 codebase for swaps"
+    },
+    "masterChef": {
+      "name": "MasterChef",
+      "description": "A system to distribute tokens directly from the token minting contract. Leverages pools within a common smart contract"
+    },
+    "stakingRewards": {
+      "name": "Staking Rewards",
+      "description": "An individual staking pool to distribute tokens"
+    },
+    "autoCompounder": {
+      "name": "Auto-compounder",
+      "description": "A vault or deposit address that provides access to the amortization of costs for compounding rewards or interest"
+    }
+  },
+  "timestamp": "2022-04-07T00:00:00+00:00",
+  "smartContractsInfo": [
+    {
+      "chainId": 43114 ,
+      "address": "0xefa94DE7a4656D787667C749f7E1223D71E9FD88",
+      "platform": "Pangolin",
+      "name": "Pangolin Factory",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png",
+      "tags": [
+        "stablecoin"
+      ]
+    },
+    {
+      "chainId": 43114,
+      "address": "0x8665e1FAD19D14b16Eecb96A7608cD42962E7eEB",
+      "symbol": "sDAIe",
+      "platform": "Snowball",
+      "name": "SnowGlobeOptimizeDAIE",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
+      "tags": [
+        "autoCompounder",
+        "stablecoin", 
+        "verified"
+      ],
+      "extensions": [
+        {
+          "audited": {
+            "depositAll()":true,
+            "withdrawAll()":true
+          },
+          "timelock/multisig": {
+            "withdrawals":true,
+            "upgrades": true
+          }
+
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  }
+}
