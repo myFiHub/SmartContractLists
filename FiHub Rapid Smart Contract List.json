@@ -37,7 +37,8 @@
       "name": "Pangolin Factory",
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png",
       "tags": [
-        "stablecoin"
+        "AMM",
+        "uniswapV2"
       ]
     },
     {
@@ -50,14 +51,24 @@
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
       "tags": [
         "autoCompounder",
-        "stablecoin", 
+        "ERC20", 
         "verified"
       ],
       "extensions": [
         {
-          "audited": {
-            "depositAll()":true,
-            "withdrawAll()":true
+          "depositAll()": {
+            "audited":true,
+            "auditors":{
+				"halborn":true,
+				"certik":false
+			}
+			"expectedAssets":{
+				"daiE":"0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
+			}
+			"want":{
+				"daiE":"0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
+			}
+			"Severity":1
           },
           "timelock/multisig": {
             "withdrawals":true,
