@@ -26,15 +26,143 @@
     "autoCompounder": {
       "name": "Auto-compounder",
       "description": "A vault or deposit address that provides access to the amortization of costs for compounding rewards or interest"
+    },
+    "ERC20": {
+      "name": "ERC20",
+      "description": "Ethereum Request for Comment 20 (ERC-20) is the implemented standard for fungible tokens created using the Ethereum blockchain. ERC-20 guides the creation of new tokens on the Ethereum blockchain so that they are interchangeable with other tokens used within smart contracts."
+    },
+    "lostToken": {
+      "name": "Lost Token",
+      "description": "The LOST Token is a governance, access and rewards representation of the Lost Worlds ecosystem. It has 50 Million hard-cap supply compatible with the Avalanche network."
+    },
+    "governance": {
+      "name": "Governance",
+      "description": "A governance token is a cryptocurrency that gives its holders a right to vote on proposed changes."
+    },
+    "vault": {
+      "name": "Vault",
+      "description": "A destination deposit location that provides a mapping of ownership or receipt token."
+    },
+    "proxy": {
+      "name": "Proxy",
+      "description": "A smart contract that references or acts as a pass-through for another contract."
     }
+
   },
-  "timestamp": "2022-04-07T00:00:00+00:00",
+  "timestamp": "2022-08-28T00:00:00+00:00",
   "smartContractsInfo": [
+    {
+      "chainId": 43114 ,
+      "address": "0x449674B82F05d498E126Dd6615a1057A9c088f2C",
+      "platform": "Lost Worlds",
+      "name": "Lost Token",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x449674B82F05d498E126Dd6615a1057A9c088f2C/logo.png",
+      "tags": [
+        "lostToken",
+        "governance",
+        "ERC20"
+      ],
+      "extensions": 
+        { 
+          "abi":{
+            "approve":{
+              "audited":true,
+              "verified":true,
+              "auditors":{
+                "FiHub:":true
+              },
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "spender",
+                  "type": "address" 
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount", 
+                  "type": "uint256" }
+              ],
+              "name": "approve",
+              "outputs": [
+                { 
+                  "internalType": "bool", 
+                  "name": "",
+                  "type": "bool" 
+                }
+              ],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            }  
+            },
+          "max_mint": true
+          }          
+                 
+    },
+    {
+      "chainId": 43114 ,
+      "address": "0x2cf6625e35b241F30871FAac932dC5946D092631",
+      "proxyaddress":"0x9D40Cc6F0f420e56430d1121a025108A44180f6c",
+      "platform": "Lost Worlds",
+      "name": "Lost Worlds Staking",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x449674B82F05d498E126Dd6615a1057A9c088f2C/logo.png",
+      "tags": [
+        "lostToken",
+        "stakingRewards",
+        "vault",
+        "proxy"
+      ],
+      "extensions": 
+        { 
+          "abi":{
+            "deposit":{
+              "audited":false,
+              "verified":true,
+              "auditors":{
+                "FiHub:":false
+              },
+              "inputs": [
+                { 
+                "internalType": "uint256",
+                "name": "amount_",
+                "type": "uint256" }
+              ],
+              "name": "deposit",
+              "outputs": [],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            "withdraw":{
+              "audited":false,
+              "verified":true,
+              "auditors":{
+                "FiHub:":false
+              },
+              "inputs": [
+                {
+                  "internalType": "uint256", 
+                  "name": "amount_", 
+                  "type": "uint256"
+                }
+              ],
+              "name": "withdraw",
+              "outputs": [],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            } 
+          },
+          "ownerAddress":"0xd8298b2ae8bA74879CC1f147C58eA0207D9Fb276",
+          "ownerIsMultisig":"false",
+          "Severity":4
+        }          
+                 
+    },
     {
       "chainId": 43114 ,
       "address": "0xefa94DE7a4656D787667C749f7E1223D71E9FD88",
       "platform": "Pangolin",
       "name": "Pangolin Factory",
+      "decimals":18,
+      "symbol":"LOST",
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png",
       "tags": [
         "AMM",
@@ -59,16 +187,16 @@
           "depositAll()": {
             "audited":true,
             "auditors":{
-				"halborn":true,
-				"certik":false
-			}
-			"expectedAssets":{
-				"daiE":"0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
-			}
-			"want":{
-				"daiE":"0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
-			}
-			"Severity":1
+				        "halborn":true,
+				        "certik":false
+		        },
+			      "expectedAssets":{
+				      "daiE":"0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
+		      	},
+			      "want":{
+			      	"daiE":"0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
+			      },
+			      "Severity":1
           },
           "timelock/multisig": {
             "withdrawals":true,
