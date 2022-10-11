@@ -48,7 +48,7 @@
       "description": "A wrapped token is a smart contract that takes an existing asset and provides an alternative version according to some standard that represents the value."
     }
   },
-  "timestamp": "2022-08-28T00:00:00+00:00",
+  "timestamp": 1665098313,
   "smartContractsInfo": [
     {
       "chainId": 43114,
@@ -56,7 +56,7 @@
       "platform": "Lost Worlds",
       "name": "Lost Token",
       "decimals": 18,
-      "max_mint": true,
+      "maxMint": true,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x449674B82F05d498E126Dd6615a1057A9c088f2C/logo.png",
       "tags": ["lostToken", "governance", "ERC20"],
       "extensions": {
@@ -64,9 +64,7 @@
           "approve": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "FiHub:": true
-            },
+            "auditors": ["FiHub"],
             "inputs": [
               {
                 "internalType": "address",
@@ -106,9 +104,7 @@
           "approve": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "FiHub:": true
-            },
+            "auditors": ["FiHub"],
             "inputs": [
               {
                 "internalType": "address",
@@ -148,9 +144,7 @@
           "deposit": {
             "audited": false,
             "verified": true,
-            "auditors": {
-              "FiHub:": false
-            },
+            "auditors": ["FiHub"],
             "inputs": [
               {
                 "internalType": "uint256",
@@ -166,9 +160,7 @@
           "withdraw": {
             "audited": false,
             "verified": true,
-            "auditors": {
-              "FiHub:": false
-            },
+            "auditors": ["FiHub"],
             "inputs": [
               {
                 "internalType": "uint256",
@@ -183,8 +175,7 @@
           }
         },
         "ownerAddress": "0xd8298b2ae8bA74879CC1f147C58eA0207D9Fb276",
-        "ownerIsMultisig": "false",
-        "Severity": 4
+        "ownerIsMultisig": false
       }
     },
     {
@@ -208,9 +199,7 @@
           "addLiquidity": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -277,9 +266,7 @@
           "addliquidityAvax": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -336,9 +323,7 @@
           "removeLiquidity": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -395,9 +380,7 @@
           "removeLiquidityAvax": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -461,9 +444,7 @@
           "addLiquidity": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -530,9 +511,7 @@
           "addliquidityAvax": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -589,9 +568,7 @@
           "removeLiquidity": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -648,9 +625,7 @@
           "removeLiquidityAvax": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               {
                 "internalType": "address",
@@ -715,9 +690,7 @@
           "deposit": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               { "internalType": "uint256", "name": "_amount", "type": "uint256" }
             ],
@@ -729,9 +702,7 @@
           "withdrawAll": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [],
             "name": "withdrawAll",
             "outputs": [],
@@ -741,9 +712,7 @@
           "withdraw": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               { "internalType": "uint256", "name": "_shares", "type": "uint256" }
             ],
@@ -755,9 +724,7 @@
           "approve": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               { "internalType": "address", "name": "spender", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
@@ -783,9 +750,7 @@
           "deposit": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               { "internalType": "uint256", "name": "_amount", "type": "uint256" }
             ],
@@ -797,9 +762,7 @@
           "withdrawAll": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [],
             "name": "withdrawAll",
             "outputs": [],
@@ -809,9 +772,7 @@
           "withdraw": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               { "internalType": "uint256", "name": "_shares", "type": "uint256" }
             ],
@@ -823,9 +784,7 @@
           "getReward": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [],
             "name": "getReward",
             "outputs": [],
@@ -835,9 +794,7 @@
           "approve": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "halborn": true
-            },
+            "auditors": ["Halborn"],
             "inputs": [
               { "internalType": "address", "name": "spender", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
@@ -863,9 +820,7 @@
           "approve": {
             "audited": true,
             "verified": true,
-            "auditors": {
-              "FiHub:": true
-            },
+            "auditors": ["FiHub"],
             "inputs": [
               {
                 "internalType": "address",
@@ -904,9 +859,7 @@
           "deposit": {
             "audited": false,
             "verified": true,
-            "auditors": {
-              "FiHub:": false
-            },
+            "auditors": ["FiHub"],
             "inputs": [
               {
               "internalType": "uint256",
@@ -932,9 +885,7 @@
           "withdraw": {
             "audited": false,
             "verified": true,
-            "auditors": {
-              "FiHub:": false
-            },
+            "auditors": ["FiHub"],
             "inputs": [
               {
               "internalType": "uint256",
@@ -959,41 +910,8 @@
           }
         },
         "ownerAddress": "0x66c048d27afb5ee59e4c07101a483654246a4eda",
-        "ownerIsMultisig": "true",
-        "Severity": 2
+        "ownerIsMultisig": true
       }
-    },
-    {
-      "chainId": 43114,
-      "address": "0x8665e1FAD19D14b16Eecb96A7608cD42962E7eEB",
-      "symbol": "sDAIe",
-      "platform": "Snowball",
-      "name": "SnowGlobeOptimizeDAIE",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
-      "tags": ["autoCompounder", "ERC20", "verified"],
-      "extensions": [
-        {
-          "depositAll()": {
-            "audited": true,
-            "auditors": {
-              "halborn": true,
-              "certik": false
-            },
-            "expectedAssets": {
-              "daiE": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
-            },
-            "want": {
-              "daiE": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70"
-            },
-            "Severity": 1
-          },
-          "timelock/multisig": {
-            "withdrawals": true,
-            "upgrades": true
-          }
-        }
-      ]
     }
   ],
   "version": {
