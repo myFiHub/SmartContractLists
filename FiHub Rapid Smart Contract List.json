@@ -1413,6 +1413,56 @@
     },
     {
       "chainId": 43114,
+      "address": "0x4483f0b6e2f5486d06958c20f8c39a7abe87bf8f",
+      "platform": "TraderJoe",
+      "name": "BoostedMasterChefJoe",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png",
+      "tags": ["stakingRewards", "vault", "masterChef","proxy"],
+      "extensions": {
+        "abi": {
+          "deposit": {
+            "audited": false,
+            "verified": true,
+            "auditors": ["FiHub"],
+            "inputs": [
+              { "internalType": "uint256", "name": "_pid", "type": "uint256" },
+              { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+            ],
+            "name": "deposit",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          "harvestFromMasterChef": {
+            "audited": false,
+            "verified": true,
+            "auditors": ["FiHub"],
+            "inputs": [],
+            "name": "harvestFromMasterChef",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+            },
+          "withdraw": {
+            "audited": false,
+            "verified": true,
+            "auditors": ["FiHub"],
+            "inputs": [
+              { "internalType": "uint256", "name": "_pid", "type": "uint256" },
+              { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+            ],
+            "name": "withdraw",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        },
+        "ownerAddress": "0x66c048d27afb5ee59e4c07101a483654246a4eda",
+        "ownerIsMultisig": true
+      }
+    },
+    {
+      "chainId": 43114,
       "address": "0x4D91F4aCE55472df8863957CF69D2bE497B43be4",
       "platform": "Snowball",
       "name": "sPGL USDC-AVAX",
@@ -1539,7 +1589,7 @@
       "chainId": 43114,
       "address": "0x870850a72490379f60a4924ca64bca89a6d53a9d ",
       "platform": "Hubble",
-      "name": "Hublle Insurance Fund",
+      "name": "Hubble Insurance Fund",
       "decimals":6,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
       "tags": ["receipt token", "derivative","native","proxy"],
@@ -1587,6 +1637,105 @@
             ],
             "name": "withdraw",
             "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        }
+      }
+    },
+    {
+      "chainId": 43114,
+      "address": "0xa0f6397FEBB03021F9BeF25134DE79835a24D76e ",
+      "platform": "Axial",
+      "name": "SwapFlashLoan",
+      "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
+      "tags": ["stableswap", "bridged","native","fees"],
+      "extensions": {
+        "abi": {
+          "approve": {
+            "audited": false,
+            "verified": true,
+            "auditors": [""],
+            "inputs": [
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
+            ],
+            "name": "approve",
+            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          "addLiquidity": {
+            "audited": false,
+            "verified": true,
+            "auditors": ["Halborn"],
+            "inputs": [
+              { "internalType": "uint256[]", "name": "amounts", "type": "uint256[]" },
+              { "internalType": "uint256", "name": "minToMint", "type": "uint256" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
+            ],
+            "name": "addLiquidity",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          "removeLiquidity": {
+            "audited": false,
+            "verified": true,
+            "auditors": ["Halborn"],
+            "inputs": [
+              { "internalType": "uint256", "name": "amount", "type": "uint256" },
+              {
+                "internalType": "uint256[]",
+                "name": "minAmounts",
+                "type": "uint256[]"
+              },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
+            ],
+            "name": "removeLiquidity",
+            "outputs": [
+              { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        }
+      }
+    },
+    {
+      "chainId": 43114,
+      "address": "0xf4003F4efBE8691B60249E6afbD307aBE7758adb",
+      "platform": "Axial",
+      "name": " Axial USDC+USDT+MIM+YUSD (HERO)",
+      "symbol": "HERO",
+      "decimals": 18,
+      "tags": ["wrapped", "ERC20"],
+      "extensions": {
+        "abi": {
+          "approve": {
+            "audited": true,
+            "verified": true,
+            "auditors": ["FiHub"],
+            "inputs": [
+              {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+              }
+            ],
+            "name": "approve",
+            "outputs": [
+              {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+              }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
