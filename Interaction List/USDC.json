@@ -1,0 +1,221 @@
+{
+    "chainId": 43114,
+    "token": {
+      "symbol": "USDC",
+      "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+      "platform": "USDC",
+      "description": "USD Coin (USDC) is a digital currency that is fully backed by U.S. dollar assets. USDC is a tokenized U.S. dollar, with the value of one USDC coin pegged 1:1 to the value of one U.S. dollar. The value of USDC is designed to remain stable, making USDC a stablecoin. In order to issue 1 USDC, a corresponding 1 USD (or an equivalent amount of USD-denominated assets) is held in the USDC Reserves.  Circle commits to redeem 1 USDC for 1 USD"
+    },
+    "routes": {
+      "aaveDeposit": [
+        { "type": "lend", "platform": "Aave" }
+      ],
+      "benqiDeposit": [
+        { "type": "lend", "platform": "Benqi" }
+      ],
+      "platypusDeposit": [
+        { "type": "lp", "platform": "Platypus" },
+        { "type": "farm", "platform": "Platypus" }
+      ],
+      "gmxDeposit": [
+        { "type": "approve", "platform": "GMX" },
+        { "type": "stake", "platform": "GMX" }
+      ],
+      "hubbleStaking": [
+        { "type": "mint", "platform": "Hubble" },
+        { "type": "farm", "platform": "Hubble" }
+      ],
+      "traderJoeFarming": [
+        { "type": "lp", "platform": "TraderJoe" },
+        { "type": "farm", "platform": "TraderJoe" }
+      ],
+      "snowballCompounding": [
+        { "type": "lp", "platform": "TraderJoe" },
+        { "type": "compound", "platform": "Snowball" },
+        { "type": "stake", "platform": "Snowball" }
+      ],
+      "yieldyakCompounding": [
+        { "type": "lp", "platform": "TraderJoe" },
+        { "type": "compound", "platform": "Yield Yak" }
+      ]
+    },
+    "interactions": [
+      {
+        "type": "lend",
+        "platform": "Aave",
+        "tokens": [
+          { "symbol": "USDC", "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" }
+        ],
+        "contract": "0x794a61358D6845594F94dc1DB02A252b5b4814aD ",
+        "method": "deposit"
+      },
+      {
+        "type": "lend",
+        "platform": "Benqi",
+        "tokens": [
+          { "symbol": "USDC", "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" }
+        ],
+        "contract": "0xB715808a78F6041E46d61Cb123C9B4A27056AE9C  ",
+        "method": "deposit"
+      },
+      {
+        "type": "lp",
+        "platform": "Platypus",
+        "tokens": [
+          { "symbol": "USDC", "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" }
+        ],
+        "contract": "0x66357dCaCe80431aee0A7507e2E361B7e2402370",
+        "method": "deposit"
+      },
+      {
+        "type": "farm",
+        "platform": "Platypus",
+        "tokens": [
+          { "symbol": "USLP-USDC", "address": "0xAEf735B1E7EcfAf8209ea46610585817Dc0a2E16" }
+        ],
+        "contract": "0xfF6934aAC9C94E1C39358D4fDCF70aeca77D0AB0",
+        "method": "deposit",
+        "poolId": 4
+      },
+      {
+        "type": "mint",
+        "platform": "Hubble",
+        "tokens": [
+          { "symbol": "USDC", "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" }
+        ],
+        "contract": "0x5c6FC0AaF35A55E7a43Fff45575380bCEdb5Cbc2",
+        "method": "mintWithReserve"
+      },
+      {
+        "type": "stake",
+        "platform": "Hubble",
+        "tokens": [
+          { "symbol": "hUSD", "address": "0x5c6FC0AaF35A55E7a43Fff45575380bCEdb5Cbc2" }
+        ],
+        "contract": "0x870850a72490379f60a4924ca64bca89a6d53a9d",
+        "method": "deposit"
+      },
+      {
+        "type": "approve",
+        "platform": "GMX",
+        "tokens": [
+          { "symbol": "USDC", "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" }
+        ],
+        "contract": "0xe54ca86531e17ef3616d22ca28b0d458b6c89106",
+        "method": ""
+      },
+      {
+        "type": "stake",
+        "platform": "GMX",
+        "tokens": [
+          { "symbol": "USDC", "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" }
+        ],
+        "contract": "0x82147C5A7E850eA4E28155DF107F2590fD4ba327",
+        "method": "mintAndStakeGlp"
+      },
+      {
+        "type": "lp",
+        "platform": "TraderJoe",
+        "tokens": [
+          { "symbol": "AVAX", "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" },
+          { "symbol": "USDC", "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" }
+        ],
+        "contract": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
+        "method": "addLiquidityAVAX"
+      },
+      {
+        "type": "farm",
+        "platform": "TraderJoe",
+        "tokens": [
+          { "symbol": "JLP", "address": "0x2A8A315e82F85D1f0658C5D66A452Bbdd9356783" }
+        ],
+        "contract": "0x4483f0b6e2f5486d06958c20f8c39a7abe87bf8f",
+        "method": "deposit",
+        "poolId": 8
+      },
+      {
+        "type": "compound",
+        "platform": "Yield Yak",
+        "tokens": [
+          { "symbol": "JLP", "address": "0x2A8A315e82F85D1f0658C5D66A452Bbdd9356783" }
+        ],
+        "contract": "0x4483f0b6e2f5486d06958c20f8c39a7abe87bf8f  ",
+        "method": "deposit"
+      },
+      {
+        "type": "compound",
+        "platform": "Snowball",
+        "tokens": [
+          { "symbol": "JLP", "address": "0x2A8A315e82F85D1f0658C5D66A452Bbdd9356783" }
+        ],
+        "contract": "0x4D91F4aCE55472df8863957CF69D2bE497B43be4  ",
+        "method": "deposit"
+      },
+      {
+        "type": "stake",
+        "platform": "Snowball",
+        "tokens": [
+          { "symbol": "sJLP", "address": "0x4D91F4aCE55472df8863957CF69D2bE497B43be4" }
+        ],
+        "contract": "0x542baef5a78Aa9EAB505b38E52b16F930d07835d",
+        "method": "deposit"
+      }
+    ],
+    
+    "platforms": [
+      {
+        "name": "Aave",
+        "token": "AAVE.e",
+        "description": "Aave is a decentralized money market protocol where users can lend and borrow cryptocurrency across different assets as collateral. The protocol has a native token called AAVE, which is also a governance token that lets the community decide the direction of the protocol in a collective manner. Lenders can earn interest by providing liquidity to the market, while borrowers can borrow by collateralizing their cryptoassets to take out loans from the liquidity pools.",
+        "link": "https://aave.com/"
+      },
+      {
+        "name": "Benqi",
+        "token": "QI",
+        "description": "BENQI is a non-custodial liquidity market protocol, built on Avalanche. The protocol enables users to effortlessly lend, borrow, and earn interest with their digital assets. The protocol has a native token called QI. Lenders can earn interest by providing liquidity to the market, while borrowers can borrow by collateralizing their cryptoassets to take out loans from the liquidity pools.",
+        "link": "https://benqi.fi/"
+      },
+      {
+        "name": "USDC",
+        "token": "USDC",
+        "description": "Lost Worlds is a location-based NFT platform, enabling protocols to launch NFT collections collectible by physically moving around the world, and users to curate their portfolio while trading with others.",
+        "link": "https://circle.com/"
+      },
+      {
+        "name": "TraderJoe",
+        "token": "JOE",
+        "description": "Trader Joe is your one-stop decentralized trading platform on the Avalanche network. TraderJoe combines DEX services with DeFi lending to offer leveraged trading. Their products are community driven which allows us to give fees collected from liquidation and swaps back to the users via their JOE/sJOE staking mechanism. JOE is a governance token that also rewards its holders with a share of exchange revenues.",
+        "link": "https://traderjoexyz.com/"
+      },
+      {
+        "name": "GMX",
+        "token": "GMX",
+        "description": "GMX is a decentralized spot and perpetual exchange that supports low swap fees and zero price impact trades. Trading is supported by a multi-asset pool that earns liquidity providers fees from market making, swap fees, leverage trading (spreads, funding fees & liquidations) and asset rebalancing. Dynamic pricing is supported by Chainlink Oracles along with TWAP pricing from leading volume DEXs.",
+        "link": "https://gmx.io/"
+      },
+      {
+        "name": "Hubble",
+        "token": "",
+        "description": "Pangolin is a community-driven decentralized exchange, up and running since the beginning of the Avalanche chain. They also offer limit orders as well as staking services.",
+        "link": "https://hubble.exchange/"
+      },
+      {
+        "name": "Pangolin",
+        "token": "PNG",
+        "description": "Pangolin is a community-driven decentralized exchange, up and running since the beginning of the Avalanche chain. They also offer limit orders as well as staking services.",
+        "link": "https://pangolin.exchange/"
+      },
+      {
+        "name": "Snowball",
+        "token": "SNOB",
+        "description": "Snowball is a developer focused Venture Studio DAO. Snowball is an integral part of an autocompounding protocol, Axial (a stableswap), Teddy Cash (an algorithmic stablecoin) and more. SNOB is the governance token for Snowball. It can be locked to obtain xSNOB, which gives access to revenue sharing, reward boosting, and voting. Snowball token distribution started on block 443700, around March 3rd, 2021. Tokens are minted through mining as incentive rewards for participating in Snowball. ",
+        "link": "snowball.network/"
+      },
+      {
+        "name": "Yield Yak",
+        "token": "YAK",
+        "description": "Yield Yak is a tool to earn more yield from DeFi farming on the Avalanche network. Yield Yak compounds rewards, deploys new strategies, proposes key configuration updates and contributes to development in the ecosystem. Yield Yak farms can run forever, without the team's involvement. Staked $YAK will receive $AVAX. YY network revenue (collected in tokens, usually) is converted to AVAX and distributed to stakers.",
+        "link": "https://yieldyak.com/"
+      }
+    ]
+  }
