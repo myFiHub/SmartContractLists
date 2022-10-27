@@ -66,24 +66,12 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
             "outputs": [
-              {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-              }
+              { "internalType": "bool", "name": "", "type": "bool" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -106,24 +94,12 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
             "outputs": [
-              {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-              }
+              { "internalType": "bool", "name": "", "type": "bool" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -146,11 +122,7 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "uint256",
-                "name": "amount_",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amount_", "type": "uint256" }
             ],
             "name": "deposit",
             "outputs": [],
@@ -162,11 +134,7 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "uint256",
-                "name": "amount_",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amount_", "type": "uint256" }
             ],
             "name": "withdraw",
             "outputs": [],
@@ -201,121 +169,41 @@
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "tokenA",
-                "type": "address"
-              },
-              {
-                "internalType": "address",
-                "name": "tokenB",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountADesired",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountBDesired",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountBMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "tokenA", "type": "address" },
+              { "internalType": "address", "name": "tokenB", "type": "address" },
+              { "internalType": "uint256", "name": "amountADesired", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountBDesired", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountBMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "addLiquidity",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountA",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountB",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountA", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountB", "type": "uint256" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
-          "addliquidityAvax": {
+          "addLiquidityAVAX": {
             "audited": true,
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "token",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountTokenDesired",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountTokenMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAXMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "token", "type": "address" },
+              { "internalType": "uint256", "name": "amountTokenDesired", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountTokenMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAXMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "addLiquidityAVAX",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountToken",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAX",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountToken", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAX", "type": "uint256" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" }
             ],
             "stateMutability": "payable",
             "type": "function"
@@ -325,106 +213,38 @@
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "tokenA",
-                "type": "address"
-              },
-              {
-                "internalType": "address",
-                "name": "tokenB",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountBMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "tokenA", "type": "address" },
+              { "internalType": "address", "name": "tokenB", "type": "address" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountBMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "removeLiquidity",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountA",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountB",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountA", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountB", "type": "uint256" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
-          "removeLiquidityAvax": {
+          "removeLiquidityAVAX": {
             "audited": true,
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "token",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountTokenMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAXMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "token", "type": "address" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountTokenMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAXMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "removeLiquidityAVAX",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountToken",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAX",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountToken", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAX", "type": "uint256" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -446,121 +266,41 @@
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "tokenA",
-                "type": "address"
-              },
-              {
-                "internalType": "address",
-                "name": "tokenB",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountADesired",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountBDesired",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountBMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "tokenA", "type": "address" },
+              { "internalType": "address", "name": "tokenB", "type": "address" },
+              { "internalType": "uint256", "name": "amountADesired", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountBDesired", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountBMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "addLiquidity",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountA",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountB",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountA", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountB", "type": "uint256" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
-          "addliquidityAvax": {
+          "addLiquidityAVAX": {
             "audited": true,
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "token",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountTokenDesired",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountTokenMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAXMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "token", "type": "address" },
+              { "internalType": "uint256", "name": "amountTokenDesired", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountTokenMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAXMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "addLiquidityAVAX",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountToken",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAX",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountToken", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAX", "type": "uint256" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" }
             ],
             "stateMutability": "payable",
             "type": "function"
@@ -570,106 +310,38 @@
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "tokenA",
-                "type": "address"
-              },
-              {
-                "internalType": "address",
-                "name": "tokenB",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountBMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "tokenA", "type": "address" },
+              { "internalType": "address", "name": "tokenB", "type": "address" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountBMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "removeLiquidity",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountA",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountB",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountA", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountB", "type": "uint256" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
-          "removeLiquidityAvax": {
+          "removeLiquidityAVAX": {
             "audited": true,
             "verified": true,
             "auditors": ["Halborn"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "token",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "liquidity",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountTokenMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAXMin",
-                "type": "uint256"
-              },
-              {
-                "internalType": "address",
-                "name": "to",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "deadline",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "token", "type": "address" },
+              { "internalType": "uint256", "name": "liquidity", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountTokenMin", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAXMin", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" },
+              { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "removeLiquidityAVAX",
             "outputs": [
-              {
-                "internalType": "uint256",
-                "name": "amountToken",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amountAVAX",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amountToken", "type": "uint256" },
+              { "internalType": "uint256", "name": "amountAVAX", "type": "uint256" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -682,7 +354,7 @@
       "address": "0xF19e161736746DDbE8bAEd66B87beaDa8b9476A6",
       "platform": "Snowball",
       "name": "sPGL Lost-Avax",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
       "tags": ["autoCompounder","vault","stakingRewards"],
       "extensions": {
@@ -742,7 +414,7 @@
       "address": "0x2d3F879B3637d8d48Ca7617e0F540285E9782342",
       "platform": "Snowball",
       "name": "Gauge for sPGL Lost-Avax",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
       "tags": ["autoCompounder","vault","stakingRewards"],
       "extensions": {
@@ -822,24 +494,12 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
             "outputs": [
-              {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-              }
+              { "internalType": "bool", "name": "", "type": "bool" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -861,21 +521,9 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-              "internalType": "uint256",
-              "name": "pid",
-              "type": "uint256"
-              },
-              {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-              },
-              {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-              }
+              { "internalType": "uint256", "name": "pid", "type": "uint256" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" }
             ],
             "name": "deposit",
             "outputs": [],
@@ -887,21 +535,9 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-              "internalType": "uint256",
-              "name": "pid",
-              "type": "uint256" 
-              },
-              {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-              },
-              { 
-              "internalType": "address",
-              "name": "to",
-              "type": "address" 
-              }
+              { "internalType": "uint256", "name": "pid", "type": "uint256" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" },
+              { "internalType": "address", "name": "to", "type": "address" }
             ],
             "name": "withdraw",
             "outputs": [],
@@ -929,24 +565,12 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
             "outputs": [
-              {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-              }
+              { "internalType": "bool", "name": "", "type": "bool" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -970,24 +594,12 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
             "outputs": [
-              {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-              }
+              { "internalType": "bool", "name": "", "type": "bool" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -1000,9 +612,9 @@
       "address": "0xB715808a78F6041E46d61Cb123C9B4A27056AE9C",
       "platform": "Benqi",
       "name": "qiUSDCn",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
-      "tags": ["autoCompounder","vault","stakingRewards"],
+      "tags": ["autoCompounder", "vault", "stakingRewards"],
       "extensions": {
         "abi": {
           "mint": {
@@ -1013,8 +625,9 @@
               { "internalType": "uint256", "name": "mintAmount", "type": "uint256" }
             ],
             "name": "mint",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-            "payable": false,
+            "outputs": [
+              { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
@@ -1026,8 +639,9 @@
               { "internalType": "uint256", "name": "redeemAmount", "type": "uint256" }
             ],
             "name": "redeemUnderlying",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-            "payable": false,
+            "outputs": [
+              { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
@@ -1039,8 +653,9 @@
               { "internalType": "uint256", "name": "redeemTokens", "type": "uint256" }
             ],
             "name": "redeem",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-            "payable": false,
+            "outputs": [
+              { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
@@ -1053,7 +668,9 @@
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1065,9 +682,9 @@
       "address": "0x625E7708f30cA75bfd92586e17077590C60eb4cD",
       "platform": "Aave",
       "name": "aAaveUSDC",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
-      "tags": ["lending","interest","proxy"],
+      "tags": ["lending", "interest", "proxy"],
       "extensions": {
         "abi": {
           "approve": {
@@ -1079,7 +696,9 @@
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1092,13 +711,13 @@
       "platform": "Aave",
       "name": "Pool V3",
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
-      "tags": ["lending","proxy"],
+      "tags": ["lending", "proxy"],
       "extensions": {
         "abi": {
           "deposit": {
             "audited": true,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs":[
               { "internalType": "address", "name": "asset", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" },
@@ -1113,14 +732,16 @@
           "withdraw": {
             "audited": true,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "asset", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" },
               { "internalType": "address", "name": "to", "type": "address" }
             ],
             "name": "withdraw",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "outputs": [
+              { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1132,9 +753,9 @@
       "address": "0x625E7708f30cA75bfd92586e17077590C60eb4cD",
       "platform": "Platypus",
       "name": "Platypus USDC Asset (LP-USDC)",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
-      "tags": ["stableswap","fees","proxy"],
+      "tags": ["stableswap", "fees", "proxy"],
       "extensions": {
         "abi": {
           "approve": {
@@ -1146,7 +767,9 @@
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1165,7 +788,7 @@
           "deposit": {
             "audited": true,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "token", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" },
@@ -1212,7 +835,7 @@
           "deposit": {
             "audited": true,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "uint256", "name": "_pid", "type": "uint256" },
               { "internalType": "uint256", "name": "_amount", "type": "uint256" }
@@ -1220,11 +843,7 @@
             "name": "deposit",
             "outputs": [
               { "internalType": "uint256", "name": "reward", "type": "uint256" },
-              {
-                "internalType": "uint256[]",
-                "name": "additionalRewards",
-                "type": "uint256[]"
-              }
+              { "internalType": "uint256[]", "name": "additionalRewards", "type": "uint256[]" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -1232,7 +851,7 @@
           "depositFor": {
             "audited": true,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "uint256", "name": "_pid", "type": "uint256" },
               { "internalType": "uint256", "name": "_amount", "type": "uint256" },
@@ -1254,11 +873,7 @@
             "name": "withdraw",
             "outputs": [
               { "internalType": "uint256", "name": "reward", "type": "uint256" },
-              {
-                "internalType": "uint256[]",
-                "name": "additionalRewards",
-                "type": "uint256[]"
-              }
+              { "internalType": "uint256[]", "name": "additionalRewards", "type": "uint256[]" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -1272,9 +887,9 @@
       "address": "0xc0253c3cC6aa5Ab407b5795a04c28fB063273894",
       "platform": "GMX",
       "name": "USD Gambit",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
-      "tags": ["stablecoin","native"],
+      "tags": ["stablecoin", "native"],
       "extensions": {
         "abi": {
           "approve": {
@@ -1286,7 +901,9 @@
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1298,7 +915,7 @@
       "address": "0x01234181085565ed162a948b6a5e88758CD7c7b8",
       "platform": "GMX",
       "name": "GMX LP",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
       "tags": ["liquidity pair"],
       "extensions": {
@@ -1312,7 +929,9 @@
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1325,9 +944,7 @@
       "platform": "GMX",
       "name": "GLP Manager",
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd/logo.png",
-      "tags": ["Perpetuals", "swaps", "index"],
-      "extensions": {
-      }
+      "tags": ["Perpetuals", "swaps", "index"]
     },
     {
       "chainId": 43114,
@@ -1341,7 +958,7 @@
           "mintAndStakeGlp": {
             "audited": true,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "_token", "type": "address" },
               { "internalType": "uint256", "name": "_amount", "type": "uint256" },
@@ -1349,14 +966,16 @@
               { "internalType": "uint256", "name": "_minGlp", "type": "uint256" }
             ],
             "name": "mintAndStakeGlp",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "outputs": [
+              { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
           "unstakeAndRedeemGlp": {
             "audited": true,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "_tokenOut", "type": "address" },
               { "internalType": "uint256", "name": "_glpAmount", "type": "uint256" },
@@ -1364,7 +983,9 @@
               { "internalType": "address", "name": "_receiver", "type": "address" }
             ],
             "name": "unstakeAndRedeemGlp",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "outputs": [
+              { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1386,24 +1007,12 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
             "outputs": [
-              {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-              }
+              { "internalType": "bool", "name": "", "type": "bool" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -1417,7 +1026,7 @@
       "platform": "TraderJoe",
       "name": "BoostedMasterChefJoe",
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png",
-      "tags": ["stakingRewards", "vault", "masterChef","proxy"],
+      "tags": ["stakingRewards", "vault", "masterChef", "proxy"],
       "extensions": {
         "abi": {
           "deposit": {
@@ -1466,9 +1075,9 @@
       "address": "0x4D91F4aCE55472df8863957CF69D2bE497B43be4",
       "platform": "Snowball",
       "name": "sPGL USDC-AVAX",
-      "decimals":18,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0xC38f41A296A4493Ff429F1238e030924A1542e50/logo.png",
-      "tags": ["autoCompounder","vault","stakingRewards"],
+      "tags": ["autoCompounder", "vault", "stakingRewards"],
       "extensions": {
         "abi": {
           "deposit": {
@@ -1514,7 +1123,9 @@
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           }
@@ -1523,31 +1134,33 @@
     },
     {
       "chainId": 43114,
-      "address": "0x5c6FC0AaF35A55E7a43Fff45575380bCEdb5Cbc2 ",
+      "address": "0x5c6FC0AaF35A55E7a43Fff45575380bCEdb5Cbc2",
       "platform": "Hubble",
       "name": "HUSD",
-      "decimals":6,
+      "decimals": 6,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
-      "tags": ["stablecoin","native","proxy"],
+      "tags": ["stablecoin", "native", "proxy"],
       "extensions": {
         "abi": {
           "approve": {
             "audited": false,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "spender", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
           "mint": {
             "audited": false,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "to", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
@@ -1560,7 +1173,7 @@
           "mintWithReserve": {
             "audited": false,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "to", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
@@ -1573,7 +1186,7 @@
           "withdraw": {
             "audited": false,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
@@ -1587,24 +1200,26 @@
     },
     {
       "chainId": 43114,
-      "address": "0x870850a72490379f60a4924ca64bca89a6d53a9d ",
+      "address": "0x870850a72490379f60a4924ca64bca89a6d53a9d",
       "platform": "Hubble",
       "name": "Hubble Insurance Fund",
-      "decimals":6,
+      "decimals": 6,
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
-      "tags": ["receipt token", "derivative","native","proxy"],
+      "tags": ["receipt token", "derivative", "native", "proxy"],
       "extensions": {
         "abi": {
           "approve": {
             "audited": false,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "spender", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
@@ -1613,11 +1228,7 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "uint256",
-                "name": "amount_",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amount_", "type": "uint256" }
             ],
             "name": "deposit",
             "outputs": [],
@@ -1629,11 +1240,7 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "uint256",
-                "name": "amount_",
-                "type": "uint256"
-              }
+              { "internalType": "uint256", "name": "amount_", "type": "uint256" }
             ],
             "name": "withdraw",
             "outputs": [],
@@ -1645,23 +1252,25 @@
     },
     {
       "chainId": 43114,
-      "address": "0xa0f6397FEBB03021F9BeF25134DE79835a24D76e ",
+      "address": "0xa0f6397FEBB03021F9BeF25134DE79835a24D76e",
       "platform": "Axial",
       "name": "SwapFlashLoan",
       "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/43114/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo_24.png",
-      "tags": ["stableswap", "bridged","native","fees"],
+      "tags": ["stableswap", "bridged", "native", "fees"],
       "extensions": {
         "abi": {
           "approve": {
             "audited": false,
             "verified": true,
-            "auditors": [""],
+            "auditors": [],
             "inputs": [
               { "internalType": "address", "name": "spender", "type": "address" },
               { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
-            "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+            "outputs": [
+              { "internalType": "bool", "name": "", "type": "bool" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
@@ -1675,7 +1284,9 @@
               { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "addLiquidity",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "outputs": [
+              { "internalType": "uint256", "name": "", "type": "uint256" }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
           },
@@ -1685,11 +1296,7 @@
             "auditors": ["Halborn"],
             "inputs": [
               { "internalType": "uint256", "name": "amount", "type": "uint256" },
-              {
-                "internalType": "uint256[]",
-                "name": "minAmounts",
-                "type": "uint256[]"
-              },
+              { "internalType": "uint256[]", "name": "minAmounts", "type": "uint256[]" },
               { "internalType": "uint256", "name": "deadline", "type": "uint256" }
             ],
             "name": "removeLiquidity",
@@ -1706,7 +1313,7 @@
       "chainId": 43114,
       "address": "0xf4003F4efBE8691B60249E6afbD307aBE7758adb",
       "platform": "Axial",
-      "name": " Axial USDC+USDT+MIM+YUSD (HERO)",
+      "name": "Axial USDC+USDT+MIM+YUSD (HERO)",
       "symbol": "HERO",
       "decimals": 18,
       "tags": ["wrapped", "ERC20"],
@@ -1717,24 +1324,12 @@
             "verified": true,
             "auditors": ["FiHub"],
             "inputs": [
-              {
-                "internalType": "address",
-                "name": "spender",
-                "type": "address"
-              },
-              {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-              }
+              { "internalType": "address", "name": "spender", "type": "address" },
+              { "internalType": "uint256", "name": "amount", "type": "uint256" }
             ],
             "name": "approve",
             "outputs": [
-              {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-              }
+              { "internalType": "bool", "name": "", "type": "bool" }
             ],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -1742,11 +1337,10 @@
         }
       }
     }
-        
   ],
   "version": {
     "major": 1,
-    "minor": 0,
-    "patch": 1
+    "minor": 1,
+    "patch": 0
   }
 }
