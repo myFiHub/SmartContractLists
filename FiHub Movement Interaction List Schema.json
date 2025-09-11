@@ -1,0 +1,418 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FiHub Movement Interaction List Schema",
+  "description": "Schema for DeFi interaction lists on Movement blockchain with Move VM specific features",
+  "type": "object",
+  "required": ["chainId", "token", "interactions", "platforms"],
+  "properties": {
+    "chainId": {
+      "type": "integer",
+      "description": "Chain ID for Movement blockchain (1 for mainnet)"
+    },
+    "token": {
+      "type": "object",
+      "description": "Primary token information for the interaction list",
+      "required": ["symbol", "address", "platform", "description"],
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "description": "Token symbol (e.g., MOVE, USDC)"
+        },
+        "address": {
+          "type": "string",
+          "description": "Token address on Movement blockchain"
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform that issued the token"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the token"
+        }
+      }
+    },
+    "routes": {
+      "type": "object",
+      "description": "Predefined routes for common DeFi operations",
+      "patternProperties": {
+        "^[a-zA-Z][a-zA-Z0-9_]*$": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "platform"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy"]
+              },
+              "platform": {
+                "type": "string",
+                "description": "Platform name for the operation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "description": "List of available DeFi interactions",
+      "items": {
+        "type": "object",
+        "required": ["type", "platform", "tokens", "module", "function"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "repay", "liquidate", "mint", "burn"]
+          },
+          "platform": {
+            "type": "string",
+            "description": "Platform providing the interaction"
+          },
+          "tokens": {
+            "type": "array",
+            "description": "Tokens involved in the interaction",
+            "items": {
+              "type": "object",
+              "required": ["symbol", "address"],
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "description": "Token symbol"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "Token address on Movement blockchain"
+                }
+              }
+            }
+          },
+          "module": {
+            "type": "string",
+            "description": "Move module address and name (e.g., 0x...::module_name)"
+          },
+          "function": {
+            "type": "string",
+            "description": "Move function name"
+          },
+          "entryPoint": {
+            "type": "boolean",
+            "description": "Whether the function is a transaction entry point",
+            "default": true
+          },
+          "visibility": {
+            "type": "string",
+            "enum": ["public", "private", "friend"],
+            "description": "Function visibility level",
+            "default": "public"
+          },
+          "gasEstimate": {
+            "type": "integer",
+            "description": "Estimated gas cost for the operation"
+          },
+          "moveSpecific": {
+            "type": "object",
+            "description": "Move VM specific properties",
+            "properties": {
+              "acquires": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Resources acquired by the function"
+              },
+              "resourceHandling": {
+                "type": "string",
+                "enum": ["fungibleAsset", "coin", "coinToFungibleAsset", "fungibleAssetToCoin", "calculation", "resource"],
+                "description": "Type of resource handling"
+              },
+              "crossChainCapable": {
+                "type": "boolean",
+                "description": "Whether the operation supports cross-chain functionality"
+              },
+              "leverageOptimization": {
+                "type": "boolean",
+                "description": "Whether the operation includes leverage optimization"
+              },
+              "yieldOptimization": {
+                "type": "boolean",
+                "description": "Whether the operation includes yield optimization"
+              },
+              "strategyManagement": {
+                "type": "boolean",
+                "description": "Whether the operation involves strategy management"
+              },
+              "liquidityProvision": {
+                "type": "boolean",
+                "description": "Whether the operation involves liquidity provision"
+              },
+              "farming": {
+                "type": "boolean",
+                "description": "Whether the operation involves farming"
+              },
+              "rewardClaiming": {
+                "type": "boolean",
+                "description": "Whether the operation involves reward claiming"
+              },
+              "strategyCreation": {
+                "type": "boolean",
+                "description": "Whether the operation involves strategy creation"
+              },
+              "conversionType": {
+                "type": "string",
+                "enum": ["coin_to_fa", "fa_to_coin"],
+                "description": "Type of conversion operation"
+              },
+              "bridgeProtocol": {
+                "type": "string",
+                "enum": ["Concordia", "LayerZero", "Wormhole", "Native"],
+                "description": "Bridge protocol used for cross-chain operations"
+              },
+              "autoCompound": {
+                "type": "boolean",
+                "description": "Whether the operation includes auto-compounding"
+              }
+            }
+          }
+        }
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "description": "Information about DeFi platforms",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "link"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Platform name"
+          },
+          "token": {
+            "type": "string",
+            "description": "Platform's native token symbol"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed platform description"
+          },
+          "link": {
+            "type": "string",
+            "format": "uri",
+            "description": "Platform website URL"
+          },
+          "moveSpecific": {
+            "type": "object",
+            "description": "Move VM specific platform properties",
+            "properties": {
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of Move modules provided by the platform"
+              },
+              "crossChainProtocols": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["Concordia", "LayerZero", "Wormhole", "Native"]
+                },
+                "description": "Supported cross-chain protocols"
+              },
+              "resourceTypes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["fungibleAsset", "coin", "resource"]
+                },
+                "description": "Types of resources handled by the platform"
+              },
+              "parallelExecution": {
+                "type": "boolean",
+                "description": "Whether the platform supports parallel execution"
+              },
+              "gasOptimized": {
+                "type": "boolean",
+                "description": "Whether the platform is gas optimized"
+              },
+              "crossChainCapable": {
+                "type": "boolean",
+                "description": "Whether the platform supports cross-chain operations"
+              },
+              "yieldOptimization": {
+                "type": "boolean",
+                "description": "Whether the platform provides yield optimization"
+              },
+              "strategyManagement": {
+                "type": "boolean",
+                "description": "Whether the platform provides strategy management"
+              },
+              "nativeChain": {
+                "type": "boolean",
+                "description": "Whether this is the native chain"
+              },
+              "vmType": {
+                "type": "string",
+                "enum": ["AptosMoveVM", "EVM"],
+                "description": "Virtual machine type"
+              },
+              "assetStandard": {
+                "type": "string",
+                "enum": ["FungibleAsset", "ERC20", "ERC721", "ERC1155"],
+                "description": "Asset standard used"
+              },
+              "resourceModel": {
+                "type": "boolean",
+                "description": "Whether the platform uses resource model"
+              }
+            }
+          }
+        }
+      }
+    },
+    "yieldStrategies": {
+      "type": "array",
+      "description": "Available yield optimization strategies",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "riskLevel", "expectedAPY", "strategies"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Strategy name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Strategy description"
+          },
+          "riskLevel": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "description": "Risk level of the strategy"
+          },
+          "expectedAPY": {
+            "type": "string",
+            "description": "Expected annual percentage yield"
+          },
+          "strategies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of strategies used"
+          }
+        }
+      }
+    },
+    "moveVmConsiderations": {
+      "type": "object",
+      "description": "Key considerations for Move VM DeFi interactions",
+      "properties": {
+        "resourceModel": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of the resource model"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "moduleSystem": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of the module system"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "fungibleAssets": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of fungible assets"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "crossChainArchitecture": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of cross-chain architecture"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "gasOptimization": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of gas optimization"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "yieldOptimization": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of yield optimization"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        }
+      }
+    }
+  }
+}

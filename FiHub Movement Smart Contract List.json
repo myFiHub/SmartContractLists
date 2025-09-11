@@ -1,0 +1,816 @@
+{
+  "name": "FiHub Movement Smart Contract List",
+  "logoURI": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
+  "keywords": ["movement", "aptos", "move", "defi", "audited", "verified"],
+  "tags": {
+    "AMM": {
+      "name": "AMM",
+      "description": "An Automated Market Maker protocol relies on smart contracts to automate price matching or discovery"
+    },
+    "moveCoin": {
+      "name": "Move Coin",
+      "description": "A fungible token implemented using the Move coin standard (0x1::coin::Coin)"
+    },
+    "lending": {
+      "name": "Lending",
+      "description": "A protocol that allows users to lend and borrow digital assets"
+    },
+    "liquidStaking": {
+      "name": "Liquid Staking",
+      "description": "A protocol that allows users to stake tokens while maintaining liquidity through receipt tokens"
+    },
+    "vault": {
+      "name": "Vault",
+      "description": "A destination deposit location that provides a mapping of ownership or receipt token"
+    },
+    "perpetuals": {
+      "name": "Perpetuals",
+      "description": "A protocol for trading perpetual futures contracts"
+    },
+    "stablecoin": {
+      "name": "Stablecoin",
+      "description": "A token with value pegged to another asset, typically a fiat currency"
+    },
+    "native": {
+      "name": "Native",
+      "description": "Native tokens or protocols of the blockchain network"
+    },
+    "bridge": {
+      "name": "Bridge",
+      "description": "A protocol that enables cross-chain asset transfers"
+    },
+    "governance": {
+      "name": "Governance",
+      "description": "A governance token or protocol that enables decentralized decision making"
+    },
+    "framework": {
+      "name": "Framework",
+      "description": "Core framework modules and system contracts"
+    },
+    "legacy": {
+      "name": "Legacy",
+      "description": "Legacy token contracts and deprecated protocols"
+    },
+    "digitalAsset": {
+      "name": "Digital Asset",
+      "description": "Non-fungible tokens and digital asset contracts"
+    },
+    "fungibleAsset": {
+      "name": "Fungible Asset",
+      "description": "Fungible asset contracts using the FA standard"
+    },
+    "crossChain": {
+      "name": "Cross-Chain",
+      "description": "Protocols supporting cross-chain operations"
+    }
+  },
+  "timestamp": "2025-01-27T00:00:00Z",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "smartContracts": [
+    {
+      "chainId": 1,
+      "address": "0x0000000000000000000000000000000000000000000000000000000000000001",
+      "moduleName": "framework",
+      "platform": "Movement",
+      "name": "Framework (0x1)",
+      "tags": ["native", "framework"],
+      "functions": [],
+      "structs": [],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x0000000000000000000000000000000000000000000000000000000000000003",
+      "moduleName": "legacy_token",
+      "platform": "Movement",
+      "name": "Legacy Token (0x3)",
+      "tags": ["native", "legacy"],
+      "functions": [],
+      "structs": [],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x0000000000000000000000000000000000000000000000000000000000000004",
+      "moduleName": "digital_assets",
+      "platform": "Movement",
+      "name": "Digital Assets (0x4)",
+      "tags": ["native", "digitalAsset"],
+      "functions": [],
+      "structs": [],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x000000000000000000000000000000000000000000000000000000000000000A",
+      "moduleName": "move_coin_fa",
+      "platform": "Movement",
+      "name": "MOVE Coin Fungible Asset",
+      "symbol": "MOVE",
+      "decimals": 8,
+      "tags": ["moveCoin", "native", "fungibleAsset"],
+      "assetStandard": "fungibleAsset",
+      "functions": [
+        {
+          "name": "transfer",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["address", "u64"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Movement Labs"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "MoveCoin",
+          "abilities": ["store"],
+          "fields": [
+            {"name": "value", "type": "u64"}
+          ],
+          "is_resource": false
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x31d0a30ae53e2ae852fcbdd1fce75a4ea6ad81417739ef96883eba9574ffe31e",
+      "moduleName": "vault",
+      "platform": "MovePosition",
+      "name": "MovePosition Vault 1",
+      "tags": ["vault", "lending"],
+      "functions": [
+        {
+          "name": "deposit",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64"],
+          "return": [],
+          "acquires": ["Vault"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "withdraw",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64"],
+          "return": [],
+          "acquires": ["Vault"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "Vault",
+          "abilities": ["key", "store"],
+          "fields": [
+            {"name": "balance", "type": "u64"},
+            {"name": "owner", "type": "address"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233",
+      "moduleName": "vault",
+      "platform": "Echelon",
+      "name": "Echelon Vault 1",
+      "tags": ["vault", "lending"],
+      "functions": [
+        {
+          "name": "deposit",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64"],
+          "return": [],
+          "acquires": ["Vault"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Echelon"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "Vault",
+          "abilities": ["key", "store"],
+          "fields": [
+            {"name": "balance", "type": "u64"},
+            {"name": "owner", "type": "address"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae",
+      "moduleName": "vault",
+      "platform": "Layerbank",
+      "name": "Layerbank Vault 1",
+      "tags": ["vault", "lending"],
+      "functions": [
+        {
+          "name": "deposit",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64"],
+          "return": [],
+          "acquires": ["Vault"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Layerbank"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "Vault",
+          "abilities": ["key", "store"],
+          "fields": [
+            {"name": "balance", "type": "u64"},
+            {"name": "owner", "type": "address"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d",
+      "moduleName": "mosaic",
+      "platform": "Mosaic",
+      "name": "Mosaic",
+      "tags": ["bridge", "crossChain"],
+      "functions": [
+        {
+          "name": "bridge",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64", "u16"],
+          "return": [],
+          "acquires": ["BridgePool"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Mosaic"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "BridgePool",
+          "abilities": ["key"],
+          "fields": [
+            {"name": "locked_amount", "type": "u64"},
+            {"name": "chain_id", "type": "u16"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x26a95d4bd7d7fc3debf6469ff94837e03e887088bef3a3f2d08d1131141830d3",
+      "moduleName": "amm",
+      "platform": "Mosaic",
+      "name": "Mosaic AMM",
+      "tags": ["AMM"],
+      "functions": [
+        {
+          "name": "swap",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64", "u64"],
+          "return": ["u64"],
+          "acquires": ["LiquidityPool"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Mosaic"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "LiquidityPool",
+          "abilities": ["key"],
+          "fields": [
+            {"name": "reserve_x", "type": "u64"},
+            {"name": "reserve_y", "type": "u64"},
+            {"name": "total_supply", "type": "u64"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241",
+      "moduleName": "interest_dex",
+      "platform": "Interest DEX",
+      "name": "Interest DEX",
+      "tags": ["AMM", "lending"],
+      "functions": [
+        {
+          "name": "swap",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64", "u64"],
+          "return": ["u64"],
+          "acquires": ["LiquidityPool"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Interest DEX"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "LiquidityPool",
+          "abilities": ["key"],
+          "fields": [
+            {"name": "reserve_x", "type": "u64"},
+            {"name": "reserve_y", "type": "u64"},
+            {"name": "total_supply", "type": "u64"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a",
+      "moduleName": "yuzu",
+      "platform": "YUZU",
+      "name": "YUZU",
+      "tags": ["AMM"],
+      "functions": [
+        {
+          "name": "swap",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64", "u64"],
+          "return": ["u64"],
+          "acquires": ["LiquidityPool"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["YUZU"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "LiquidityPool",
+          "abilities": ["key"],
+          "fields": [
+            {"name": "reserve_x", "type": "u64"},
+            {"name": "reserve_y", "type": "u64"},
+            {"name": "total_supply", "type": "u64"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x4c5058bc4cd77fe207b8b9990e8af91e1055b814073f0596068e3b95a7ccd31a",
+      "moduleName": "move_fun",
+      "platform": "Move.Fun",
+      "name": "Move.Fun",
+      "tags": ["AMM"],
+      "functions": [
+        {
+          "name": "swap",
+          "visibility": "public",
+          "is_entry": true,
+          "params": ["u64", "u64"],
+          "return": ["u64"],
+          "acquires": ["LiquidityPool"],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Move.Fun"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "LiquidityPool",
+          "abilities": ["key"],
+          "fields": [
+            {"name": "reserve_x", "type": "u64"},
+            {"name": "reserve_y", "type": "u64"},
+            {"name": "total_supply", "type": "u64"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "extensions": {
+        "audited": true,
+        "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf",
+      "moduleName": "lend",
+      "platform": "MovePosition",
+      "name": "MovePosition Lending Module",
+      "description": "Advanced cross-chain lending protocol built on Concordia's OmniRisk layer with intelligent leverage optimization and bespoke risk calculations",
+      "website": "https://www.moveposition.xyz/",
+      "tags": ["lending", "vault", "crossChain", "gasOptimized", "formallyVerified"],
+      "assetStandard": "fungibleAsset",
+      "functions": [
+        {
+          "name": "lend_to_portfolio",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["&signer", "address", "vector<u8>"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "lend_to_portfolio_with_ticket",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["&signer", "address", "&BasicTicket"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "lend_v2",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["&signer", "vector<u8>"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "lend_with_amount",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["&signer", "address", "u64"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "emit_lend_event",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["address", "vector<u8>", "u64", "String", "u64", "BrokerView", "BrokerView"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "LendEvent",
+          "abilities": ["drop", "store"],
+          "fields": [
+            {"name": "actor", "type": "address"},
+            {"name": "tx_hash", "type": "vector<u8>"},
+            {"name": "amount", "type": "u64"},
+            {"name": "broker_type", "type": "String"},
+            {"name": "timestamp", "type": "u64"},
+            {"name": "pre_broker", "type": "BrokerView"},
+            {"name": "post_broker", "type": "BrokerView"}
+          ],
+          "is_resource": false
+        }
+      ],
+      "security": {
+        "auditScore": 90,
+        "lastAuditDate": "2024-12-01",
+        "vulnerabilityReports": [],
+        "securityLevel": "high",
+        "penetrationTested": true,
+        "formalVerification": false
+      },
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": true,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "lend": 2000,
+          "repay": 1800,
+          "borrow": 2200
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["Concordia", "LayerZero"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Aptos Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "extensions": {
+        "audited": true,
+        "verified": true,
+        "friends": ["0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::entry_public", "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::lend_and_borrow"],
+        "metadata": {
+          "description": "Cross-chain lending with intelligent leverage optimization",
+          "website": "https://www.moveposition.xyz/",
+          "documentation": "https://docs.moveposition.xyz/"
+        }
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf",
+      "moduleName": "vault",
+      "platform": "MovePosition",
+      "name": "MovePosition Vault Module",
+      "description": "Vault management system for secure asset storage and management with resource account integration",
+      "website": "https://www.moveposition.xyz/",
+      "tags": ["vault", "lending", "gasOptimized"],
+      "assetStandard": "fungibleAsset",
+      "functions": [
+        {
+          "name": "deposit",
+          "visibility": "public",
+          "is_entry": false,
+          "params": ["&Vault", "Coin<T0>"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "withdraw",
+          "visibility": "public",
+          "is_entry": false,
+          "params": ["&Vault", "u64"],
+          "return": ["Coin<T0>"],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "transfer",
+          "visibility": "public",
+          "is_entry": false,
+          "params": ["&Vault", "address", "u64"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "balance",
+          "visibility": "public",
+          "is_entry": false,
+          "params": ["&Vault"],
+          "return": ["u64"],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "new",
+          "visibility": "public",
+          "is_entry": false,
+          "params": ["&signer", "vector<u8>"],
+          "return": ["Vault"],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "Vault",
+          "abilities": ["store", "key"],
+          "fields": [
+            {"name": "ra", "type": "RA"}
+          ],
+          "is_resource": true
+        }
+      ],
+      "security": {
+        "auditScore": 90,
+        "lastAuditDate": "2024-12-01",
+        "vulnerabilityReports": [],
+        "securityLevel": "high",
+        "penetrationTested": true,
+        "formalVerification": false
+      },
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "deposit": 1500,
+          "withdraw": 1200,
+          "transfer": 1000
+        }
+      },
+      "extensions": {
+        "audited": true,
+        "verified": true,
+        "metadata": {
+          "description": "Secure vault management with resource account integration",
+          "website": "https://www.moveposition.xyz/"
+        }
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf",
+      "moduleName": "borrow",
+      "platform": "MovePosition",
+      "name": "MovePosition Borrowing Module",
+      "description": "Advanced borrowing system with intelligent leverage optimization and risk management",
+      "website": "https://www.moveposition.xyz/",
+      "tags": ["lending", "borrowing", "crossChain", "gasOptimized"],
+      "assetStandard": "fungibleAsset",
+      "functions": [
+        {
+          "name": "borrow_v2",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["&signer", "vector<u8>"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "borrow_with_amount",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["&signer", "u64", "u64"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "borrow_with_ticket_v2",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["&signer", "&BasicTicket"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        },
+        {
+          "name": "emit_borrow_event",
+          "visibility": "friend",
+          "is_entry": false,
+          "params": ["address", "vector<u8>", "u64", "String", "u64", "BrokerView", "BrokerView"],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["MoveBit"]
+        }
+      ],
+      "structs": [
+        {
+          "name": "BorrowEvent",
+          "abilities": ["drop", "store"],
+          "fields": [
+            {"name": "actor", "type": "address"},
+            {"name": "tx_hash", "type": "vector<u8>"},
+            {"name": "amount", "type": "u64"},
+            {"name": "broker_type", "type": "String"},
+            {"name": "timestamp", "type": "u64"},
+            {"name": "pre_broker", "type": "BrokerView"},
+            {"name": "post_broker", "type": "BrokerView"}
+          ],
+          "is_resource": false
+        }
+      ],
+      "security": {
+        "auditScore": 90,
+        "lastAuditDate": "2024-12-01",
+        "vulnerabilityReports": [],
+        "securityLevel": "high",
+        "penetrationTested": true,
+        "formalVerification": false
+      },
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "borrow": 2200,
+          "repay": 1800
+        }
+      },
+      "extensions": {
+        "audited": true,
+        "verified": true,
+        "friends": ["0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::entry_public", "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::lend_and_borrow"],
+        "metadata": {
+          "description": "Intelligent borrowing with leverage optimization",
+          "website": "https://www.moveposition.xyz/"
+        }
+      }
+    }
+  ]
+}

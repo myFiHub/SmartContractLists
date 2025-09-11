@@ -1,0 +1,1143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fihub.org/movement-smart-contract-list.schema.json",
+  "title": "FiHub Movement Smart Contract List",
+  "description": "Schema for lists of smart contracts compatible with the Movement Virtual Machine and Move programming language",
+  "definitions": {
+    "Version": {
+      "type": "object",
+      "description": "The version of the list, used in change detection",
+      "examples": [
+        {
+          "major": 1,
+          "minor": 0,
+          "patch": 0
+        }
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "major": {
+          "type": "integer",
+          "description": "The major version of the list. Must be incremented when contracts are removed from the list or addresses are changed.",
+          "minimum": 0,
+          "examples": [1, 2]
+        },
+        "minor": {
+          "type": "integer",
+          "description": "The minor version of the list. Must be incremented when contracts are added to the list.",
+          "minimum": 0,
+          "examples": [0, 1]
+        },
+        "patch": {
+          "type": "integer",
+          "description": "The patch version of the list. Must be incremented for any changes to the list.",
+          "minimum": 0,
+          "examples": [0, 1]
+        }
+      },
+      "required": ["major", "minor", "patch"]
+    },
+    "TagIdentifier": {
+      "type": "string",
+      "description": "The unique identifier of a tag",
+      "minLength": 1,
+      "maxLength": 30,
+      "pattern": "^[\\w]+$",
+      "examples": ["AMM", "lending", "moveCoin", "liquidStaking", "fungibleAsset", "digitalAsset", "upgradeable", "crossChain", "formallyVerified"]
+    },
+    "ExtensionIdentifier": {
+      "type": "string",
+      "description": "The name of a contract extension property",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[\\w]+$",
+      "examples": ["audited", "verified", "friends", "architecture"]
+    },
+    "MoveFunction": {
+      "type": "object",
+      "description": "A Move function definition with its signature and metadata",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[\\w_]+$"
+        },
+        "visibility": {
+          "type": "string",
+          "description": "The visibility of the function",
+          "enum": ["public", "private", "friend", "public(friend)"],
+          "examples": ["public", "private"]
+        },
+        "is_entry": {
+          "type": "boolean",
+          "description": "Whether this function can be called as a transaction entry point"
+        },
+        "params": {
+          "type": "array",
+          "description": "Function parameters with their types",
+          "items": {
+            "type": "string",
+            "description": "Parameter type (e.g., 'address', 'u64', 'vector<u8>')"
+          },
+          "maxItems": 20
+        },
+        "return": {
+          "type": "array",
+          "description": "Function return types",
+          "items": {
+            "type": "string",
+            "description": "Return type"
+          },
+          "maxItems": 10
+        },
+        "acquires": {
+          "type": "array",
+          "description": "Resources that this function acquires access to",
+          "items": {
+            "type": "string",
+            "description": "Resource type name"
+          },
+          "maxItems": 10
+        },
+        "audited": {
+          "type": "boolean",
+          "description": "Whether this function has been audited"
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Whether this function has been verified on-chain"
+        },
+        "auditors": {
+          "type": "array",
+          "description": "List of auditing firms that reviewed this function",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "maxItems": 10
+        }
+      },
+      "required": ["name", "visibility", "is_entry", "params", "return"]
+    },
+    "MoveStruct": {
+      "type": "object",
+      "description": "A Move struct definition",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the struct",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[\\w_]+$"
+        },
+        "abilities": {
+          "type": "array",
+          "description": "The abilities of the struct",
+          "items": {
+            "type": "string",
+            "enum": ["key", "store", "copy", "drop"]
+          },
+          "maxItems": 4
+        },
+        "fields": {
+          "type": "array",
+          "description": "Struct fields",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Field name"
+              },
+              "type": {
+                "type": "string",
+                "description": "Field type"
+              }
+            },
+            "required": ["name", "type"]
+          },
+          "maxItems": 20
+        },
+        "is_resource": {
+          "type": "boolean",
+          "description": "Whether this struct represents a resource (has key ability)"
+        },
+        "is_object": {
+          "type": "boolean",
+          "description": "Whether this struct represents a Move Object (used in FA/DA standards)"
+        },
+        "object_type": {
+          "type": "string",
+          "description": "Type of object if applicable (e.g., 'Metadata', 'FungibleStore', 'Collection', 'Token')",
+          "enum": ["Metadata", "FungibleStore", "Collection", "Token", "Other"],
+          "examples": ["Metadata", "FungibleStore"]
+        }
+      },
+      "required": ["name", "abilities", "fields"]
+    },
+    "ExtensionMap": {
+      "type": "object",
+      "description": "An object containing any arbitrary or vendor-specific contract metadata",
+      "maxProperties": 15,
+      "propertyNames": {
+        "$ref": "#/definitions/ExtensionIdentifier"
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/ExtensionValue"
+      },
+      "examples": [
+        {
+          "audited": true,
+          "verified": true,
+          "friends": ["0x1::aptos_coin", "0x1::coin"],
+          "architecture": {
+            "proxy": true,
+            "implementationContract": "0x123...",
+            "upgradeable": true
+          }
+        }
+      ]
+    },
+    "ExtensionPrimitiveValue": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "examples": ["#00000", "0x123..."]
+        },
+        {
+          "type": "boolean",
+          "examples": [true, false]
+        },
+        {
+          "type": "number",
+          "examples": [15, 1000]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ExtensionValue": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ExtensionPrimitiveValue"
+        },
+        {
+          "type": "object",
+          "maxProperties": 15,
+          "propertyNames": {
+            "$ref": "#/definitions/ExtensionIdentifier"
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/ExtensionValueInner0"
+          }
+        }
+      ]
+    },
+    "ExtensionValueInner0": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ExtensionPrimitiveValue"
+        },
+        {
+          "type": "object",
+          "maxProperties": 15,
+          "propertyNames": {
+            "$ref": "#/definitions/ExtensionIdentifier"
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/ExtensionValueInner1"
+          }
+        }
+      ]
+    },
+    "ExtensionValueInner1": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ExtensionPrimitiveValue"
+        }
+      ]
+    },
+    "TagDefinition": {
+      "type": "object",
+      "description": "Definition of a tag that can be associated with a contract via its identifier",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tag",
+          "pattern": "^[ \\w]+$",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "description": {
+          "type": "string",
+          "description": "A user-friendly description of the tag",
+          "pattern": "^[ \\w\\.,:]+$",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": ["name", "description"],
+      "examples": [
+        {
+          "name": "AMM",
+          "description": "An Automated Market Maker protocol relies on smart contracts to automate price matching or discovery."
+        },
+        {
+          "name": "moveCoin",
+          "description": "A fungible token implemented using the Move coin standard (0x1::coin::Coin)"
+        }
+      ]
+    },
+    "SmartContractInfo": {
+      "type": "object",
+      "description": "Metadata for a single contract in a smart contract list",
+      "additionalProperties": false,
+      "properties": {
+        "chainId": {
+          "type": "integer",
+          "description": "The chain ID of the network where this contract is deployed",
+          "minimum": 1,
+          "examples": [1, 2, 43114]
+        },
+        "address": {
+          "type": "string",
+          "description": "The address of the contract on the specified chain ID",
+          "pattern": "^0x[a-fA-F0-9]{1,64}$",
+          "examples": [
+            "0x1",
+            "0x1234567890123456789012345678901234567890123456789012345678901234"
+          ]
+        },
+        "moduleName": {
+          "type": "string",
+          "description": "The name of the Move module",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[\\w_]+$",
+          "examples": ["coin", "liquidity_pool", "vault"]
+        },
+        "platform": {
+          "type": "string",
+          "description": "The platform or protocol name",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[ \\w.'+\\-%/À-ÖØ-öø-ÿ:&\\[\\]\\(\\)]+$",
+          "examples": ["Aptos", "Movement", "Thala", "PancakeSwap"]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the contract",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[ \\w.'+\\-%/À-ÖØ-öø-ÿ:&\\[\\]\\(\\)]+$",
+          "examples": ["Aptos Coin", "Thala USDC", "PancakeSwap Router"]
+        },
+        "symbol": {
+          "type": "string",
+          "description": "The symbol for the contract; must be alphanumeric",
+          "pattern": "^[a-zA-Z0-9+\\-%/$.]+$",
+          "minLength": 1,
+          "maxLength": 20,
+          "examples": ["APT", "USDC", "PGL"]
+        },
+        "decimals": {
+          "type": "integer",
+          "description": "The number of decimals for the token (if applicable)",
+          "minimum": 0,
+          "maximum": 255,
+          "examples": [6, 8, 18]
+        },
+        "logoURI": {
+          "type": "string",
+          "description": "A URI to the contract logo asset; suggest SVG or PNG of size 64x64",
+          "format": "uri",
+          "examples": [
+            "https://raw.githubusercontent.com/aptos-labs/aptos-core/main/ecosystem/typescript/sdk/src/coin_list/aptos.png"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "An array of tag identifiers associated with the contract",
+          "items": {
+            "$ref": "#/definitions/TagIdentifier"
+          },
+          "maxItems": 15,
+          "examples": [
+            ["moveCoin", "native"],
+            ["AMM", "liquidity"],
+            ["lending", "vault"],
+            ["fungibleAsset", "crossChain"],
+            ["stablecoin", "bridged"]
+          ]
+        },
+        "functions": {
+          "type": "array",
+          "description": "List of Move functions exposed by this contract",
+          "items": {
+            "$ref": "#/definitions/MoveFunction"
+          },
+          "maxItems": 50
+        },
+        "structs": {
+          "type": "array",
+          "description": "List of Move structs defined by this contract",
+          "items": {
+            "$ref": "#/definitions/MoveStruct"
+          },
+          "maxItems": 30
+        },
+        "extensions": {
+          "$ref": "#/definitions/ExtensionMap"
+        },
+        "assetStandard": {
+          "type": "string",
+          "description": "The asset standard this contract implements",
+          "enum": ["coin", "fungibleAsset", "digitalAsset", "custom"],
+          "examples": ["coin", "fungibleAsset", "digitalAsset"]
+        },
+        "objectAddress": {
+          "type": "string",
+          "description": "The object address for FA/DA standards (if different from contract address)",
+          "pattern": "^0x[a-fA-F0-9]{1,64}$",
+          "examples": ["0x1234567890123456789012345678901234567890123456789012345678901234"]
+        },
+        "refs": {
+          "type": "object",
+          "description": "Move Object references for FA/DA standards",
+          "properties": {
+            "mintRef": {
+              "type": "boolean",
+              "description": "Whether this contract has minting capabilities"
+            },
+            "transferRef": {
+              "type": "boolean", 
+              "description": "Whether this contract has transfer control capabilities"
+            },
+            "burnRef": {
+              "type": "boolean",
+              "description": "Whether this contract has burning capabilities"
+            },
+            "mutatorRef": {
+              "type": "boolean",
+              "description": "Whether this contract has mutation capabilities"
+            }
+          }
+        },
+        "storeType": {
+          "type": "string",
+          "description": "Type of store for FA standards",
+          "enum": ["primary", "secondary", "none"],
+          "examples": ["primary", "secondary"]
+        },
+        "bridgeImplementation": {
+          "type": "object",
+          "description": "Bridge implementation details for cross-chain tokens",
+          "properties": {
+            "protocol": {
+              "type": "string",
+              "description": "Bridge protocol used (e.g., LayerZero, Wormhole, Native)",
+              "examples": ["LayerZero", "Wormhole", "Native", "Custom"]
+            },
+            "type": {
+              "type": "string", 
+              "description": "Bridge type (e.g., OFT, Lock-and-Mint, Burn-and-Mint)",
+              "examples": ["OFT", "Lock-and-Mint", "Burn-and-Mint", "Atomic"]
+            },
+            "version": {
+              "type": "string",
+              "description": "Bridge implementation version",
+              "examples": ["v1", "v2", "v3"]
+            },
+            "sourceChain": {
+              "type": "string",
+              "description": "Original chain where the token was deployed",
+              "examples": ["Ethereum", "Aptos", "Movement"]
+            }
+          }
+        },
+        "collectionInfo": {
+          "type": "object",
+          "description": "Collection information for DA standards",
+          "properties": {
+            "collectionAddress": {
+              "type": "string",
+              "description": "Address of the parent collection",
+              "pattern": "^0x[a-fA-F0-9]{1,64}$"
+            },
+            "collectionName": {
+              "type": "string",
+              "description": "Name of the collection",
+              "maxLength": 128
+            },
+            "maxSupply": {
+              "type": "integer",
+              "description": "Maximum supply of tokens in collection (null for unlimited)",
+              "minimum": 1
+            },
+            "isSoulbound": {
+              "type": "boolean",
+              "description": "Whether tokens in this collection are soulbound (non-transferable)"
+            }
+          }
+        },
+        "security": {
+          "type": "object",
+          "description": "Security and auditing metadata",
+          "properties": {
+            "auditScore": {
+              "type": "integer",
+              "description": "Overall security audit score (0-100)",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "lastAuditDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Date of the most recent security audit"
+            },
+            "vulnerabilityReports": {
+              "type": "array",
+              "description": "List of known vulnerability reports",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "severity": {
+                    "type": "string",
+                    "enum": ["low", "medium", "high", "critical"]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["open", "in-progress", "resolved", "false-positive"]
+                  },
+                  "reportDate": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 500
+                  }
+                },
+                "required": ["severity", "status", "reportDate"]
+              },
+              "maxItems": 20
+            },
+            "securityLevel": {
+              "type": "string",
+              "description": "Overall security level assessment",
+              "enum": ["low", "medium", "high", "enterprise"],
+              "examples": ["high", "enterprise"]
+            },
+            "penetrationTested": {
+              "type": "boolean",
+              "description": "Whether the contract has undergone penetration testing"
+            },
+            "formalVerification": {
+              "type": "boolean",
+              "description": "Whether the contract has been formally verified"
+            }
+          }
+        },
+        "governance": {
+          "type": "object",
+          "description": "Governance and upgrade information",
+          "properties": {
+            "isUpgradeable": {
+              "type": "boolean",
+              "description": "Whether the contract can be upgraded"
+            },
+            "upgradeDelay": {
+              "type": "integer",
+              "description": "Time delay for upgrades in seconds",
+              "minimum": 0
+            },
+            "governanceToken": {
+              "type": "string",
+              "description": "Address of the governance token",
+              "pattern": "^0x[a-fA-F0-9]{1,64}$"
+            },
+            "multisigRequired": {
+              "type": "boolean",
+              "description": "Whether multisig is required for governance actions"
+            },
+            "multisigThreshold": {
+              "type": "integer",
+              "description": "Number of signatures required for multisig",
+              "minimum": 1
+            },
+            "timelockDelay": {
+              "type": "integer",
+              "description": "Time delay for governance actions in seconds",
+              "minimum": 0
+            },
+            "governanceType": {
+              "type": "string",
+              "description": "Type of governance mechanism",
+              "enum": ["token-based", "multisig", "timelock", "hybrid", "none"],
+              "examples": ["token-based", "multisig"]
+            }
+          }
+        },
+        "compliance": {
+          "type": "object",
+          "description": "Compliance and regulatory information",
+          "properties": {
+            "kycRequired": {
+              "type": "boolean",
+              "description": "Whether KYC is required for interaction"
+            },
+            "amlRequired": {
+              "type": "boolean",
+              "description": "Whether AML checks are required"
+            },
+            "jurisdiction": {
+              "type": "string",
+              "description": "Primary legal jurisdiction",
+              "maxLength": 50,
+              "examples": ["US", "EU", "Singapore", "Switzerland"]
+            },
+            "regulatoryStatus": {
+              "type": "string",
+              "description": "Current regulatory compliance status",
+              "enum": ["compliant", "pending", "non-compliant", "exempt", "unknown"],
+              "examples": ["compliant", "pending"]
+            },
+            "freezeCapable": {
+              "type": "boolean",
+              "description": "Whether the contract can freeze accounts"
+            },
+            "blacklistCapable": {
+              "type": "boolean",
+              "description": "Whether the contract can blacklist addresses"
+            },
+            "regulatoryBodies": {
+              "type": "array",
+              "description": "List of regulatory bodies with oversight",
+              "items": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "maxItems": 10,
+              "examples": ["SEC", "CFTC", "FINMA", "MAS"]
+            }
+          }
+        },
+        "objectExtensions": {
+          "type": "object",
+          "description": "Move object extension information",
+          "properties": {
+            "customResources": {
+              "type": "array",
+              "description": "List of custom resources added to the object",
+              "items": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "maxItems": 20
+            },
+            "eventHandlers": {
+              "type": "array",
+              "description": "List of event handlers defined",
+              "items": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "maxItems": 20
+            },
+            "resourceGroups": {
+              "type": "array",
+              "description": "Resource groups this object belongs to",
+              "items": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "maxItems": 10
+            },
+            "friends": {
+              "type": "array",
+              "description": "Friend modules that can access this object",
+              "items": {
+                "type": "string",
+                "pattern": "^0x[a-fA-F0-9]{1,64}::[\\w_]+$"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "performance": {
+          "type": "object",
+          "description": "Performance and optimization metrics",
+          "properties": {
+            "gasOptimized": {
+              "type": "boolean",
+              "description": "Whether the contract is gas-optimized"
+            },
+            "parallelExecutable": {
+              "type": "boolean",
+              "description": "Whether functions can be executed in parallel"
+            },
+            "resourceEfficient": {
+              "type": "boolean",
+              "description": "Whether the contract uses resources efficiently"
+            },
+            "estimatedGasCost": {
+              "type": "object",
+              "description": "Estimated gas costs for common operations",
+              "properties": {
+                "transfer": {
+                  "type": "integer",
+                  "description": "Gas cost for transfer operation",
+                  "minimum": 0
+                },
+                "mint": {
+                  "type": "integer",
+                  "description": "Gas cost for mint operation",
+                  "minimum": 0
+                },
+                "burn": {
+                  "type": "integer",
+                  "description": "Gas cost for burn operation",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        },
+        "interoperability": {
+          "type": "object",
+          "description": "Cross-chain and interoperability features",
+          "properties": {
+            "crossChainCapable": {
+              "type": "boolean",
+              "description": "Whether the contract supports cross-chain operations"
+            },
+            "bridgeProtocols": {
+              "type": "array",
+              "description": "Supported bridge protocols",
+              "items": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "maxItems": 10,
+              "examples": ["LayerZero", "Wormhole", "Axelar", "Hyperlane"]
+            },
+            "supportedChains": {
+              "type": "array",
+              "description": "List of supported blockchain networks",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "chainId": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "chainName": {
+                    "type": "string",
+                    "maxLength": 50
+                  },
+                  "isNative": {
+                    "type": "boolean",
+                    "description": "Whether this is the native chain"
+                  }
+                },
+                "required": ["chainId", "chainName"]
+              },
+              "maxItems": 20
+            },
+            "wrappedAssets": {
+              "type": "array",
+              "description": "Wrapped asset representations on other chains",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "chainId": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "wrappedAddress": {
+                    "type": "string",
+                    "pattern": "^0x[a-fA-F0-9]{40}$"
+                  },
+                  "bridgeAddress": {
+                    "type": "string",
+                    "pattern": "^0x[a-fA-F0-9]{40}$"
+                  }
+                },
+                "required": ["chainId", "wrappedAddress"]
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "apiVerification": {
+          "type": "object",
+          "description": "API verification information for blockchain data authenticity",
+          "properties": {
+            "rpcEndpoint": {
+              "type": "string",
+              "description": "The RPC endpoint used to fetch contract data",
+              "format": "uri",
+              "examples": [
+                "https://full.mainnet.movementinfra.xyz/v1",
+                "https://fullnode.mainnet.aptoslabs.com/v1"
+              ]
+            },
+            "apiCalls": {
+              "type": "array",
+              "description": "List of API calls made to verify contract data",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "endpoint": {
+                    "type": "string",
+                    "description": "Specific API endpoint called",
+                    "examples": [
+                      "/accounts/{address}/modules",
+                      "/accounts/{address}/modules/{module_name}"
+                    ]
+                  },
+                  "method": {
+                    "type": "string",
+                    "description": "HTTP method used",
+                    "enum": ["GET", "POST"],
+                    "examples": ["GET"]
+                  },
+                  "fullUrl": {
+                    "type": "string",
+                    "description": "Complete URL used for verification",
+                    "format": "uri",
+                    "examples": [
+                      "https://full.mainnet.movementinfra.xyz/v1/accounts/0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf/modules"
+                    ]
+                  },
+                  "responseHash": {
+                    "type": "string",
+                    "description": "SHA-256 hash of the API response for integrity verification",
+                    "pattern": "^[a-fA-F0-9]{64}$",
+                    "examples": ["a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890"]
+                  },
+                  "purpose": {
+                    "type": "string",
+                    "description": "What this API call was used to verify",
+                    "examples": ["module_functions", "module_structs", "module_existence"]
+                  }
+                },
+                "required": ["endpoint", "method", "fullUrl", "purpose"]
+              },
+              "maxItems": 10
+            },
+            "lastVerified": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the contract data was last verified against the blockchain"
+            },
+            "verificationStatus": {
+              "type": "string",
+              "description": "Current verification status",
+              "enum": ["verified", "pending", "failed", "outdated"],
+              "examples": ["verified", "pending"]
+            },
+            "dataIntegrity": {
+              "type": "object",
+              "description": "Data integrity verification information",
+              "properties": {
+                "functionsVerified": {
+                  "type": "boolean",
+                  "description": "Whether function signatures match blockchain data"
+                },
+                "structsVerified": {
+                  "type": "boolean",
+                  "description": "Whether struct definitions match blockchain data"
+                },
+                "moduleExists": {
+                  "type": "boolean",
+                  "description": "Whether the module exists at the specified address"
+                },
+                "checksumMatch": {
+                  "type": "boolean",
+                  "description": "Whether data checksum matches expected values"
+                }
+              }
+            },
+            "verificationInstructions": {
+              "type": "object",
+              "description": "Instructions for users to verify the data themselves",
+              "properties": {
+                "curlCommand": {
+                  "type": "string",
+                  "description": "Example curl command to verify the data",
+                  "examples": [
+                    "curl -s \"https://full.mainnet.movementinfra.xyz/v1/accounts/0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf/modules\""
+                  ]
+                },
+                "expectedFields": {
+                  "type": "array",
+                  "description": "Key fields users should verify in the response",
+                  "items": {
+                    "type": "string"
+                  },
+                  "examples": [["bytecode", "abi", "exposed_functions", "structs"]]
+                },
+                "verificationSteps": {
+                  "type": "array",
+                  "description": "Step-by-step verification instructions",
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 10,
+                  "examples": [
+                    [
+                      "1. Make API call to fetch module data",
+                      "2. Verify module exists in response",
+                      "3. Check function signatures match schema",
+                      "4. Validate struct definitions"
+                    ]
+                  ]
+                }
+              }
+            },
+            "alternativeEndpoints": {
+              "type": "array",
+              "description": "Alternative RPC endpoints for cross-verification",
+              "items": {
+                "type": "string",
+                "format": "uri"
+              },
+              "maxItems": 5,
+              "examples": [
+                [
+                  "https://full.mainnet.movementinfra.xyz/v1",
+                  "https://mainnet.movementlabs.xyz/v1"
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "required": ["chainId", "address", "moduleName", "name"]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the smart contract list",
+      "minLength": 1,
+      "maxLength": 30,
+      "pattern": "^[\\w ]+$",
+      "examples": ["FiHub Movement Smart Contract List"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of this list version; i.e. when this immutable version of the list was created"
+    },
+    "version": {
+      "$ref": "#/definitions/Version"
+    },
+    "smartContracts": {
+      "type": "array",
+      "description": "The list of smart contracts included in the list",
+      "items": {
+        "$ref": "#/definitions/SmartContractInfo"
+      },
+      "minItems": 1,
+      "maxItems": 10000
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Keywords associated with the contents of the list; may be used in list discoverability",
+      "items": {
+        "type": "string",
+        "description": "A keyword to describe the contents of the list",
+        "minLength": 1,
+        "maxLength": 30,
+        "pattern": "^[\\w ]+$",
+        "examples": [
+          "movement",
+          "aptos",
+          "move",
+          "defi",
+          "audited"
+        ]
+      },
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "tags": {
+      "type": "object",
+      "description": "A mapping of tag identifiers to their name and description",
+      "propertyNames": {
+        "$ref": "#/definitions/TagIdentifier"
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/TagDefinition"
+      },
+      "maxProperties": 50,
+      "examples": [
+        {
+          "moveCoin": {
+            "name": "Move Coin",
+            "description": "A fungible token implemented using the Move coin standard"
+          },
+          "fungibleAsset": {
+            "name": "Fungible Asset",
+            "description": "A fungible asset implemented using the Aptos FA standard with Move Objects"
+          },
+          "digitalAsset": {
+            "name": "Digital Asset",
+            "description": "A non-fungible token implemented using the Aptos DA standard with Move Objects"
+          },
+          "collection": {
+            "name": "Collection",
+            "description": "A collection of digital assets (NFTs) using the DA standard"
+          },
+          "metadata": {
+            "name": "Metadata",
+            "description": "Metadata object for FA/DA standards containing asset information"
+          },
+          "fungibleStore": {
+            "name": "Fungible Store",
+            "description": "A store for holding fungible asset balances using the FA standard"
+          },
+          "soulbound": {
+            "name": "Soulbound",
+            "description": "A non-transferable digital asset that cannot be moved between accounts"
+          },
+          "dispatchable": {
+            "name": "Dispatchable",
+            "description": "An asset with custom deposit/withdraw logic using dispatchable hooks"
+          },
+          "upgradeable": {
+            "name": "Upgradeable",
+            "description": "A contract that can be upgraded through governance mechanisms"
+          },
+          "multisig": {
+            "name": "Multisig",
+            "description": "A contract requiring multiple signatures for governance actions"
+          },
+          "timelock": {
+            "name": "Timelock",
+            "description": "A contract with time-delayed governance actions"
+          },
+          "crossChain": {
+            "name": "Cross-Chain",
+            "description": "Supports cross-chain operations and bridging"
+          },
+          "bridge": {
+            "name": "Bridge",
+            "description": "Token bridge implementation for cross-chain transfers"
+          },
+          "bridged": {
+            "name": "Bridged",
+            "description": "A token that has been bridged from another chain"
+          },
+          "stablecoin": {
+            "name": "Stablecoin",
+            "description": "A token pegged to a stable value (e.g., USD, EUR)"
+          },
+          "liquidity": {
+            "name": "Liquidity",
+            "description": "Provides liquidity for trading or lending operations"
+          },
+          "native": {
+            "name": "Native",
+            "description": "Native to the Movement blockchain (framework or core contracts)"
+          },
+          "AMM": {
+            "name": "AMM",
+            "description": "Automated Market Maker protocol for token swaps"
+          },
+          "lending": {
+            "name": "Lending",
+            "description": "Lending protocol for borrowing and lending assets"
+          },
+          "vault": {
+            "name": "Vault",
+            "description": "A destination deposit location that provides a mapping of ownership or receipt token"
+          },
+          "staking": {
+            "name": "Staking",
+            "description": "Staking protocol for earning rewards on locked assets"
+          },
+          "governance": {
+            "name": "Governance",
+            "description": "Governance protocol for decentralized decision making"
+          },
+          "perpetuals": {
+            "name": "Perpetuals",
+            "description": "Perpetual futures trading protocol"
+          },
+          "derivatives": {
+            "name": "Derivatives",
+            "description": "Derivatives trading protocol"
+          },
+          "oracle": {
+            "name": "Oracle",
+            "description": "Price feed or data oracle service"
+          },
+          "gasOptimized": {
+            "name": "Gas Optimized",
+            "description": "A contract optimized for efficient gas usage"
+          },
+          "parallelExecutable": {
+            "name": "Parallel Executable",
+            "description": "A contract with functions that can be executed in parallel"
+          },
+          "formallyVerified": {
+            "name": "Formally Verified",
+            "description": "A contract that has undergone formal verification"
+          },
+          "penetrationTested": {
+            "name": "Penetration Tested",
+            "description": "A contract that has undergone penetration testing"
+          },
+          "kycRequired": {
+            "name": "KYC Required",
+            "description": "A contract requiring Know Your Customer verification"
+          },
+          "amlCompliant": {
+            "name": "AML Compliant",
+            "description": "A contract compliant with Anti-Money Laundering regulations"
+          },
+          "freezeCapable": {
+            "name": "Freeze Capable",
+            "description": "A contract that can freeze accounts or assets"
+          },
+          "blacklistCapable": {
+            "name": "Blacklist Capable",
+            "description": "A contract that can blacklist addresses"
+          },
+          "AMM": {
+            "name": "AMM",
+            "description": "An Automated Market Maker protocol relies on smart contracts to automate price matching or discovery"
+          }
+        }
+      ]
+    },
+    "logoURI": {
+      "type": "string",
+      "description": "A URI for the logo of the smart contract list; prefer SVG or PNG of size 256x256",
+      "format": "uri",
+      "examples": [
+        "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "timestamp",
+    "version",
+    "smartContracts"
+  ]
+}
