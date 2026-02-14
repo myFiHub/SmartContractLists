@@ -55,8 +55,7 @@
       { "type": "swap", "platform": "Interest DEX" }
     ],
     "interestDexYield": [
-      { "type": "lp", "platform": "Interest DEX" },
-      { "type": "claim", "platform": "Interest DEX" }
+      { "type": "lp", "platform": "Interest DEX" }
     ]
   },
   "interactions": [
@@ -66,7 +65,7 @@
       "tokens": [
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
       ],
-      "module": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::entry_public",
+      "module": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::lend",
       "function": "lend_to_portfolio",
       "entryPoint": true,
       "visibility": "public",
@@ -83,7 +82,7 @@
       "tokens": [
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
       ],
-      "module": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::entry_public",
+      "module": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::borrow",
       "function": "borrow_v2",
       "entryPoint": true,
       "visibility": "public",
@@ -94,35 +93,34 @@
       }
     },
     {
+      "type": "vault",
+      "platform": "MovePosition",
+      "tokens": [
+        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
+      ],
+      "module": "0x31d0a30ae53e2ae852fcbdd1fce75a4ea6ad81417739ef96883eba9574ffe31e::vault",
+      "function": "deposit",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": ["VaultPosition"],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
       "type": "lend",
       "platform": "Layerbank",
       "tokens": [
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
       ],
-      "module": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::lending",
+      "module": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault",
       "function": "deposit",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
       "moveSpecific": {
         "acquires": ["LendingPosition"],
-        "resourceHandling": "fungibleAsset",
-        "crossChainCapable": true
-      }
-    },
-    {
-      "type": "borrow",
-      "platform": "Layerbank",
-      "tokens": [
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
-      ],
-      "module": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::lending",
-      "function": "borrow",
-      "entryPoint": true,
-      "visibility": "public",
-      "gasEstimate": 2200,
-      "moveSpecific": {
-        "acquires": ["BorrowPosition"],
         "resourceHandling": "fungibleAsset",
         "crossChainCapable": true
       }
@@ -150,8 +148,8 @@
       "tokens": [
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
       ],
-      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::yield",
-      "function": "harvest_yield",
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "deposit",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
@@ -167,8 +165,8 @@
       "tokens": [
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
       ],
-      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::yield",
-      "function": "compound_rewards",
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "deposit",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2200,
@@ -186,8 +184,8 @@
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" },
         { "symbol": "USDC", "address": "0x000000000000000000000000000000000000000000000000000000000000000B" }
       ],
-      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::swap",
-      "function": "swap_exact_input",
+      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::yuzu",
+      "function": "swap",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1300,
@@ -205,8 +203,8 @@
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" },
         { "symbol": "USDC", "address": "0x000000000000000000000000000000000000000000000000000000000000000B" }
       ],
-      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::liquidity",
-      "function": "add_liquidity",
+      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::yuzu",
+      "function": "swap",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1800,
@@ -224,8 +222,8 @@
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" },
         { "symbol": "USDT", "address": "0x000000000000000000000000000000000000000000000000000000000000000C" }
       ],
-      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::liquidity",
-      "function": "add_liquidity",
+      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::yuzu",
+      "function": "swap",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1800,
@@ -242,8 +240,8 @@
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" },
         { "symbol": "USDC", "address": "0x000000000000000000000000000000000000000000000000000000000000000B" }
       ],
-      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::amm",
-      "function": "swap",
+      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::mosaic",
+      "function": "bridge",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1500,
@@ -260,8 +258,8 @@
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" },
         { "symbol": "USDC", "address": "0x000000000000000000000000000000000000000000000000000000000000000B" }
       ],
-      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::amm",
-      "function": "add_liquidity",
+      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::mosaic",
+      "function": "bridge",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
@@ -278,7 +276,7 @@
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" },
         { "symbol": "USDC", "address": "0x000000000000000000000000000000000000000000000000000000000000000B" }
       ],
-      "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::dex",
+      "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::interest_dex",
       "function": "swap",
       "entryPoint": true,
       "visibility": "public",
@@ -295,8 +293,8 @@
         { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" },
         { "symbol": "USDC", "address": "0x000000000000000000000000000000000000000000000000000000000000000B" }
       ],
-      "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::dex",
-      "function": "add_liquidity",
+      "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::interest_dex",
+      "function": "swap",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1900,
@@ -304,22 +302,6 @@
         "acquires": ["LiquidityPosition"],
         "resourceHandling": "fungibleAsset",
         "liquidityProvision": true
-      }
-    },
-    {
-      "type": "claim",
-      "platform": "Interest DEX",
-      "tokens": [
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
-      ],
-      "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::interest",
-      "function": "claim_interest",
-      "entryPoint": true,
-      "visibility": "public",
-      "gasEstimate": 1200,
-      "moveSpecific": {
-        "acquires": ["InterestPosition"],
-        "resourceHandling": "fungibleAsset"
       }
     }
   ],
@@ -372,7 +354,6 @@
       "link": "https://layerbank.finance/",
       "moveSpecific": {
         "modules": [
-          "lending",
           "vault",
           "risk_management"
         ],
@@ -390,8 +371,7 @@
       "link": "https://yuzu.exchange/",
       "moveSpecific": {
         "modules": [
-          "swap",
-          "liquidity",
+          "yuzu",
           "farming"
         ],
         "crossChainCapable": true,
@@ -408,9 +388,8 @@
       "link": "https://mosaic.finance/",
       "moveSpecific": {
         "modules": [
-          "amm",
-          "lending",
-          "vault"
+          "mosaic",
+          "amm"
         ],
         "crossChainCapable": true,
         "bridgeProtocols": ["LayerZero"],
@@ -426,9 +405,7 @@
       "link": "https://interest.finance/",
       "moveSpecific": {
         "modules": [
-          "dex",
-          "interest",
-          "yield"
+          "interest_dex"
         ],
         "resourceTypes": ["fungibleAsset"],
         "parallelExecution": true,

@@ -1,0 +1,64 @@
+{
+  "chainId": 1,
+  "token": {
+    "symbol": "MOD",
+    "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD",
+    "platform": "Thala",
+    "description": "MOD is Thala's collateralized stablecoin on Aptos."
+  },
+  "routes": {
+    "thalaSwap": [{ "type": "swap", "platform": "Thala" }],
+    "thalaLp": [{ "type": "lp", "platform": "Thala" }],
+    "thalaBorrow": [{ "type": "borrow", "platform": "Thala" }],
+    "thalaModMint": [{ "type": "mint", "platform": "Thala" }]
+  },
+  "interactions": [
+    {
+      "type": "swap",
+      "platform": "Thala",
+      "tokens": [{ "symbol": "MOD", "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD" }],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "function": "swap_exact_in",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1850,
+      "moveSpecific": { "acquires": [], "resourceHandling": "fungibleAsset" }
+    },
+    {
+      "type": "lp",
+      "platform": "Thala",
+      "tokens": [{ "symbol": "MOD", "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD" }],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "function": "add_liquidity",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": { "acquires": [], "resourceHandling": "fungibleAsset", "liquidityProvision": true }
+    },
+    {
+      "type": "borrow",
+      "platform": "Thala",
+      "tokens": [{ "symbol": "MOD", "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD" }],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "function": "borrow",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2300,
+      "moveSpecific": { "acquires": ["Position"], "resourceHandling": "fungibleAsset" }
+    },
+    {
+      "type": "mint",
+      "platform": "Thala",
+      "tokens": [{ "symbol": "MOD", "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD" }],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin",
+      "function": "mint",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2400,
+      "moveSpecific": { "acquires": [], "resourceHandling": "fungibleAsset" }
+    }
+  ],
+  "platforms": [
+    { "name": "Thala", "description": "Aptos DeFi superapp for swap/lending/stablecoin.", "link": "https://thala.fi" }
+  ]
+}

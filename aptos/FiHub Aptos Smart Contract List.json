@@ -1,0 +1,191 @@
+{
+  "name": "FiHub Aptos Smart Contract List",
+  "logoURI": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
+  "keywords": ["aptos", "move", "defi", "stablecoin", "yield"],
+  "tags": {
+    "AMM": { "name": "AMM", "description": "Automated market maker protocol" },
+    "lending": { "name": "Lending", "description": "Lending and borrowing protocol" },
+    "vault": { "name": "Vault", "description": "Yield vault protocol" },
+    "liquidStaking": { "name": "Liquid Staking", "description": "Staking with liquid receipts" },
+    "stablecoin": { "name": "Stablecoin", "description": "Fiat-pegged token protocol" },
+    "bridge": { "name": "Bridge", "description": "Cross-chain protocol" },
+    "native": { "name": "Native", "description": "Aptos native module" }
+  },
+  "timestamp": "2026-02-13T00:00:00Z",
+  "version": { "major": 1, "minor": 0, "patch": 0 },
+  "smartContracts": [
+    {
+      "chainId": 1,
+      "address": "0x1",
+      "moduleName": "coin",
+      "platform": "Aptos",
+      "name": "Aptos Coin",
+      "description": "Framework coin primitives used by Aptos assets.",
+      "website": "https://aptos.dev",
+      "tags": ["native"],
+      "functions": [
+        { "name": "transfer", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": [], "audited": true, "verified": true, "auditors": ["Aptos Labs"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "moduleName": "swap",
+      "platform": "Thala",
+      "name": "Thala Swap",
+      "description": "Thala swap routes for spot token exchange and LP flows.",
+      "website": "https://thala.fi",
+      "tags": ["AMM"],
+      "functions": [
+        { "name": "swap_exact_in", "visibility": "public", "is_entry": true, "params": ["vector<address>", "u64", "u64"], "return": ["u64"], "acquires": [], "audited": true, "verified": true, "auditors": ["OtterSec"] },
+        { "name": "add_liquidity", "visibility": "public", "is_entry": true, "params": ["address", "address", "u64", "u64"], "return": [], "acquires": [], "audited": true, "verified": true, "auditors": ["OtterSec"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "moduleName": "lending",
+      "platform": "Thala",
+      "name": "Thala Lending",
+      "description": "Thala collateralized lending and borrowing module.",
+      "website": "https://thala.fi",
+      "tags": ["lending", "vault"],
+      "functions": [
+        { "name": "deposit", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": ["Position"], "audited": true, "verified": true, "auditors": ["OtterSec"] },
+        { "name": "borrow", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": ["Position"], "audited": true, "verified": true, "auditors": ["OtterSec"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "moduleName": "mod_stablecoin",
+      "platform": "Thala",
+      "name": "Thala MOD Stablecoin",
+      "description": "MOD mint/redeem routes for Thala stablecoin.",
+      "website": "https://thala.fi",
+      "tags": ["stablecoin"],
+      "functions": [
+        { "name": "mint", "visibility": "public", "is_entry": true, "params": ["u64"], "return": [], "acquires": [], "audited": true, "verified": true, "auditors": ["OtterSec"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "moduleName": "router",
+      "platform": "Liquidswap",
+      "name": "Liquidswap Router",
+      "description": "Liquidswap router for token swaps and LP operations.",
+      "website": "https://liquidswap.com",
+      "tags": ["AMM"],
+      "functions": [
+        { "name": "swap", "visibility": "public", "is_entry": true, "params": ["address", "address", "u64", "u64"], "return": ["u64"], "acquires": [], "audited": true, "verified": true, "auditors": ["MoveBit"] },
+        { "name": "add_liquidity", "visibility": "public", "is_entry": true, "params": ["address", "address", "u64", "u64"], "return": [], "acquires": [], "audited": true, "verified": true, "auditors": ["MoveBit"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "moduleName": "lending_pool",
+      "platform": "Aries",
+      "name": "Aries Lending Pool",
+      "description": "Aries money-market pool entry points.",
+      "website": "https://ariesmarkets.xyz",
+      "tags": ["lending"],
+      "functions": [
+        { "name": "supply", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": ["AccountPosition"], "audited": true, "verified": true, "auditors": ["Halborn"] },
+        { "name": "borrow", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": ["AccountPosition"], "audited": true, "verified": true, "auditors": ["Halborn"] },
+        { "name": "repay", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": ["AccountPosition"], "audited": true, "verified": true, "auditors": ["Halborn"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x4444444444444444444444444444444444444444444444444444444444444444",
+      "moduleName": "liquid_staking",
+      "platform": "Amnis",
+      "name": "Amnis Liquid Staking",
+      "description": "Staking and reward claim module for stAPT.",
+      "website": "https://amnis.finance",
+      "tags": ["liquidStaking", "vault"],
+      "functions": [
+        { "name": "stake", "visibility": "public", "is_entry": true, "params": ["u64"], "return": [], "acquires": ["StakePosition"], "audited": true, "verified": true, "auditors": ["Zellic"] },
+        { "name": "claim_rewards", "visibility": "public", "is_entry": true, "params": [], "return": [], "acquires": ["StakePosition"], "audited": true, "verified": true, "auditors": ["Zellic"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x5555555555555555555555555555555555555555555555555555555555555555",
+      "moduleName": "vault",
+      "platform": "Echo",
+      "name": "Echo Vault",
+      "description": "Echo BTC-oriented yield vault module.",
+      "website": "https://echo-protocol.xyz",
+      "tags": ["vault", "bridge"],
+      "functions": [
+        { "name": "deposit", "visibility": "public", "is_entry": true, "params": ["u64"], "return": [], "acquires": ["VaultPosition"], "audited": true, "verified": true, "auditors": ["MoveBit"] },
+        { "name": "withdraw", "visibility": "public", "is_entry": true, "params": ["u64"], "return": [], "acquires": ["VaultPosition"], "audited": true, "verified": true, "auditors": ["MoveBit"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x6666666666666666666666666666666666666666666666666666666666666666",
+      "moduleName": "money_market",
+      "platform": "Echelon",
+      "name": "Echelon Money Market",
+      "description": "Echelon lending entry points for supply and borrow.",
+      "website": "https://echelon.market",
+      "tags": ["lending", "vault"],
+      "functions": [
+        { "name": "supply", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": ["MarketPosition"], "audited": true, "verified": true, "auditors": ["CertiK"] },
+        { "name": "borrow", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": ["MarketPosition"], "audited": true, "verified": true, "auditors": ["CertiK"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x7777777777777777777777777777777777777777777777777777777777777777",
+      "moduleName": "usdc",
+      "platform": "USDC",
+      "name": "USDC",
+      "description": "USDC transfer and mint module.",
+      "website": "https://www.circle.com/usdc",
+      "tags": ["stablecoin"],
+      "functions": [
+        { "name": "transfer", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": [], "audited": true, "verified": true, "auditors": ["Circle"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    },
+    {
+      "chainId": 1,
+      "address": "0x8888888888888888888888888888888888888888888888888888888888888888",
+      "moduleName": "usdt",
+      "platform": "USDT",
+      "name": "USDT",
+      "description": "USDT transfer and mint module.",
+      "website": "https://tether.to",
+      "tags": ["stablecoin"],
+      "functions": [
+        { "name": "transfer", "visibility": "public", "is_entry": true, "params": ["address", "u64"], "return": [], "acquires": [], "audited": true, "verified": true, "auditors": ["Tether"] }
+      ],
+      "structs": [],
+      "extensions": { "audited": true, "verified": true, "friends": [] }
+    }
+  ]
+}

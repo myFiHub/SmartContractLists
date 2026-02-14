@@ -1,0 +1,128 @@
+{
+  "chainId": 1,
+  "token": {
+    "symbol": "APT",
+    "address": "0x1::aptos_coin::AptosCoin",
+    "platform": "Aptos",
+    "description": "APT is the native token on Aptos used for gas, staking, and DeFi collateral."
+  },
+  "routes": {
+    "thalaSwap": [{ "type": "swap", "platform": "Thala" }],
+    "thalaLp": [{ "type": "lp", "platform": "Thala" }],
+    "thalaLend": [{ "type": "lend", "platform": "Thala" }],
+    "liquidswapSwap": [{ "type": "swap", "platform": "Liquidswap" }],
+    "liquidswapLp": [{ "type": "lp", "platform": "Liquidswap" }],
+    "ariesLend": [{ "type": "lend", "platform": "Aries" }],
+    "amnisStake": [{ "type": "stake", "platform": "Amnis" }],
+    "amnisClaim": [{ "type": "claim", "platform": "Amnis" }],
+    "echoVault": [{ "type": "vault", "platform": "Echo" }]
+  },
+  "interactions": [
+    {
+      "type": "swap",
+      "platform": "Thala",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "function": "swap_exact_in",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1900,
+      "moveSpecific": { "acquires": [], "resourceHandling": "coin" }
+    },
+    {
+      "type": "lp",
+      "platform": "Thala",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "function": "add_liquidity",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": { "acquires": [], "resourceHandling": "coin", "liquidityProvision": true }
+    },
+    {
+      "type": "lend",
+      "platform": "Thala",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "function": "deposit",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": { "acquires": ["Position"], "resourceHandling": "coin" }
+    },
+    {
+      "type": "swap",
+      "platform": "Liquidswap",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x2222222222222222222222222222222222222222222222222222222222222222::router",
+      "function": "swap",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1700,
+      "moveSpecific": { "acquires": [], "resourceHandling": "coin" }
+    },
+    {
+      "type": "lp",
+      "platform": "Liquidswap",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x2222222222222222222222222222222222222222222222222222222222222222::router",
+      "function": "add_liquidity",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": { "acquires": [], "resourceHandling": "coin", "liquidityProvision": true }
+    },
+    {
+      "type": "lend",
+      "platform": "Aries",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x3333333333333333333333333333333333333333333333333333333333333333::lending_pool",
+      "function": "supply",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2300,
+      "moveSpecific": { "acquires": ["AccountPosition"], "resourceHandling": "coin" }
+    },
+    {
+      "type": "stake",
+      "platform": "Amnis",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x4444444444444444444444444444444444444444444444444444444444444444::liquid_staking",
+      "function": "stake",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1800,
+      "moveSpecific": { "acquires": ["StakePosition"], "resourceHandling": "coin" }
+    },
+    {
+      "type": "claim",
+      "platform": "Amnis",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x4444444444444444444444444444444444444444444444444444444444444444::liquid_staking",
+      "function": "claim_rewards",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1200,
+      "moveSpecific": { "acquires": ["StakePosition"], "resourceHandling": "coin" }
+    },
+    {
+      "type": "vault",
+      "platform": "Echo",
+      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault",
+      "function": "deposit",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": { "acquires": ["VaultPosition"], "resourceHandling": "coin" }
+    }
+  ],
+  "platforms": [
+    { "name": "Thala", "description": "Aptos DeFi superapp for swap/lending/stablecoin.", "link": "https://thala.fi" },
+    { "name": "Liquidswap", "description": "Aptos AMM for swaps and LP.", "link": "https://liquidswap.com" },
+    { "name": "Aries", "description": "Aptos money-market protocol.", "link": "https://ariesmarkets.xyz" },
+    { "name": "Amnis", "description": "Aptos liquid staking protocol.", "link": "https://amnis.finance" },
+    { "name": "Echo", "description": "BTC-focused Aptos vault protocol.", "link": "https://echo-protocol.xyz" }
+  ]
+}

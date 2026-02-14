@@ -933,7 +933,7 @@
       "type": "string",
       "description": "The name of the smart contract list",
       "minLength": 1,
-      "maxLength": 30,
+      "maxLength": 60,
       "pattern": "^[\\w ]+$",
       "examples": ["FiHub Movement Smart Contract List"]
     },
