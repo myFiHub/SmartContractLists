@@ -83,11 +83,11 @@
     },
     {
       "chainId": 1,
-      "address": "0x1111111111111111111111111111111111111111111111111111111111111111",
-      "moduleName": "swap",
+      "address": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af",
+      "moduleName": "weighted_pool",
       "platform": "Thala",
-      "name": "Thala Swap",
-      "description": "Thala swap routes for spot token exchange and LP flows.",
+      "name": "ThalaSwap Weighted Pool",
+      "description": "ThalaSwap DEX weighted pool; primary swap and LP entry (ThalaSwap V1 canonical).",
       "website": "https://thala.fi",
       "tags": [
         "AMM"
@@ -140,7 +140,7 @@
     },
     {
       "chainId": 1,
-      "address": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01",
       "moduleName": "lending",
       "platform": "Thala",
       "name": "Thala Lending",
@@ -233,7 +233,7 @@
     },
     {
       "chainId": 1,
-      "address": "0x1111111111111111111111111111111111111111111111111111111111111111",
+      "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01",
       "moduleName": "mod_stablecoin",
       "platform": "Thala",
       "name": "Thala MOD Stablecoin",
@@ -398,6 +398,43 @@
           "verified": true,
           "auditors": [
             "Tether"
+          ]
+        }
+      ],
+      "structs": [],
+      "extensions": {
+        "audited": true,
+        "verified": true,
+        "friends": []
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01",
+      "moduleName": "vault",
+      "platform": "Thala",
+      "name": "Thala CDP Vault",
+      "description": "Thala Move Dollar (MOD) CDP; deposit_collateral opens position (receipt: CollateralPosition resource).",
+      "website": "https://thala.fi",
+      "tags": [
+        "vault",
+        "stablecoin"
+      ],
+      "functions": [
+        {
+          "name": "deposit_collateral",
+          "visibility": "public",
+          "is_entry": true,
+          "params": [
+            "address",
+            "u64"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": [
+            "OtterSec"
           ]
         }
       ],

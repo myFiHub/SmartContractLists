@@ -2,7 +2,7 @@
   "chainId": 1,
   "token": {
     "symbol": "MOD",
-    "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD",
+    "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD",
     "platform": "Thala",
     "description": "MOD is Thala's collateralized stablecoin on Aptos."
   },
@@ -44,6 +44,16 @@
         "platform": "Thala",
         "counterpartRouteKey": "thalaModMint"
       }
+    ],
+    "thalaAptModPair": [
+      {
+        "type": "mint",
+        "platform": "Thala"
+      },
+      {
+        "type": "lp",
+        "platform": "Thala"
+      }
     ]
   },
   "interactions": [
@@ -53,10 +63,10 @@
       "tokens": [
         {
           "symbol": "MOD",
-          "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD"
+          "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool",
       "function": "swap_exact_in",
       "entryPoint": true,
       "visibility": "public",
@@ -72,10 +82,10 @@
       "tokens": [
         {
           "symbol": "MOD",
-          "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD"
+          "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool",
       "function": "add_liquidity",
       "entryPoint": true,
       "visibility": "public",
@@ -92,14 +102,14 @@
       "tokens": [
         {
           "symbol": "MOD",
-          "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD"
+          "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
       "function": "borrow",
       "receiptToken": {
         "symbol": "thMOD-DEBT",
-        "address": "0x1111111111111111111111111111111111111111111111111111111111111111::lending::Position"
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
       },
       "entryPoint": true,
       "visibility": "public",
@@ -117,10 +127,10 @@
       "tokens": [
         {
           "symbol": "MOD",
-          "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD"
+          "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
       "function": "repay",
       "entryPoint": true,
       "visibility": "public",
@@ -138,10 +148,10 @@
       "tokens": [
         {
           "symbol": "MOD",
-          "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD"
+          "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin",
       "function": "mint",
       "entryPoint": true,
       "visibility": "public",
@@ -157,10 +167,10 @@
       "tokens": [
         {
           "symbol": "MOD",
-          "address": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin::MOD"
+          "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::mod_stablecoin",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin",
       "function": "redeem",
       "entryPoint": true,
       "visibility": "public",
