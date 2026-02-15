@@ -295,6 +295,12 @@ node validate_registry_mappings.js
 
 # Validate Aptos registry artifacts
 node validate_registry_mappings.js --network aptos
+
+# Build on-chain observation + module-existence report (Movement)
+node verify_onchain_registry.js --network movement --limit 200
+
+# Build on-chain observation + module-existence report (Aptos)
+node verify_onchain_registry.js --network aptos --limit 200
 ```
 
 ---
@@ -326,10 +332,15 @@ SmartContractLists/
 ├── movement_contract_fetcher.js                         # Node.js contract fetcher
 ├── surgical_update.py                                   # Targeted update tool
 ├── validate_registry_mappings.js                        # IL/SCL/matrix validator
+├── verify_onchain_registry.js                           # On-chain module/function verifier
 ├── IMPLEMENTATION_SUMMARY.md                            # Implementation details
 ├── docs/                                                # Move documentation & references
 │   ├── aptos-protocol-addresses.json                    # Aptos protocol seed addresses
 │   └── aptos-protocol-interaction-matrix.json           # Aptos protocol mapping
+│   ├── protocol-interaction-matrix.json                 # Movement protocol mapping
+│   ├── observed_functions_movement.json                 # Movement observed entry functions report
+│   ├── observed_functions_aptos.json                    # Aptos observed entry functions report
+│   └── PROTOCOL_GAP_RESEARCH.md                         # Follow-up protocol research backlog
 ├── LICENSE
 └── README.md                                            # This file
 ```
@@ -384,6 +395,7 @@ See:
 - `docs/protocol-interaction-matrix.json`
 - `docs/APTOS_PROTOCOL_INTERACTION_MATRIX.md`
 - `docs/aptos-protocol-interaction-matrix.json`
+- `docs/PROTOCOL_GAP_RESEARCH.md`
 - `docs/DATA_RETRIEVAL_AND_PROCESSING.md`
 
 ---

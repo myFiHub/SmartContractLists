@@ -7,122 +7,487 @@
     "description": "APT is the native token on Aptos used for gas, staking, and DeFi collateral."
   },
   "routes": {
-    "thalaSwap": [{ "type": "swap", "platform": "Thala" }],
-    "thalaLp": [{ "type": "lp", "platform": "Thala" }],
-    "thalaLend": [{ "type": "lend", "platform": "Thala" }],
-    "liquidswapSwap": [{ "type": "swap", "platform": "Liquidswap" }],
-    "liquidswapLp": [{ "type": "lp", "platform": "Liquidswap" }],
-    "ariesLend": [{ "type": "lend", "platform": "Aries" }],
-    "amnisStake": [{ "type": "stake", "platform": "Amnis" }],
-    "amnisClaim": [{ "type": "claim", "platform": "Amnis" }],
-    "echoVault": [{ "type": "vault", "platform": "Echo" }]
+    "thalaSwap": [
+      {
+        "type": "swap",
+        "platform": "Thala"
+      }
+    ],
+    "thalaLp": [
+      {
+        "type": "lp",
+        "platform": "Thala"
+      }
+    ],
+    "thalaLend": [
+      {
+        "type": "lend",
+        "platform": "Thala"
+      }
+    ],
+    "thalaWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Thala",
+        "counterpartRouteKey": "thalaLend"
+      }
+    ],
+    "liquidswapSwap": [
+      {
+        "type": "swap",
+        "platform": "Liquidswap"
+      }
+    ],
+    "liquidswapLp": [
+      {
+        "type": "lp",
+        "platform": "Liquidswap"
+      }
+    ],
+    "liquidswapRedeem": [
+      {
+        "type": "redeem",
+        "platform": "Liquidswap",
+        "counterpartRouteKey": "liquidswapLp"
+      }
+    ],
+    "ariesLend": [
+      {
+        "type": "lend",
+        "platform": "Aries"
+      }
+    ],
+    "ariesWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Aries",
+        "counterpartRouteKey": "ariesLend"
+      }
+    ],
+    "amnisStake": [
+      {
+        "type": "stake",
+        "platform": "Amnis"
+      }
+    ],
+    "amnisClaim": [
+      {
+        "type": "claim",
+        "platform": "Amnis"
+      }
+    ],
+    "amnisWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Amnis",
+        "counterpartRouteKey": "amnisStake"
+      }
+    ],
+    "echoVault": [
+      {
+        "type": "vault",
+        "platform": "Echo"
+      }
+    ],
+    "echoWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Echo",
+        "counterpartRouteKey": "echoVault"
+      }
+    ],
+    "thalaSwapLpLend": [
+      {
+        "type": "swap",
+        "platform": "Thala"
+      },
+      {
+        "type": "lp",
+        "platform": "Thala"
+      },
+      {
+        "type": "lend",
+        "platform": "Thala"
+      }
+    ],
+    "liquidswapSwapLp": [
+      {
+        "type": "swap",
+        "platform": "Liquidswap"
+      },
+      {
+        "type": "lp",
+        "platform": "Liquidswap"
+      }
+    ],
+    "amnisStakeClaim": [
+      {
+        "type": "stake",
+        "platform": "Amnis"
+      },
+      {
+        "type": "claim",
+        "platform": "Amnis"
+      }
+    ]
   },
   "interactions": [
     {
       "type": "swap",
       "platform": "Thala",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
       "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
       "function": "swap_exact_in",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1900,
-      "moveSpecific": { "acquires": [], "resourceHandling": "coin" }
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "coin"
+      }
     },
     {
       "type": "lp",
       "platform": "Thala",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
       "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
       "function": "add_liquidity",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2200,
-      "moveSpecific": { "acquires": [], "resourceHandling": "coin", "liquidityProvision": true }
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "coin",
+        "liquidityProvision": true
+      }
     },
     {
       "type": "lend",
       "platform": "Thala",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
       "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
       "function": "deposit",
+      "receiptToken": {
+        "symbol": "thAPT-LEND",
+        "address": "0x1111111111111111111111111111111111111111111111111111111111111111::lending::Position"
+      },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2100,
-      "moveSpecific": { "acquires": ["Position"], "resourceHandling": "coin" }
+      "moveSpecific": {
+        "acquires": [
+          "Position"
+        ],
+        "resourceHandling": "coin"
+      }
     },
     {
       "type": "swap",
       "platform": "Liquidswap",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
-      "module": "0x2222222222222222222222222222222222222222222222222222222222222222::router",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2",
       "function": "swap",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1700,
-      "moveSpecific": { "acquires": [], "resourceHandling": "coin" }
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "coin"
+      }
     },
     {
       "type": "lp",
       "platform": "Liquidswap",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
-      "module": "0x2222222222222222222222222222222222222222222222222222222222222222::router",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2",
       "function": "add_liquidity",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2100,
-      "moveSpecific": { "acquires": [], "resourceHandling": "coin", "liquidityProvision": true }
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "coin",
+        "liquidityProvision": true
+      }
+    },
+    {
+      "type": "redeem",
+      "platform": "Liquidswap",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2",
+      "function": "remove_liquidity",
+      "receiptToken": {
+        "symbol": "lsAPT-LP",
+        "address": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2::LiquidityPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "coin"
+      }
     },
     {
       "type": "lend",
       "platform": "Aries",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
-      "module": "0x3333333333333333333333333333333333333333333333333333333333333333::lending_pool",
-      "function": "supply",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
+      "function": "deposit",
+      "receiptToken": {
+        "symbol": "arAPT-SUPPLY",
+        "address": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::ProfilePosition"
+      },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2300,
-      "moveSpecific": { "acquires": ["AccountPosition"], "resourceHandling": "coin" }
+      "moveSpecific": {
+        "acquires": [
+          "AccountPosition"
+        ],
+        "resourceHandling": "coin"
+      }
     },
     {
       "type": "stake",
       "platform": "Amnis",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
-      "module": "0x4444444444444444444444444444444444444444444444444444444444444444::liquid_staking",
-      "function": "stake",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x111ae3e5bc816a5e63c2da97d0aa3886519e0cd5e4b046659fa35796bd11542a::router",
+      "function": "stake_entry",
+      "receiptToken": {
+        "symbol": "stAPT",
+        "address": "0x111ae3e5bc816a5e63c2da97d0aa3886519e0cd5e4b046659fa35796bd11542a::router::StakePosition"
+      },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1800,
-      "moveSpecific": { "acquires": ["StakePosition"], "resourceHandling": "coin" }
+      "moveSpecific": {
+        "acquires": [
+          "StakePosition"
+        ],
+        "resourceHandling": "coin"
+      }
     },
     {
       "type": "claim",
       "platform": "Amnis",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
-      "module": "0x4444444444444444444444444444444444444444444444444444444444444444::liquid_staking",
-      "function": "claim_rewards",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x111ae3e5bc816a5e63c2da97d0aa3886519e0cd5e4b046659fa35796bd11542a::delegation_manager",
+      "function": "update_rewards",
+      "claimContext": {
+        "rewardToken": {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        },
+        "sourceType": "stake",
+        "label": "Amnis staking rewards"
+      },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 1200,
-      "moveSpecific": { "acquires": ["StakePosition"], "resourceHandling": "coin" }
+      "moveSpecific": {
+        "acquires": [
+          "StakePosition"
+        ],
+        "resourceHandling": "coin"
+      }
     },
     {
       "type": "vault",
       "platform": "Echo",
-      "tokens": [{ "symbol": "APT", "address": "0x1::aptos_coin::AptosCoin" }],
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
       "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault",
       "function": "deposit",
+      "receiptToken": {
+        "symbol": "eAPT-VAULT",
+        "address": "0x5555555555555555555555555555555555555555555555555555555555555555::vault::VaultPosition"
+      },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2100,
-      "moveSpecific": { "acquires": ["VaultPosition"], "resourceHandling": "coin" }
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "coin"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Thala",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "thAPT-LEND",
+        "address": "0x1111111111111111111111111111111111111111111111111111111111111111::lending::Position"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2050,
+      "moveSpecific": {
+        "acquires": [
+          "Position"
+        ],
+        "resourceHandling": "coin"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Aries",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "arAPT-SUPPLY",
+        "address": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::ProfilePosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": [
+          "AccountPosition"
+        ],
+        "resourceHandling": "coin"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Amnis",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x111ae3e5bc816a5e63c2da97d0aa3886519e0cd5e4b046659fa35796bd11542a::router",
+      "function": "unstake_entry",
+      "receiptToken": {
+        "symbol": "stAPT",
+        "address": "0x111ae3e5bc816a5e63c2da97d0aa3886519e0cd5e4b046659fa35796bd11542a::router::StakePosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1900,
+      "moveSpecific": {
+        "acquires": [
+          "StakePosition"
+        ],
+        "resourceHandling": "coin"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Echo",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "eAPT-VAULT",
+        "address": "0x5555555555555555555555555555555555555555555555555555555555555555::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2050,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "coin"
+      }
     }
   ],
   "platforms": [
-    { "name": "Thala", "description": "Aptos DeFi superapp for swap/lending/stablecoin.", "link": "https://thala.fi" },
-    { "name": "Liquidswap", "description": "Aptos AMM for swaps and LP.", "link": "https://liquidswap.com" },
-    { "name": "Aries", "description": "Aptos money-market protocol.", "link": "https://ariesmarkets.xyz" },
-    { "name": "Amnis", "description": "Aptos liquid staking protocol.", "link": "https://amnis.finance" },
-    { "name": "Echo", "description": "BTC-focused Aptos vault protocol.", "link": "https://echo-protocol.xyz" }
+    {
+      "name": "Thala",
+      "description": "Aptos DeFi superapp for swap/lending/stablecoin.",
+      "link": "https://thala.fi"
+    },
+    {
+      "name": "Liquidswap",
+      "description": "Aptos AMM for swaps and LP.",
+      "link": "https://liquidswap.com"
+    },
+    {
+      "name": "Aries",
+      "description": "Aptos money-market protocol.",
+      "link": "https://ariesmarkets.xyz"
+    },
+    {
+      "name": "Amnis",
+      "description": "Aptos liquid staking protocol.",
+      "link": "https://amnis.finance"
+    },
+    {
+      "name": "Echo",
+      "description": "BTC-focused Aptos vault protocol.",
+      "link": "https://echo-protocol.xyz"
+    }
   ]
 }

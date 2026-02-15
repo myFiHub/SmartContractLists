@@ -7,38 +7,634 @@
     "description": "USDC on Aptos for payments, swaps, and collateralized lending."
   },
   "routes": {
-    "thalaSwap": [{ "type": "swap", "platform": "Thala" }],
-    "thalaLp": [{ "type": "lp", "platform": "Thala" }],
-    "thalaLend": [{ "type": "lend", "platform": "Thala" }],
-    "thalaBorrow": [{ "type": "borrow", "platform": "Thala" }],
-    "liquidswapSwap": [{ "type": "swap", "platform": "Liquidswap" }],
-    "liquidswapLp": [{ "type": "lp", "platform": "Liquidswap" }],
-    "ariesLend": [{ "type": "lend", "platform": "Aries" }],
-    "ariesBorrow": [{ "type": "borrow", "platform": "Aries" }],
-    "ariesRepay": [{ "type": "repay", "platform": "Aries" }],
-    "echelonLend": [{ "type": "lend", "platform": "Echelon" }],
-    "echelonBorrow": [{ "type": "borrow", "platform": "Echelon" }],
-    "echoVault": [{ "type": "vault", "platform": "Echo" }]
+    "thalaSwap": [
+      {
+        "type": "swap",
+        "platform": "Thala"
+      }
+    ],
+    "thalaLp": [
+      {
+        "type": "lp",
+        "platform": "Thala"
+      }
+    ],
+    "thalaLend": [
+      {
+        "type": "lend",
+        "platform": "Thala"
+      }
+    ],
+    "thalaWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Thala",
+        "counterpartRouteKey": "thalaLend"
+      }
+    ],
+    "thalaBorrow": [
+      {
+        "type": "borrow",
+        "platform": "Thala"
+      }
+    ],
+    "thalaRepay": [
+      {
+        "type": "repay",
+        "platform": "Thala",
+        "counterpartRouteKey": "thalaBorrow"
+      }
+    ],
+    "liquidswapSwap": [
+      {
+        "type": "swap",
+        "platform": "Liquidswap"
+      }
+    ],
+    "liquidswapLp": [
+      {
+        "type": "lp",
+        "platform": "Liquidswap"
+      }
+    ],
+    "liquidswapRedeem": [
+      {
+        "type": "redeem",
+        "platform": "Liquidswap",
+        "counterpartRouteKey": "liquidswapLp"
+      }
+    ],
+    "ariesLend": [
+      {
+        "type": "lend",
+        "platform": "Aries"
+      }
+    ],
+    "ariesBorrow": [
+      {
+        "type": "borrow",
+        "platform": "Aries"
+      }
+    ],
+    "ariesRepay": [
+      {
+        "type": "repay",
+        "platform": "Aries"
+      }
+    ],
+    "ariesWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Aries",
+        "counterpartRouteKey": "ariesLend"
+      }
+    ],
+    "echelonLend": [
+      {
+        "type": "lend",
+        "platform": "Echelon"
+      }
+    ],
+    "echelonBorrow": [
+      {
+        "type": "borrow",
+        "platform": "Echelon"
+      }
+    ],
+    "echelonWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Echelon",
+        "counterpartRouteKey": "echelonLend"
+      }
+    ],
+    "echelonRepay": [
+      {
+        "type": "repay",
+        "platform": "Echelon",
+        "counterpartRouteKey": "echelonBorrow"
+      }
+    ],
+    "echoVault": [
+      {
+        "type": "vault",
+        "platform": "Echo"
+      }
+    ],
+    "echoWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Echo",
+        "counterpartRouteKey": "echoVault"
+      }
+    ],
+    "thalaSwapLpLend": [
+      {
+        "type": "swap",
+        "platform": "Thala"
+      },
+      {
+        "type": "lp",
+        "platform": "Thala"
+      },
+      {
+        "type": "lend",
+        "platform": "Thala"
+      }
+    ],
+    "liquidswapSwapLp": [
+      {
+        "type": "swap",
+        "platform": "Liquidswap"
+      },
+      {
+        "type": "lp",
+        "platform": "Liquidswap"
+      }
+    ],
+    "ariesLendBorrow": [
+      {
+        "type": "lend",
+        "platform": "Aries"
+      },
+      {
+        "type": "borrow",
+        "platform": "Aries"
+      }
+    ],
+    "echelonLendBorrow": [
+      {
+        "type": "lend",
+        "platform": "Echelon"
+      },
+      {
+        "type": "borrow",
+        "platform": "Echelon"
+      }
+    ]
   },
   "interactions": [
-    { "type": "swap", "platform": "Thala", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap", "function": "swap_exact_in", "entryPoint": true, "visibility": "public", "gasEstimate": 1800, "moveSpecific": { "acquires": [], "resourceHandling": "fungibleAsset" } },
-    { "type": "lp", "platform": "Thala", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap", "function": "add_liquidity", "entryPoint": true, "visibility": "public", "gasEstimate": 2200, "moveSpecific": { "acquires": [], "resourceHandling": "fungibleAsset", "liquidityProvision": true } },
-    { "type": "lend", "platform": "Thala", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending", "function": "deposit", "entryPoint": true, "visibility": "public", "gasEstimate": 2000, "moveSpecific": { "acquires": ["Position"], "resourceHandling": "fungibleAsset" } },
-    { "type": "borrow", "platform": "Thala", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending", "function": "borrow", "entryPoint": true, "visibility": "public", "gasEstimate": 2300, "moveSpecific": { "acquires": ["Position"], "resourceHandling": "fungibleAsset" } },
-    { "type": "swap", "platform": "Liquidswap", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x2222222222222222222222222222222222222222222222222222222222222222::router", "function": "swap", "entryPoint": true, "visibility": "public", "gasEstimate": 1700, "moveSpecific": { "acquires": [], "resourceHandling": "fungibleAsset" } },
-    { "type": "lp", "platform": "Liquidswap", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x2222222222222222222222222222222222222222222222222222222222222222::router", "function": "add_liquidity", "entryPoint": true, "visibility": "public", "gasEstimate": 2100, "moveSpecific": { "acquires": [], "resourceHandling": "fungibleAsset", "liquidityProvision": true } },
-    { "type": "lend", "platform": "Aries", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x3333333333333333333333333333333333333333333333333333333333333333::lending_pool", "function": "supply", "entryPoint": true, "visibility": "public", "gasEstimate": 2200, "moveSpecific": { "acquires": ["AccountPosition"], "resourceHandling": "fungibleAsset" } },
-    { "type": "borrow", "platform": "Aries", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x3333333333333333333333333333333333333333333333333333333333333333::lending_pool", "function": "borrow", "entryPoint": true, "visibility": "public", "gasEstimate": 2400, "moveSpecific": { "acquires": ["AccountPosition"], "resourceHandling": "fungibleAsset" } },
-    { "type": "repay", "platform": "Aries", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x3333333333333333333333333333333333333333333333333333333333333333::lending_pool", "function": "repay", "entryPoint": true, "visibility": "public", "gasEstimate": 1900, "moveSpecific": { "acquires": ["AccountPosition"], "resourceHandling": "fungibleAsset" } },
-    { "type": "lend", "platform": "Echelon", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x6666666666666666666666666666666666666666666666666666666666666666::money_market", "function": "supply", "entryPoint": true, "visibility": "public", "gasEstimate": 2100, "moveSpecific": { "acquires": ["MarketPosition"], "resourceHandling": "fungibleAsset" } },
-    { "type": "borrow", "platform": "Echelon", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x6666666666666666666666666666666666666666666666666666666666666666::money_market", "function": "borrow", "entryPoint": true, "visibility": "public", "gasEstimate": 2300, "moveSpecific": { "acquires": ["MarketPosition"], "resourceHandling": "fungibleAsset" } },
-    { "type": "vault", "platform": "Echo", "tokens": [{ "symbol": "USDC", "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC" }], "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault", "function": "deposit", "entryPoint": true, "visibility": "public", "gasEstimate": 2000, "moveSpecific": { "acquires": ["VaultPosition"], "resourceHandling": "fungibleAsset" } }
+    {
+      "type": "swap",
+      "platform": "Thala",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "function": "swap_exact_in",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1800,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "lp",
+      "platform": "Thala",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::swap",
+      "function": "add_liquidity",
+      "receiptToken": {
+        "symbol": "thUSDC-LP",
+        "address": "0x1111111111111111111111111111111111111111111111111111111111111111::swap::LPPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset",
+        "liquidityProvision": true
+      }
+    },
+    {
+      "type": "lend",
+      "platform": "Thala",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "function": "deposit",
+      "receiptToken": {
+        "symbol": "thUSDC-LEND",
+        "address": "0x1111111111111111111111111111111111111111111111111111111111111111::lending::Position"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [
+          "Position"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "borrow",
+      "platform": "Thala",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "function": "borrow",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2300,
+      "moveSpecific": {
+        "acquires": [
+          "Position"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "swap",
+      "platform": "Liquidswap",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2",
+      "function": "swap",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1700,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "lp",
+      "platform": "Liquidswap",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2",
+      "function": "add_liquidity",
+      "receiptToken": {
+        "symbol": "lsUSDC-LP",
+        "address": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2::LiquidityPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset",
+        "liquidityProvision": true
+      }
+    },
+    {
+      "type": "lend",
+      "platform": "Aries",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
+      "function": "deposit",
+      "receiptToken": {
+        "symbol": "arUSDC-SUPPLY",
+        "address": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::ProfilePosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": {
+        "acquires": [
+          "AccountPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "borrow",
+      "platform": "Aries",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
+      "function": "withdraw",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2400,
+      "moveSpecific": {
+        "acquires": [
+          "AccountPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "repay",
+      "platform": "Aries",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
+      "function": "deposit",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1900,
+      "moveSpecific": {
+        "acquires": [
+          "AccountPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "lend",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
+      "function": "supply",
+      "receiptToken": {
+        "symbol": "ecUSDC-MARKET",
+        "address": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts::MarketPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": [
+          "MarketPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "borrow",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
+      "function": "borrow",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2300,
+      "moveSpecific": {
+        "acquires": [
+          "MarketPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "vault",
+      "platform": "Echo",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault",
+      "function": "deposit",
+      "receiptToken": {
+        "symbol": "echoUSDC-VAULT",
+        "address": "0x5555555555555555555555555555555555555555555555555555555555555555::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Thala",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "thUSDC-LEND",
+        "address": "0x1111111111111111111111111111111111111111111111111111111111111111::lending::Position"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2050,
+      "moveSpecific": {
+        "acquires": [
+          "Position"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "repay",
+      "platform": "Thala",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x1111111111111111111111111111111111111111111111111111111111111111::lending",
+      "function": "repay",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [
+          "Position"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "redeem",
+      "platform": "Liquidswap",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2",
+      "function": "remove_liquidity",
+      "receiptToken": {
+        "symbol": "lsUSDC-LP",
+        "address": "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12::scripts_v2::LiquidityPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2150,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Aries",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "arUSDC-SUPPLY",
+        "address": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::ProfilePosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2150,
+      "moveSpecific": {
+        "acquires": [
+          "AccountPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "ecUSDC-MARKET",
+        "address": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts::MarketPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": [
+          "MarketPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "repay",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
+      "function": "repay",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2050,
+      "moveSpecific": {
+        "acquires": [
+          "MarketPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Echo",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
+        }
+      ],
+      "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "echoUSDC-VAULT",
+        "address": "0x5555555555555555555555555555555555555555555555555555555555555555::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2050,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    }
   ],
   "platforms": [
-    { "name": "Thala", "description": "Aptos DeFi superapp for swap/lending/stablecoin.", "link": "https://thala.fi" },
-    { "name": "Liquidswap", "description": "Aptos AMM for swaps and LP.", "link": "https://liquidswap.com" },
-    { "name": "Aries", "description": "Aptos money-market protocol.", "link": "https://ariesmarkets.xyz" },
-    { "name": "Echelon", "description": "Aptos money-market and lending protocol.", "link": "https://echelon.market" },
-    { "name": "Echo", "description": "BTC-focused Aptos vault protocol.", "link": "https://echo-protocol.xyz" }
+    {
+      "name": "Thala",
+      "description": "Aptos DeFi superapp for swap/lending/stablecoin.",
+      "link": "https://thala.fi"
+    },
+    {
+      "name": "Liquidswap",
+      "description": "Aptos AMM for swaps and LP.",
+      "link": "https://liquidswap.com"
+    },
+    {
+      "name": "Aries",
+      "description": "Aptos money-market protocol.",
+      "link": "https://ariesmarkets.xyz"
+    },
+    {
+      "name": "Echelon",
+      "description": "Aptos money-market and lending protocol.",
+      "link": "https://echelon.market"
+    },
+    {
+      "name": "Echo",
+      "description": "BTC-focused Aptos vault protocol.",
+      "link": "https://echo-protocol.xyz"
+    }
   ]
 }

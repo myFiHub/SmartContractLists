@@ -8,35 +8,119 @@
   },
   "routes": {
     "movePositionLending": [
-      { "type": "lend", "platform": "MovePosition" }
+      {
+        "type": "lend",
+        "platform": "MovePosition"
+      }
     ],
     "layerbankLending": [
-      { "type": "lend", "platform": "Layerbank" }
+      {
+        "type": "lend",
+        "platform": "Layerbank"
+      }
+    ],
+    "layerbankWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Layerbank",
+        "counterpartRouteKey": "layerbankLending"
+      }
     ],
     "echelonVault": [
-      { "type": "vault", "platform": "Echelon" }
+      {
+        "type": "vault",
+        "platform": "Echelon"
+      }
+    ],
+    "echelonWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Echelon",
+        "counterpartRouteKey": "echelonVault"
+      }
+    ],
+    "echelonClaim": [
+      {
+        "type": "claim",
+        "platform": "Echelon",
+        "counterpartRouteKey": "echelonAutoCompound"
+      }
     ],
     "echelonAutoCompound": [
-      { "type": "vault", "platform": "Echelon" },
-      { "type": "compound", "platform": "Echelon" }
+      {
+        "type": "vault",
+        "platform": "Echelon"
+      },
+      {
+        "type": "compound",
+        "platform": "Echelon"
+      }
     ],
     "usdcMoveYuzuLiquidity": [
-      { "type": "lp", "platform": "YUZU" }
+      {
+        "type": "lp",
+        "platform": "YUZU"
+      }
     ],
     "usdcMoveMosaicLiquidity": [
-      { "type": "lp", "platform": "Mosaic" }
+      {
+        "type": "lp",
+        "platform": "Mosaic"
+      }
     ],
     "usdcMoveInterestDexLiquidity": [
-      { "type": "lp", "platform": "Interest DEX" }
+      {
+        "type": "lp",
+        "platform": "Interest DEX"
+      }
     ],
     "yuzuSwap": [
-      { "type": "swap", "platform": "YUZU" }
+      {
+        "type": "swap",
+        "platform": "YUZU"
+      }
     ],
     "mosaicSwap": [
-      { "type": "swap", "platform": "Mosaic" }
+      {
+        "type": "swap",
+        "platform": "Mosaic"
+      }
     ],
     "interestDexSwap": [
-      { "type": "swap", "platform": "Interest DEX" }
+      {
+        "type": "swap",
+        "platform": "Interest DEX"
+      }
+    ],
+    "mosaicSwapLpStake": [
+      {
+        "type": "swap",
+        "platform": "Mosaic"
+      },
+      {
+        "type": "lp",
+        "platform": "Mosaic"
+      },
+      {
+        "type": "stake",
+        "platform": "Mosaic"
+      }
+    ],
+    "yuzuSwapLp": [
+      {
+        "type": "swap",
+        "platform": "YUZU"
+      },
+      {
+        "type": "lp",
+        "platform": "YUZU"
+      }
+    ],
+    "mosaicStake": [
+      {
+        "type": "stake",
+        "platform": "Mosaic"
+      }
     ]
   },
   "interactions": [
@@ -44,7 +128,10 @@
       "type": "lend",
       "platform": "MovePosition",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        }
       ],
       "module": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::lend",
       "function": "lend_to_portfolio",
@@ -61,10 +148,17 @@
       "type": "lend",
       "platform": "Layerbank",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        }
       ],
       "module": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault",
       "function": "deposit",
+      "receiptToken": {
+        "symbol": "lbUSDC-POS",
+        "address": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault::LendingPosition"
+      },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
@@ -77,10 +171,17 @@
       "type": "vault",
       "platform": "Echelon",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        }
       ],
       "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
       "function": "deposit",
+      "receiptToken": {
+        "symbol": "ecUSDC-VAULT",
+        "address": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault::VaultPosition"
+      },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2100,
@@ -94,7 +195,10 @@
       "type": "compound",
       "platform": "Echelon",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        }
       ],
       "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
       "function": "deposit",
@@ -109,11 +213,98 @@
       }
     },
     {
+      "type": "withdraw",
+      "platform": "Layerbank",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        }
+      ],
+      "module": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "lbUSDC-POS",
+        "address": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault::LendingPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1900,
+      "moveSpecific": {
+        "acquires": [
+          "LendingPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        }
+      ],
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "ecUSDC-VAULT",
+        "address": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1950,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "claim",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        }
+      ],
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "harvest",
+      "claimContext": {
+        "rewardToken": {
+          "symbol": "ECH",
+          "address": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::reward::ECH"
+        },
+        "sourceType": "vault",
+        "label": "Echelon USDC vault rewards"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1800,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition",
+          "YieldStrategy"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "rewardClaiming": true
+      }
+    },
+    {
       "type": "swap",
       "platform": "YUZU",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" },
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        },
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
       ],
       "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::yuzu",
       "function": "swap",
@@ -130,11 +321,17 @@
       "type": "lp",
       "platform": "YUZU",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" },
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        },
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
       ],
-      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::yuzu",
-      "function": "swap",
+      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::scripts",
+      "function": "add_liquidity_one_coin",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2900,
@@ -142,20 +339,30 @@
         "acquires": [],
         "resourceHandling": "fungibleAsset",
         "liquidityProvision": true
+      },
+      "receiptToken": {
+        "symbol": "yzUSDC-MOVE-LP",
+        "address": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::scripts::LiquidityPosition"
       }
     },
     {
       "type": "swap",
       "platform": "Mosaic",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" },
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        },
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
       ],
-      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::mosaic",
-      "function": "bridge",
+      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::router",
+      "function": "swap",
       "entryPoint": true,
       "visibility": "public",
-      "gasEstimate": 1650,
+      "gasEstimate": 1750,
       "moveSpecific": {
         "acquires": [],
         "resourceHandling": "fungibleAsset"
@@ -165,16 +372,28 @@
       "type": "lp",
       "platform": "Mosaic",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" },
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        },
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
       ],
-      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::mosaic",
-      "function": "bridge",
+      "module": "0xfbdb3da73efcfa742d542f152d65fc6da7b55dee864cd66475213e4be18c9d54::pool",
+      "function": "add_liquidity_weighted_entry",
+      "receiptToken": {
+        "symbol": "mosUSDC-MOVE-LP",
+        "address": "0xfbdb3da73efcfa742d542f152d65fc6da7b55dee864cd66475213e4be18c9d54::pool::PoolPosition"
+      },
       "entryPoint": true,
       "visibility": "public",
-      "gasEstimate": 2800,
+      "gasEstimate": 3000,
       "moveSpecific": {
-        "acquires": [],
+        "acquires": [
+          "PoolPosition"
+        ],
         "resourceHandling": "fungibleAsset",
         "liquidityProvision": true
       }
@@ -183,8 +402,14 @@
       "type": "swap",
       "platform": "Interest DEX",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" },
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        },
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
       ],
       "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::interest_dex",
       "function": "swap",
@@ -200,8 +425,14 @@
       "type": "lp",
       "platform": "Interest DEX",
       "tokens": [
-        { "symbol": "USDC", "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a" },
-        { "symbol": "MOVE", "address": "0x000000000000000000000000000000000000000000000000000000000000000A" }
+        {
+          "symbol": "USDC",
+          "address": "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a"
+        },
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
       ],
       "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::interest_dex",
       "function": "swap",
@@ -212,6 +443,32 @@
         "acquires": [],
         "resourceHandling": "fungibleAsset",
         "liquidityProvision": true
+      }
+    },
+    {
+      "type": "stake",
+      "platform": "Mosaic",
+      "tokens": [
+        {
+          "symbol": "mosUSDC-MOVE-LP",
+          "address": "0xfbdb3da73efcfa742d542f152d65fc6da7b55dee864cd66475213e4be18c9d54::pool::PoolPosition"
+        }
+      ],
+      "module": "0x78cc27a51d18877acf616d5f432c23851f8689183ad56f3ddf690bb3d372ca39::farming_fa_wrapper",
+      "function": "stake",
+      "receiptToken": {
+        "symbol": "mosUSDC-MOVE-STAKED",
+        "address": "0x78cc27a51d18877acf616d5f432c23851f8689183ad56f3ddf690bb3d372ca39::farming_fa_wrapper::StakePosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": {
+        "acquires": [
+          "StakePosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "farming": true
       }
     }
   ],

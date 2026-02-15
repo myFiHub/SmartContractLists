@@ -44,11 +44,15 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy"]
+                "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn"]
               },
               "platform": {
                 "type": "string",
                 "description": "Platform name for the operation"
+              },
+              "counterpartRouteKey": {
+                "type": "string",
+                "description": "Optional inverse route key for wind/unwind pairing"
               }
             }
           }
@@ -64,7 +68,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "repay", "liquidate", "mint", "burn"]
+            "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn"]
           },
           "platform": {
             "type": "string",
@@ -110,6 +114,49 @@
           "gasEstimate": {
             "type": "integer",
             "description": "Estimated gas cost for the operation"
+          },
+          "receiptToken": {
+            "type": "object",
+            "description": "Optional receipt/position token for wind and unwind accounting",
+            "required": ["symbol", "address"],
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "Receipt or position token symbol"
+              },
+              "address": {
+                "type": "string",
+                "description": "Receipt or position token address"
+              }
+            }
+          },
+          "claimContext": {
+            "type": "object",
+            "description": "Optional reward claim context",
+            "properties": {
+              "rewardToken": {
+                "type": "object",
+                "required": ["symbol", "address"],
+                "properties": {
+                  "symbol": {
+                    "type": "string",
+                    "description": "Reward token symbol"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "Reward token address"
+                  }
+                }
+              },
+              "sourceType": {
+                "type": "string",
+                "description": "Source interaction class (stake, vault, lp, farm)"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable claim context label"
+              }
+            }
           },
           "moveSpecific": {
             "type": "object",
