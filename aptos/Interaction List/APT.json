@@ -135,13 +135,14 @@
     {
       "type": "swap",
       "platform": "Thala",
+      "type_arguments_source": "runtime",
       "tokens": [
         {
           "symbol": "APT",
           "address": "0x1::aptos_coin::AptosCoin"
         }
       ],
-      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool",
+      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool_scripts",
       "function": "swap_exact_in",
       "entryPoint": true,
       "visibility": "public",
@@ -154,13 +155,14 @@
     {
       "type": "lp",
       "platform": "Thala",
+      "type_arguments_source": "runtime",
       "tokens": [
         {
           "symbol": "APT",
           "address": "0x1::aptos_coin::AptosCoin"
         }
       ],
-      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool",
+      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool_scripts",
       "function": "add_liquidity",
       "entryPoint": true,
       "visibility": "public",

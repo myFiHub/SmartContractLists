@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "FiHub Movement Interaction List Schema",
-  "description": "Schema for DeFi interaction lists on Movement blockchain with Move VM specific features",
+  "description": "Schema for DeFi interaction lists on Movement blockchain with Move VM specific features. Each interaction may include an Interface List (params) and/or a Tx Construction Spec (typeArguments, arguments, runtimeDeps, preflight) for deterministic build of type args and function args. See docs/INTERACTION_LIST_INTERFACE.md and docs/CONSTRUCTION_SPEC.md.",
   "type": "object",
   "required": ["chainId", "token", "interactions", "platforms"],
   "properties": {
@@ -99,6 +99,163 @@
           "function": {
             "type": "string",
             "description": "Move function name"
+          },
+          "params": {
+            "type": "array",
+            "description": "Interface List: parameter specification for this interaction. Defines argument order, types, and how each value is obtained (user input, static, or runtime). When present, consumers use this to build the function arguments array for the chain; when absent, fall back to type/platform defaults or SCL.",
+            "items": {
+              "type": "object",
+              "required": ["name", "type", "source"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Parameter name (matches Move/SCL when available)"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Move type string (e.g. address, u64, vector<u8>, bool)"
+                },
+                "source": {
+                  "type": "string",
+                  "enum": ["user", "static", "runtime"],
+                  "description": "Where the value comes from: user (form input), static (fixed value), runtime (e.g. pool/market resolver)"
+                },
+                "inputKind": {
+                  "type": "string",
+                  "enum": ["primary", "secondary"],
+                  "description": "When source is user, which form field (primary amount or secondary amount)"
+                },
+                "value": {
+                  "description": "When source is static, the literal value (string, boolean, or number)"
+                },
+                "hint": {
+                  "type": "string",
+                  "description": "Human-readable hint for runtime source (e.g. 'Aries market id from API')"
+                }
+              }
+            },
+            "maxItems": 20
+          },
+          "sclFunctionRef": {
+            "type": "string",
+            "description": "Optional reference to SCL function for ABI alignment: normalized address::moduleName::functionName. Used by validators to ensure params match SCL."
+          },
+          "type_arguments": {
+            "type": "array",
+            "description": "Move type strings for generic entry functions (e.g. coin type). Length must match SCL function generic_type_params when referential checks run.",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Move type (e.g. 0x1::aptos_coin::AptosCoin)"
+            },
+            "maxItems": 20
+          },
+          "type_arguments_source": {
+            "type": "string",
+            "enum": ["static", "runtime"],
+            "description": "When 'runtime', type_arguments are built at runtime (e.g. from user selection); semantic checks may allow missing type_arguments for this interaction. Deprecated in favor of typeArguments when construction spec is used."
+          },
+          "typeArguments": {
+            "type": "object",
+            "description": "Tx Construction Spec: how to deterministically build type arguments. When present, takes precedence over type_arguments/type_arguments_source.",
+            "required": ["mode"],
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": ["static", "template", "resolver"],
+                "description": "static: use literal list. template: substitute placeholders like {fromType},{toType}. resolver: call a named resolver with inputs."
+              },
+              "static": {
+                "type": "array",
+                "description": "When mode is static: literal type strings (e.g. 0x1::aptos_coin::AptosCoin).",
+                "items": { "type": "string", "minLength": 1 },
+                "maxItems": 20
+              },
+              "template": {
+                "type": "array",
+                "description": "When mode is template: strings with placeholders {fromType}, {toType}, {curveType}, {tokenType} substituted at runtime.",
+                "items": { "type": "string" },
+                "maxItems": 20
+              },
+              "resolver": {
+                "type": "object",
+                "description": "When mode is resolver: named resolver and its inputs (placeholder keys reference context).",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Resolver identifier (e.g. thala.v1.weightedPool)"
+                  },
+                  "inputs": {
+                    "type": "object",
+                    "description": "Key-value map; values may be placeholders like {fromType}, {toType}, {poolId}",
+                    "additionalProperties": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "arguments": {
+            "type": "object",
+            "description": "Tx Construction Spec: how to deterministically build function arguments. When present, consumers use this (and optional resolver) instead of params/legacy buildArgs.",
+            "properties": {
+              "schema": {
+                "type": "array",
+                "description": "Ordered list of argument specs. source may be user.amountIn, user.amountOut, quote.minOut, resolver.routePath, static, etc.",
+                "items": {
+                  "type": "object",
+                  "required": ["name", "type", "source"],
+                  "properties": {
+                    "name": { "type": "string", "description": "Argument name (align with Move/SCL)" },
+                    "type": { "type": "string", "description": "Move type (e.g. u64, vector<address>, vector<u8>)" },
+                    "source": { "type": "string", "description": "Dot path: user.primary, user.secondary, quote.minOut, resolver.<key>, static; or literal value" }
+                  }
+                },
+                "maxItems": 20
+              },
+              "resolver": {
+                "type": "object",
+                "description": "Optional: named resolver that returns or assembles arguments (e.g. thala.v1.swapArgs).",
+                "required": ["id"],
+                "properties": {
+                  "id": { "type": "string", "description": "Resolver identifier" },
+                  "inputs": {
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "runtimeDeps": {
+            "type": "array",
+            "description": "Required runtime lookups (pool registry, market registry, lens). Consumers must have this data before building the tx.",
+            "items": {
+              "type": "object",
+              "required": ["kind", "platform"],
+              "properties": {
+                "kind": { "type": "string", "description": "e.g. poolRegistry, marketRegistry, lens" },
+                "platform": { "type": "string", "description": "Platform name (e.g. Thala)" },
+                "version": { "type": "string", "description": "Optional protocol version (e.g. v1)" },
+                "source": { "type": "string", "description": "Optional: lens, api, static" }
+              }
+            },
+            "maxItems": 10
+          },
+          "preflight": {
+            "type": "array",
+            "description": "Deterministic checks before build/simulate (pool exists, balance sufficient, etc.).",
+            "items": {
+              "type": "object",
+              "required": ["check"],
+              "properties": {
+                "check": { "type": "string", "description": "e.g. poolExists, balanceSufficient, positionExists" },
+                "resolver": { "type": "string", "description": "Resolver id when check depends on it (e.g. thala.v1.weightedPool)" },
+                "token": { "type": "string", "description": "Placeholder or type for balance check" },
+                "amount": { "type": "string", "description": "Placeholder for amount (e.g. {amountIn})" }
+              }
+            },
+            "maxItems": 10
           },
           "entryPoint": {
             "type": "boolean",

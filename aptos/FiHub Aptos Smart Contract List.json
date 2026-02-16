@@ -140,6 +140,70 @@
     },
     {
       "chainId": 1,
+      "address": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af",
+      "moduleName": "weighted_pool_scripts",
+      "platform": "Thala",
+      "name": "ThalaSwap Weighted Pool Scripts",
+      "description": "ThalaSwap script entry points for swap and LP (generic type args at runtime).",
+      "website": "https://thala.fi",
+      "tags": [
+        "AMM"
+      ],
+      "functions": [
+        {
+          "name": "swap_exact_in",
+          "visibility": "public",
+          "is_entry": true,
+          "params": [],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": [
+            "OtterSec"
+          ]
+        },
+        {
+          "name": "add_liquidity",
+          "visibility": "public",
+          "is_entry": true,
+          "params": [],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": [
+            "OtterSec"
+          ]
+        }
+      ],
+      "structs": [],
+      "extensions": {
+        "audited": true,
+        "verified": true,
+        "friends": []
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0xff1ac437457a839f7d07212d789b85dd77b3df00f59613fcba02388464bfcacb",
+      "moduleName": "lens",
+      "platform": "Thala",
+      "name": "ThalaSwap Lens",
+      "description": "Pool discovery / lens for ThalaSwap V1 (weighted and stable pools).",
+      "website": "https://thala.fi",
+      "tags": [
+        "AMM"
+      ],
+      "functions": [],
+      "structs": [],
+      "extensions": {
+        "audited": false,
+        "verified": false
+      }
+    },
+    {
+      "chainId": 1,
       "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01",
       "moduleName": "lending",
       "platform": "Thala",

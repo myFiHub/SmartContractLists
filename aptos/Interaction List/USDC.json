@@ -177,13 +177,14 @@
     {
       "type": "swap",
       "platform": "Thala",
+      "type_arguments_source": "runtime",
       "tokens": [
         {
           "symbol": "USDC",
           "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
         }
       ],
-      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool",
+      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool_scripts",
       "function": "swap_exact_in",
       "entryPoint": true,
       "visibility": "public",
@@ -196,13 +197,14 @@
     {
       "type": "lp",
       "platform": "Thala",
+      "type_arguments_source": "runtime",
       "tokens": [
         {
           "symbol": "USDC",
           "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
         }
       ],
-      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool",
+      "module": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool_scripts",
       "function": "add_liquidity",
       "receiptToken": {
         "symbol": "thUSDC-LP",
@@ -317,6 +319,7 @@
       ],
       "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
       "function": "deposit",
+      "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
       "receiptToken": {
         "symbol": "arUSDC-SUPPLY",
         "address": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::ProfilePosition"
@@ -342,6 +345,7 @@
       ],
       "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
       "function": "withdraw",
+      "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2400,
@@ -384,6 +388,7 @@
       ],
       "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
       "function": "supply",
+      "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
       "receiptToken": {
         "symbol": "ecUSDC-MARKET",
         "address": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts::MarketPosition"
@@ -409,6 +414,7 @@
       ],
       "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
       "function": "borrow",
+      "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2300,
@@ -549,6 +555,7 @@
       ],
       "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
       "function": "withdraw",
+      "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
       "receiptToken": {
         "symbol": "ecUSDC-MARKET",
         "address": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts::MarketPosition"
@@ -574,6 +581,7 @@
       ],
       "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
       "function": "repay",
+      "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2050,

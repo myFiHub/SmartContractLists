@@ -722,7 +722,7 @@
         {
           "name": "lend_to_portfolio",
           "visibility": "friend",
-          "is_entry": false,
+          "is_entry": true,
           "params": [
             "&signer",
             "address",
@@ -1082,7 +1082,7 @@
         {
           "name": "borrow_v2",
           "visibility": "friend",
-          "is_entry": false,
+          "is_entry": true,
           "params": [
             "&signer",
             "vector<u8>"
