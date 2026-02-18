@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://fihub.org/movement-smart-contract-list.schema.json",
-  "title": "FiHub Movement Smart Contract List",
+  "$id": "https://myfihub.com/aptos-movement-smart-contract-list.schema.json",
+  "title": "FiHub Aptos-Movement Smart Contract List",
   "description": "Schema for lists of smart contracts compatible with the Movement Virtual Machine and Move programming language",
   "definitions": {
     "Version": {
@@ -1058,7 +1058,7 @@
           },
           "native": {
             "name": "Native",
-            "description": "Native to the Movement blockchain (framework or core contracts)"
+            "description": "Native to the Aptos-Movement blockchain (framework or core contracts)"
           },
           "AMM": {
             "name": "AMM",

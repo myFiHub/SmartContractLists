@@ -136,6 +136,9 @@
       "type": "swap",
       "platform": "Thala",
       "type_arguments_source": "runtime",
+      "runtimeDeps": [
+        { "kind": "poolRegistry", "platform": "Thala", "version": "v1", "contractRef": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool", "sourceType": "indexer" }
+      ],
       "tokens": [
         {
           "symbol": "APT",
@@ -156,6 +159,9 @@
       "type": "lp",
       "platform": "Thala",
       "type_arguments_source": "runtime",
+      "runtimeDeps": [
+        { "kind": "poolRegistry", "platform": "Thala", "version": "v1", "contractRef": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool", "sourceType": "indexer" }
+      ],
       "tokens": [
         {
           "symbol": "APT",
@@ -176,6 +182,7 @@
     {
       "type": "lend",
       "platform": "Thala",
+      "type_arguments": ["0x1::aptos_coin::AptosCoin"],
       "tokens": [
         {
           "symbol": "APT",
@@ -342,17 +349,18 @@
     {
       "type": "vault",
       "platform": "Echo",
+      "type_arguments": ["0x1::aptos_coin::AptosCoin"],
       "tokens": [
         {
           "symbol": "APT",
           "address": "0x1::aptos_coin::AptosCoin"
         }
       ],
-      "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault",
+      "module": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault",
       "function": "deposit",
       "receiptToken": {
         "symbol": "eAPT-VAULT",
-        "address": "0x5555555555555555555555555555555555555555555555555555555555555555::vault::VaultPosition"
+        "address": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault::VaultPosition"
       },
       "entryPoint": true,
       "visibility": "public",
@@ -367,6 +375,7 @@
     {
       "type": "withdraw",
       "platform": "Thala",
+      "type_arguments": ["0x1::aptos_coin::AptosCoin"],
       "tokens": [
         {
           "symbol": "APT",
@@ -442,17 +451,18 @@
     {
       "type": "withdraw",
       "platform": "Echo",
+      "type_arguments": ["0x1::aptos_coin::AptosCoin"],
       "tokens": [
         {
           "symbol": "APT",
           "address": "0x1::aptos_coin::AptosCoin"
         }
       ],
-      "module": "0x5555555555555555555555555555555555555555555555555555555555555555::vault",
+      "module": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault",
       "function": "withdraw",
       "receiptToken": {
         "symbol": "eAPT-VAULT",
-        "address": "0x5555555555555555555555555555555555555555555555555555555555555555::vault::VaultPosition"
+        "address": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault::VaultPosition"
       },
       "entryPoint": true,
       "visibility": "public",

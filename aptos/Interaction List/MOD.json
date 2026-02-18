@@ -61,6 +61,9 @@
       "type": "swap",
       "platform": "Thala",
       "type_arguments_source": "runtime",
+      "runtimeDeps": [
+        { "kind": "poolRegistry", "platform": "Thala", "version": "v1", "contractRef": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool", "sourceType": "indexer" }
+      ],
       "tokens": [
         {
           "symbol": "MOD",
@@ -81,6 +84,9 @@
       "type": "lp",
       "platform": "Thala",
       "type_arguments_source": "runtime",
+      "runtimeDeps": [
+        { "kind": "poolRegistry", "platform": "Thala", "version": "v1", "contractRef": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool", "sourceType": "indexer" }
+      ],
       "tokens": [
         {
           "symbol": "MOD",
@@ -101,6 +107,7 @@
     {
       "type": "borrow",
       "platform": "Thala",
+      "type_arguments": ["0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"],
       "tokens": [
         {
           "symbol": "MOD",
@@ -126,6 +133,7 @@
     {
       "type": "repay",
       "platform": "Thala",
+      "type_arguments": ["0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"],
       "tokens": [
         {
           "symbol": "MOD",

@@ -1,4 +1,4 @@
-# FiHub Movement Smart Contract Lists and Interaction Lists
+# FiHub Aptos-Movement Smart Contract Lists and Interaction Lists
 
 A **two-layer decentralized registry standard** for smart contracts and DeFi interactions on **Movement + Aptos (Move VM)**.
 
@@ -12,13 +12,13 @@ Inspired by the success of token lists in wallets like Uniswap, FiHub's **Smart 
 
 The SCL is the canonical inventory of Move modules and their affordances: `moduleName`, `functions`, `structs`, plus rich "trust surface" metadata (audit score, governance, upgradeability, security level, compliance, interoperability).
 
-**Schema:** [`FiHub Movement Smart Contract List Schema.json`](./FiHub%20Movement%20Smart%20Contract%20List%20Schema.json)
+**Schema:** [`FiHub Aptos-Movement Smart Contract List Schema.json`]
 
 ### Layer B: Interaction List (IL) — "What a user can do + how to do it"
 
 The IL is a transaction/intent catalog per token/platform: interaction type, involved tokens, `module` + `function`, `entryPoint`, `gasEstimate`, and Move-specific properties (`acquires`, `resourceHandling`, `crossChain`, etc.).
 
-**Schema:** [`FiHub Movement Interaction List Schema.json`](./FiHub%20Movement%20Interaction%20List%20Schema.json)
+**Schema:** [`FiHub Aptos-Movement Interaction List Schema.json`]
 
 ### Design Principle
 
@@ -30,7 +30,7 @@ The IL is a transaction/intent catalog per token/platform: interaction type, inv
 
 ### Smart Contract Lists
 
-- **238 contracts** across Movement framework and ecosystem protocols
+- **238 contracts** across Aptos-Movement framework and ecosystem protocols
 - **Comprehensive schema** with Move-native module/function/struct support
 - **Automated fetcher** for real-time contract data from Movement RPC
 - **Rich metadata** including audits, governance, performance, compliance
@@ -124,13 +124,13 @@ The schemas are especially valuable for AI agents because they support **grounde
 
 ## Smart Contract List Specification
 
-Smart Contract Lists follow the JSON schema in [`FiHub Movement Smart Contract List Schema.json`](./FiHub%20Movement%20Smart%20Contract%20List%20Schema.json).
+Smart Contract Lists follow the JSON schema in [`FiHub Aptos-Movement Smart Contract List Schema.json`](./FiHub%20Movement%20Smart%20Contract%20List%20Schema.json).
 
 ### Top-Level Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Human-readable name (e.g. `"FiHub Movement Smart Contract List"`) |
+| `name` | string | Human-readable name (e.g. `"FiHub Aptos-Movement Smart Contract List"`) |
 | `logoURI` | string | URI for the list logo (PNG/SVG, 256x256 recommended) |
 | `keywords` | string[] | Tags for discoverability (e.g. `["lending", "stablecoin"]`) |
 | `timestamp` | string | ISO 8601 timestamp when the list was generated |
@@ -142,10 +142,10 @@ Smart Contract Lists follow the JSON schema in [`FiHub Movement Smart Contract L
 
 Each entry inside `smartContracts` includes:
 
-- `chainId` — Network chain ID (e.g. `1` for Movement Mainnet)
+- `chainId` — Network chain ID (e.g. `1` for Aptos-Movement Mainnet)
 - `address` — Contract address (0x + 64 hex)
 - `moduleName` — Move module name (e.g. `"lend"`, `"vault"`)
-- `platform` — Platform/project name (e.g. `"MovePosition"`, `"YUZU"`)
+- `platform` — Platform/project name (e.g. `"Thala"`, `"Echelon"`)
 - `name` — Human-readable contract name
 - `description` — Detailed protocol description
 - `website` — Official project website
@@ -163,7 +163,7 @@ Each entry inside `smartContracts` includes:
 
 ## Interaction List Specification
 
-Interaction Lists follow the JSON schema in [`FiHub Movement Interaction List Schema.json`](./FiHub%20Movement%20Interaction%20List%20Schema.json).
+Interaction Lists follow the JSON schema in [`FiHub Aptos-Movement Interaction List Schema.json`](./FiHub%20Movement%20Interaction%20List%20Schema.json).
 
 ### Top-Level Fields
 
@@ -318,10 +318,10 @@ SmartContractLists/
 │       └── MOD.json
 ├── aptos_contract_metadata.json                       # Aptos metadata config
 ├── aptos_contract_fetcher.py                          # Aptos SCL fetcher (seed-driven)
-├── FiHub Movement Smart Contract List Schema.json       # SCL JSON schema
+├── FiHub Aptos-Movement Smart Contract List Schema.json       # SCL JSON schema
 ├── FiHub Movement Smart Contract List.json              # Curated SCL (manual)
 ├── FiHub Movement Smart Contract List Generated.json    # Auto-generated SCL (238 contracts)
-├── FiHub Movement Interaction List Schema.json          # IL JSON schema
+├── FiHub Aptos-Movement Interaction List Schema.json          # IL JSON schema
 ├── FiHub Rapid Smart Contract List Schema.json          # Rapid/EVM SCL schema
 ├── FiHub Rapid Smart Contract List.json                 # EVM SCL (legacy)
 ├── Interaction List/                                    # IL release artifacts
@@ -336,11 +336,12 @@ SmartContractLists/
 ├── IMPLEMENTATION_SUMMARY.md                            # Implementation details
 ├── docs/                                                # Move documentation & references
 │   ├── aptos-protocol-addresses.json                    # Aptos protocol seed addresses
-│   └── aptos-protocol-interaction-matrix.json           # Aptos protocol mapping
+│   ├── aptos-protocol-interaction-matrix.json           # Aptos protocol mapping
 │   ├── protocol-interaction-matrix.json                 # Movement protocol mapping
 │   ├── observed_functions_movement.json                 # Movement observed entry functions report
 │   ├── observed_functions_aptos.json                    # Aptos observed entry functions report
-│   └── PROTOCOL_GAP_RESEARCH.md                         # Follow-up protocol research backlog
+│   ├── PROTOCOL_GAP_RESEARCH.md                         # Follow-up protocol research backlog
+│   └── FUTURE_DEVELOPMENT_ARCHITECTURE.md               # Data-driven SCL/IL argument construction (future)
 ├── LICENSE
 └── README.md                                            # This file
 ```
@@ -397,6 +398,40 @@ See:
 - `docs/aptos-protocol-interaction-matrix.json`
 - `docs/PROTOCOL_GAP_RESEARCH.md`
 - `docs/DATA_RETRIEVAL_AND_PROCESSING.md`
+- `docs/FUTURE_DEVELOPMENT_ARCHITECTURE.md` — Data-driven argument construction (SCL/IL) for scalable onboarding
+
+---
+
+## Refreshing runtime data
+
+**One-command refresh** (from repo root): runs the Thala indexer, copies artifacts to `fihub/data/` when present, and optionally runs the param audit:
+
+```bash
+node SmartContractLists/scripts/refresh_registry_data.js
+node SmartContractLists/scripts/refresh_registry_data.js --no-audit   # skip audit step
+```
+
+See [scripts/refresh_registry_data.js](scripts/refresh_registry_data.js). When to run: before release, or when new Thala pools or Aptos IL updates are added.
+
+### Thala V1 pool registry (Aptos)
+
+Pool type arguments for Thala swap/LP are resolved from `docs/thala-pools.json`. To refresh only Thala pools:
+
+```bash
+APTOS_RPC_URL=https://fullnode.mainnet.aptoslabs.com/v1 node SmartContractLists/scripts/index_thala_v1_pools.js
+```
+
+Output is written to `SmartContractLists/docs/thala-pools.json`. The artifact is **contract-scoped** (data from views on `weighted_pool`); see [docs/REGISTRY_AND_POOL_MODEL.md](docs/REGISTRY_AND_POOL_MODEL.md). After updating the pool list, sync any **new contract references** into the Aptos SCL so every referenced module appears in the Smart Contract List:
+
+```bash
+node SmartContractLists/scripts/sync_thala_pools_contracts_to_scl.js
+```
+
+When deploying from `fihub/data/`, copy the file (or run `refresh_registry_data.js` above):
+
+```bash
+cp SmartContractLists/docs/thala-pools.json fihub/data/SmartContractLists/docs/
+```
 
 ---
 

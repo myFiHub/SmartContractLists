@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "FiHub Movement Interaction List Schema",
-  "description": "Schema for DeFi interaction lists on Movement blockchain with Move VM specific features. Each interaction may include an Interface List (params) and/or a Tx Construction Spec (typeArguments, arguments, runtimeDeps, preflight) for deterministic build of type args and function args. See docs/INTERACTION_LIST_INTERFACE.md and docs/CONSTRUCTION_SPEC.md.",
+  "title": "FiHub Aptos-Movement Interaction List Schema",
+  "description": "Schema for DeFi interaction lists on Aptos-Movement blockchain with Move VM specific features. Each interaction may include an Interface List (params) and/or a Tx Construction Spec (typeArguments, arguments, runtimeDeps, preflight) for deterministic build of type args and function args. See docs/INTERACTION_LIST_INTERFACE.md and docs/CONSTRUCTION_SPEC.md.",
   "type": "object",
   "required": ["chainId", "token", "interactions", "platforms"],
   "properties": {
     "chainId": {
       "type": "integer",
-      "description": "Chain ID for Movement blockchain (1 for mainnet)"
+      "description": "Chain ID for Aptos-Movement blockchain (1 for mainnet)"
     },
     "token": {
       "type": "object",
@@ -20,7 +20,7 @@
         },
         "address": {
           "type": "string",
-          "description": "Token address on Movement blockchain"
+          "description": "Token address on Aptos-Movement blockchain"
         },
         "platform": {
           "type": "string",
@@ -87,7 +87,7 @@
                 },
                 "address": {
                   "type": "string",
-                  "description": "Token address on Movement blockchain"
+                  "description": "Token address on Aptos-Movement blockchain"
                 }
               }
             }
@@ -237,7 +237,9 @@
                 "kind": { "type": "string", "description": "e.g. poolRegistry, marketRegistry, lens" },
                 "platform": { "type": "string", "description": "Platform name (e.g. Thala)" },
                 "version": { "type": "string", "description": "Optional protocol version (e.g. v1)" },
-                "source": { "type": "string", "description": "Optional: lens, api, static" }
+                "source": { "type": "string", "description": "Optional: lens, api, static" },
+                "contractRef": { "type": "string", "description": "When source is contract-scoped: parent address and module (e.g. 0x...::module)" },
+                "sourceType": { "type": "string", "enum": ["standalone", "contractView", "indexer", "api"], "description": "How to load: standalone (file/API), contractView (view on contractRef), indexer (script output), api" }
               }
             },
             "maxItems": 10
@@ -256,6 +258,30 @@
               }
             },
             "maxItems": 10
+          },
+          "platformParamRef": {
+            "type": "object",
+            "description": "Where to resolve a platform-specific parameter (e.g. market_id, market_index) for building function args. Resolves to SCL extensions or API.",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": ["scl", "api", "runtime"],
+                "description": "scl = from SCL contract extensions; api = from app API; runtime = from pool/market resolver"
+              },
+              "extensionKey": {
+                "type": "string",
+                "description": "When source is scl: extension key (e.g. marketIdsBySymbol, marketIndicesBySymbol)"
+              },
+              "symbolFromToken": {
+                "type": "boolean",
+                "description": "When true, lookup key is the interaction primary token symbol"
+              },
+              "contractRef": {
+                "type": "string",
+                "description": "Optional. When source is scl: address::module of contract; if omitted, use interaction module"
+              }
+            },
+            "required": ["source"]
           },
           "entryPoint": {
             "type": "boolean",

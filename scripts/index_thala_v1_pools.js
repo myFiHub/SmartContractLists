@@ -20,7 +20,7 @@ const RPC_URL = process.env.APTOS_RPC_URL || "https://fullnode.mainnet.aptoslabs
 const OUT_PATH = path.join(ROOT, "docs", "thala-pools.json");
 
 async function viewRequest(functionId, typeArgs = [], args = []) {
-  const res = await fetch(`${RPC_URL}/v1/view`, {
+  const res = await fetch(`${RPC_URL.replace(/\/v1\/?$/, "")}/v1/view`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -94,13 +94,8 @@ async function indexWeightedPools() {
       );
       const lpCoinName = typeof lpName === "string" ? lpName : String(lpName ?? "");
       const poolTypeArgs = parseLpNameToTypeArgs(lpCoinName);
-      const assets = [];
-      if (poolTypeArgs.length >= 2) {
-        const lastTwo = poolTypeArgs.slice(-2);
-        assets.push(...lastTwo);
-      } else if (poolTypeArgs.length > 0) {
-        assets.push(...poolTypeArgs);
-      }
+      // First two type args are the pool's coin/asset types (for resolver matching).
+      const assets = poolTypeArgs.length >= 2 ? poolTypeArgs.slice(0, 2) : poolTypeArgs.slice();
       pools.push({
         pool_id: id,
         lp_coin_name: lpCoinName,
@@ -128,8 +123,10 @@ async function main() {
     lastIndexedAt: new Date().toISOString(),
     rpcUrl: RPC_URL,
     thalaV1Address: THALA_V1_ADDRESS,
+    contractRef: `${THALA_V1_ADDRESS}::weighted_pool`,
+    sourceType: "indexer",
     pools: weighted,
-    note: "Runtime type_arguments for swap/LP = pool_type_args + [fromType, toType].",
+    note: "Runtime type_arguments for swap/LP = pool_type_args + [fromType, toType]. Contract-scoped: data from views on contractRef.",
   };
 
   const outDir = path.dirname(OUT_PATH);
