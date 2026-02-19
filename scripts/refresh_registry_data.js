@@ -71,6 +71,11 @@ if (fs.existsSync(FIHUB_DATA)) {
       copy(ariesMarketIds, path.join(docsDest, "aries-market-ids.json"));
     }
   }
+  const aptosScl = path.join(ROOT, "aptos", "FiHub Aptos Smart Contract List.json");
+  const aptosSclDest = path.join(FIHUB_DATA, "aptos", "FiHub Aptos Smart Contract List.json");
+  if (fs.existsSync(aptosScl) && fs.existsSync(path.dirname(aptosSclDest))) {
+    copy(aptosScl, aptosSclDest);
+  }
   const aptosIlSrc = path.join(ROOT, "aptos", "Interaction List");
   const aptosIlDest = path.join(FIHUB_DATA, "aptos", "Interaction List");
   if (fs.existsSync(aptosIlSrc) && fs.existsSync(path.join(FIHUB_DATA, "aptos"))) {
@@ -94,7 +99,7 @@ if (!skipAudit) {
     "aptos",
   ], REPO_ROOT);
   if (auditStatus !== 0) {
-    console.error("Audit reported mismatches. Fix matrix or SCL/IL and re-run.");
+    console.error("Audit reported mismatches. Fix SCL/IL and re-run.");
     process.exit(auditStatus);
   }
 } else {

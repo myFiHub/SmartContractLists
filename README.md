@@ -433,6 +433,24 @@ When deploying from `fihub/data/`, copy the file (or run `refresh_registry_data.
 cp SmartContractLists/docs/thala-pools.json fihub/data/SmartContractLists/docs/
 ```
 
+**Thala pool registry as source for the Interaction List:** The IL is asset-based (per-token JSONs). Thala swap and LP interactions do not hardcode type arguments; they set `type_arguments_source: "runtime"` and `runtimeDeps: [{ "kind": "poolRegistry", "platform": "Thala", ... }]`. The app resolves type args and pool data at runtime by calling `/api/thala/resolve-pool`, which reads from **`docs/thala-pools.json`** as the single source of truth. Each pool in that file includes:
+
+- `pool_id`, `pool_type_args`, `assets`, `lp_coin_name` — for type resolution and LP
+- **`pool_address`** — used as the swap route (single-hop: `[pool_address]`) and as the pool argument for `add_liquidity`
+
+So the Thala pool registry (`docs/thala-pools.json`) is the canonical reference for Thala swap/LP; the IL only declares that Thala swap/LP depend on this registry.
+
+### Construction and testing
+
+Transaction construction is **IL-driven** with a single pipeline:
+
+- **Construction module** (`fihub/lib/txConstruction.ts`): Builds `type_arguments` and `function_arguments` from an IL interaction, user context, and pre-fetched resolver results. When an interaction has `params` or `arguments.schema`, the module builds args from that; otherwise it uses (type, platform) rules. No resolver calls inside the module; the caller (UI or API) supplies resolver results.
+- **POST /api/tx/construct**: Accepts `{ interaction, context, network }`; runs resolvers server-side (Thala resolve-pool, Aries market-id, Echelon market-index); returns `{ type_arguments, arguments }` for use with `/api/tx/build`. Used by the simulation audit and optionally by the UI.
+- **Simulation audit** (`fihub/scripts/run_simulation_audit.js`): For one interaction per (platform, type), calls `/api/tx/construct` then `/api/tx/build` then `/api/tx/simulate`. Aligns with the real UI and validates Thala swap/LP with real routes. Run with `BASE_URL=http://localhost:3000 TEST_SENDER=0x1 node fihub/scripts/run_simulation_audit.js` (dev server running).
+- **Construction-viable check** (`fihub/scripts/check_construction_viable.js`): For interactions with `runtimeDeps`, calls `/api/tx/construct` with minimal context and asserts non-4xx. Run with `BASE_URL=http://localhost:3000 node fihub/scripts/check_construction_viable.js`.
+
+See [docs/CONSTRUCTION_SPEC.md](docs/CONSTRUCTION_SPEC.md) and [docs/INTERACTION_LIST_INTERFACE.md](docs/INTERACTION_LIST_INTERFACE.md) for schema and param sources.
+
 ---
 
 ## Version Control

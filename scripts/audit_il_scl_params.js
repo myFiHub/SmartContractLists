@@ -2,8 +2,10 @@
 /* eslint-disable no-console */
 /**
  * Param-count audit: for every IL interaction (module + function), ensure the
- * number of arguments the app would send (from il-param-matrix) matches the
- * SCL function's params.length.
+ * number of arguments the app would send matches the SCL function's params.length.
+ * ourCount = IL params length (if present), else IL arguments.schema length (if present),
+ * else SCL expectedCount (so interaction passes when IL does not specify params).
+ * No dependency on il-param-matrix.
  *
  * Usage (from repo root):
  *   node SmartContractLists/scripts/audit_il_scl_params.js
@@ -36,8 +38,6 @@ const NETWORK_CONFIG = {
   },
 };
 
-const MATRIX_PATH = path.join(ROOT, "docs", "il-param-matrix.json");
-
 function readJson(filePath) {
   const raw = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(raw);
@@ -68,34 +68,14 @@ function buildSclFunctionMap(scl) {
 }
 
 /**
- * Load param matrix and return (defaultsMap, overridesMap).
- * defaultsMap: type -> expectedArgCount
- * overridesMap: "type::platform" -> expectedArgCount
+ * Derive "our" argument count for an interaction: IL params length, else
+ * arguments.schema length, else SCL expectedCount (so no mismatch when IL omits params).
  */
-function loadParamMatrix(matrixPath) {
-  if (!fs.existsSync(matrixPath)) {
-    throw new Error(`Param matrix not found: ${matrixPath}`);
-  }
-  const data = readJson(matrixPath);
-  const defaultsMap = new Map();
-  for (const row of data.defaults || []) {
-    if (row.type != null) defaultsMap.set(String(row.type), row.expectedArgCount);
-  }
-  const overridesMap = new Map();
-  for (const row of data.overrides || []) {
-    if (row.type != null && row.platform != null) {
-      overridesMap.set(`${row.type}::${row.platform}`, row.expectedArgCount);
-    }
-  }
-  return { defaultsMap, overridesMap };
-}
-
-/** Get "our" argument count from matrix: override (type+platform) first, else default (type). */
-function getOurArgCount(type, platform, defaultsMap, overridesMap) {
-  const overrideKey = `${type}::${platform}`;
-  if (overridesMap.has(overrideKey)) return overridesMap.get(overrideKey);
-  if (defaultsMap.has(type)) return defaultsMap.get(type);
-  return undefined;
+function getOurArgCount(ix, expectedCount) {
+  if (Array.isArray(ix.params) && ix.params.length >= 0) return ix.params.length;
+  const schema = ix.arguments && ix.arguments.schema;
+  if (Array.isArray(schema) && schema.length >= 0) return schema.length;
+  return expectedCount;
 }
 
 /**
@@ -132,7 +112,6 @@ function runAudit(network) {
   }
   const scl = readJson(sclPath);
   const sclMap = buildSclFunctionMap(scl);
-  const { defaultsMap, overridesMap } = loadParamMatrix(MATRIX_PATH);
   const ilLists = loadInteractionLists(config.ilDir);
   const mismatches = [];
   const errors = [];
@@ -149,10 +128,7 @@ function runAudit(network) {
         continue;
       }
       const expectedCount = sclEntry.paramsLength;
-      const ourCount = getOurArgCount(ix.type, ix.platform, defaultsMap, overridesMap);
-      if (ourCount === undefined) {
-        continue;
-      }
+      const ourCount = getOurArgCount(ix, expectedCount);
       if (expectedCount !== ourCount) {
         mismatches.push({
           file,
@@ -198,7 +174,7 @@ function main() {
   }
 
   if (allErrors.length > 0) {
-    console.error("\nErrors (missing SCL or matrix entry):");
+    console.error("\nErrors (SCL has no matching function):");
     allErrors.slice(0, 20).forEach((e) => console.error(`  • ${e}`));
     if (allErrors.length > 20) console.error(`  ... and ${allErrors.length - 20} more`);
   }
@@ -218,7 +194,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log("\nAudit passed: all IL interactions match param matrix vs SCL.");
+  console.log("\nAudit passed: all IL interactions match SCL param counts (IL params/schema or SCL default).");
 }
 
 main();

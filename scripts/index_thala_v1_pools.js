@@ -105,6 +105,7 @@ async function indexWeightedPools() {
         swap_entrypoint: swapEntrypoint,
         add_liquidity_entrypoint: addLpEntrypoint,
         note: "Runtime type_arguments = pool_type_args.concat([fromType, toType])",
+        pool_address: THALA_V1_ADDRESS,
       });
     } catch (e) {
       console.warn(`Pool id ${id}: ${e.message}`);

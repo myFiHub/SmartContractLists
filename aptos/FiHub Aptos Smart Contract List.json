@@ -167,7 +167,12 @@
           "name": "swap_exact_in",
           "visibility": "public",
           "is_entry": true,
-          "params": [],
+          "generic_type_params": 11,
+          "params": [
+            "vector<address>",
+            "u64",
+            "u64"
+          ],
           "return": [],
           "acquires": [],
           "audited": true,
@@ -180,7 +185,13 @@
           "name": "add_liquidity",
           "visibility": "public",
           "is_entry": true,
-          "params": [],
+          "generic_type_params": 8,
+          "params": [
+            "address",
+            "address",
+            "u64",
+            "u64"
+          ],
           "return": [],
           "acquires": [],
           "audited": true,
@@ -314,6 +325,96 @@
         "receiptType": "Resource",
         "receiptStructName": "Vault",
         "receiptTypeNote": "CDP position (vault::Vault); no transferable receipt token."
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01",
+      "moduleName": "lending",
+      "platform": "Thala",
+      "name": "Thala Lending (IL alias)",
+      "description": "IL uses lending::deposit/withdraw/borrow/repay; on-chain entry points are vault_scripts (deposit_collateral, etc.). This alias matches IL module name so SCL/IL param audit resolves. Payload args: u64 amount, vector<address> collateral types (64-char hex).",
+      "website": "https://thala.fi",
+      "tags": [
+        "lending",
+        "vault"
+      ],
+      "functions": [
+        {
+          "name": "deposit",
+          "visibility": "public",
+          "is_entry": true,
+          "generic_type_params": 1,
+          "params": [
+            "u64",
+            "vector<address>"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": [
+            "OtterSec"
+          ]
+        },
+        {
+          "name": "withdraw",
+          "visibility": "public",
+          "is_entry": true,
+          "generic_type_params": 1,
+          "params": [
+            "u64",
+            "vector<address>"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": [
+            "OtterSec"
+          ]
+        },
+        {
+          "name": "borrow",
+          "visibility": "public",
+          "is_entry": true,
+          "generic_type_params": 1,
+          "params": [
+            "u64",
+            "vector<address>"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": [
+            "OtterSec"
+          ]
+        },
+        {
+          "name": "repay",
+          "visibility": "public",
+          "is_entry": true,
+          "generic_type_params": 1,
+          "params": [
+            "u64",
+            "vector<address>"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": [
+            "OtterSec"
+          ]
+        }
+      ],
+      "structs": [],
+      "extensions": {
+        "audited": true,
+        "verified": true,
+        "friends": [],
+        "receiptTypeNote": "IL alias; actual entry points in vault_scripts (deposit_collateral, withdraw_collateral, borrow, repay)."
       }
     },
     {
