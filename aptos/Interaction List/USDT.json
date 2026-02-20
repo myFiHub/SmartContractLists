@@ -235,18 +235,18 @@
           "address": "0x8888888888888888888888888888888888888888888888888888888888888888::usdt::USDT"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
-      "function": "deposit",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
+      "function": "deposit_collateral",
       "receiptToken": {
-        "symbol": "thUSDT-LEND",
-        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
+        "symbol": "thUSDT-CDP",
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault::Vault"
       },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }
@@ -261,14 +261,14 @@
           "address": "0x8888888888888888888888888888888888888888888888888888888888888888::usdt::USDT"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
       "function": "borrow",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2300,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }
@@ -470,18 +470,18 @@
           "address": "0x8888888888888888888888888888888888888888888888888888888888888888::usdt::USDT"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
-      "function": "withdraw",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
+      "function": "withdraw_collateral",
       "receiptToken": {
-        "symbol": "thUSDT-LEND",
-        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
+        "symbol": "thUSDT-CDP",
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault::Vault"
       },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2050,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }
@@ -496,14 +496,14 @@
           "address": "0x8888888888888888888888888888888888888888888888888888888888888888::usdt::USDT"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
       "function": "repay",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }

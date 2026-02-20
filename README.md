@@ -2,6 +2,8 @@
 
 A **two-layer decentralized registry standard** for smart contracts and DeFi interactions on **Movement + Aptos (Move VM)**.
 
+**Canonical registry:** This repository (SmartContractLists) is the single source of truth. The FiHub app reads from `fihub/data/SmartContractLists`, which must be synced from here (see [Data sync](#data-sync) and [Refreshing runtime data](#refreshing-runtime-data)). All edits and CI validation run against SmartContractLists; fihub consumes the synced copy.
+
 Inspired by the success of token lists in wallets like Uniswap, FiHub's **Smart Contract Lists (SCL)** and **Interaction Lists (IL)** extend the concept to **DeFi protocols, vaults, staking pools, AMMs, and ecosystem assets** — providing the "ecosystem map" that powers discovery, validation, AI recommendations, and safe transaction execution.
 
 ---
@@ -401,6 +403,27 @@ See:
 - `docs/FUTURE_DEVELOPMENT_ARCHITECTURE.md` — Data-driven argument construction (SCL/IL) for scalable onboarding
 
 ---
+
+## Data sync
+
+The FiHub app uses registry data from `fihub/data/SmartContractLists/`. To update that copy from this canonical source, run (from repo root):
+
+```bash
+node SmartContractLists/scripts/refresh_registry_data.js
+```
+
+This copies Aptos IL, SCL, and docs (e.g. Thala pools, Aries market IDs) from SmartContractLists into `fihub/data/SmartContractLists/`. Run before running fihub tests or deploy so unit/integration tests and production use the same data as the canonical list. CI should run this step before fihub tests.
+
+## Entry-point verification
+
+To ensure every IL `module::function` exists on-chain and (when available) is an entry function, run:
+
+```bash
+node SmartContractLists/verify_onchain_registry.js --network aptos
+node SmartContractLists/verify_onchain_registry.js --network movement   # if applicable
+```
+
+The script loads IL from SmartContractLists, fetches `/accounts/{addr}/modules` for each module address, and checks that (1) the module exists and (2) the function exists on the module ABI and has `is_entry === true`. It writes a report to `docs/observed_functions_aptos.json` (or movement). Use `--strict` to exit non-zero when any module is missing or any function is missing/not entry (e.g. in CI).
 
 ## Refreshing runtime data
 

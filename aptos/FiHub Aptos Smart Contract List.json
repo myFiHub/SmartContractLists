@@ -257,6 +257,10 @@
           "verified": true,
           "auditors": [
             "OtterSec"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" },
+            { "type": "vector<address>", "source": "interaction.type_arguments_as_vector" }
           ]
         },
         {
@@ -276,6 +280,10 @@
           "verified": true,
           "auditors": [
             "OtterSec"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" },
+            { "type": "vector<address>", "source": "interaction.type_arguments_as_vector" }
           ]
         },
         {
@@ -295,6 +303,10 @@
           "verified": true,
           "auditors": [
             "OtterSec"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" },
+            { "type": "vector<address>", "source": "interaction.type_arguments_as_vector" }
           ]
         },
         {
@@ -314,6 +326,10 @@
           "verified": true,
           "auditors": [
             "OtterSec"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" },
+            { "type": "vector<address>", "source": "interaction.type_arguments_as_vector" }
           ]
         }
       ],
@@ -495,6 +511,9 @@
           "verified": true,
           "auditors": [
             "MoveBit"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" }
           ]
         },
         {
@@ -512,6 +531,9 @@
           "verified": true,
           "auditors": [
             "MoveBit"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" }
           ]
         }
       ],
@@ -667,6 +689,10 @@
           "verified": true,
           "auditors": [
             "MoveBit"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" },
+            { "type": "u64", "source": "user.secondary" }
           ]
         },
         {
@@ -685,6 +711,12 @@
           "verified": true,
           "auditors": [
             "MoveBit"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" },
+            { "type": "u64", "source": "user.secondary" },
+            { "type": "u64", "source": "static", "value": "0" },
+            { "type": "u64", "source": "static", "value": "0" }
           ]
         },
         {
@@ -702,6 +734,11 @@
           "verified": true,
           "auditors": [
             "MoveBit"
+          ],
+          "argumentSchema": [
+            { "type": "u64", "source": "user.primary" },
+            { "type": "u64", "source": "static", "value": "0" },
+            { "type": "u64", "source": "static", "value": "0" }
           ]
         }
       ],
@@ -745,6 +782,11 @@
           "verified": true,
           "auditors": [
             "Halborn"
+          ],
+          "argumentSchema": [
+            { "type": "vector<u8>", "source": "resolver.market_id" },
+            { "type": "u64", "source": "user.primary" },
+            { "type": "bool", "source": "static.true" }
           ]
         },
         {
@@ -764,6 +806,11 @@
           "verified": true,
           "auditors": [
             "Halborn"
+          ],
+          "argumentSchema": [
+            { "type": "vector<u8>", "source": "resolver.market_id" },
+            { "type": "u64", "source": "user.primary" },
+            { "type": "bool", "source": "static.true" }
           ]
         }
       ],
@@ -809,6 +856,10 @@
           "verified": true,
           "auditors": [
             "CertiK"
+          ],
+          "argumentSchema": [
+            { "type": "u8", "source": "resolver.market_index" },
+            { "type": "u64", "source": "user.primary" }
           ]
         },
         {
@@ -825,6 +876,10 @@
           "verified": true,
           "auditors": [
             "CertiK"
+          ],
+          "argumentSchema": [
+            { "type": "u8", "source": "resolver.market_index" },
+            { "type": "u64", "source": "user.primary" }
           ]
         },
         {
@@ -841,6 +896,10 @@
           "verified": true,
           "auditors": [
             "CertiK"
+          ],
+          "argumentSchema": [
+            { "type": "u8", "source": "resolver.market_index" },
+            { "type": "u64", "source": "user.primary" }
           ]
         },
         {
@@ -857,6 +916,10 @@
           "verified": true,
           "auditors": [
             "CertiK"
+          ],
+          "argumentSchema": [
+            { "type": "u8", "source": "resolver.market_index" },
+            { "type": "u64", "source": "user.primary" }
           ]
         },
         {
@@ -872,6 +935,9 @@
           "verified": true,
           "auditors": [
             "CertiK"
+          ],
+          "argumentSchema": [
+            { "type": "u8", "source": "resolver.market_index" }
           ]
         }
       ],

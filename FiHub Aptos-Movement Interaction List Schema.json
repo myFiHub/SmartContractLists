@@ -197,30 +197,32 @@
           },
           "arguments": {
             "type": "object",
-            "description": "Tx Construction Spec: how to deterministically build function arguments. When present, consumers use this (and optional resolver) instead of params/legacy buildArgs.",
+            "description": "Tx Construction Spec: how to deterministically build function arguments. When present, consumers use this (and optional resolver) instead of params/legacy buildArgs. When only resolver is set, argument values are resolved at runtime (e.g. aries.market_id, echelon.market_index) and SCL argumentSchema may be used for the shape.",
             "properties": {
               "schema": {
                 "type": "array",
-                "description": "Ordered list of argument specs. source may be user.amountIn, user.amountOut, quote.minOut, resolver.routePath, static, etc.",
+                "description": "Ordered list of argument specs. source: user.primary, user.secondary, user.min_out, resolver.market_id, resolver.market_index, resolver.route, interaction.type_arguments_as_vector, static.true, static.false, or static with value for literals.",
                 "items": {
                   "type": "object",
-                  "required": ["name", "type", "source"],
+                  "required": ["type", "source"],
                   "properties": {
-                    "name": { "type": "string", "description": "Argument name (align with Move/SCL)" },
-                    "type": { "type": "string", "description": "Move type (e.g. u64, vector<address>, vector<u8>)" },
-                    "source": { "type": "string", "description": "Dot path: user.primary, user.secondary, quote.minOut, resolver.<key>, static; or literal value" }
+                    "name": { "type": "string", "description": "Optional argument name (align with Move/SCL)" },
+                    "type": { "type": "string", "description": "Move type (e.g. u64, vector<address>, vector<u8>, bool, u8)" },
+                    "source": { "type": "string", "description": "Dot path: user.primary, user.secondary, resolver.market_id, resolver.market_index, resolver.route, interaction.type_arguments_as_vector, static.true, static.false, or static" },
+                    "value": { "description": "When source is static: literal value (string, number, boolean); e.g. '0' for min amounts" }
                   }
                 },
                 "maxItems": 20
               },
               "resolver": {
                 "type": "object",
-                "description": "Optional: named resolver that returns or assembles arguments (e.g. thala.v1.swapArgs).",
+                "description": "Optional: named resolver for runtime values used in function args. When present, consumers call the resolver before build (e.g. aries.market_id, echelon.market_index). Resolver id examples: aries.market_id (inputs: symbol / {token.symbol}), echelon.market_index (inputs: symbol / {token.symbol}), thala.v1.weightedPool (for swap/LP type args and route).",
                 "required": ["id"],
                 "properties": {
-                  "id": { "type": "string", "description": "Resolver identifier" },
+                  "id": { "type": "string", "description": "Resolver identifier (e.g. aries.market_id, echelon.market_index, thala.v1.weightedPool)" },
                   "inputs": {
                     "type": "object",
+                    "description": "Key-value map; values may be placeholders like {token.symbol}",
                     "additionalProperties": { "type": "string" }
                   }
                 }

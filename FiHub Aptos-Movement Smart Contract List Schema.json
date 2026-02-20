@@ -125,6 +125,22 @@
             "maxLength": 50
           },
           "maxItems": 10
+        },
+        "argumentSchema": {
+          "type": "array",
+          "description": "Ordered list of argument slots for data-driven construction. Each entry has type and source; optional value for static literals. Source vocabulary: user.primary, user.secondary, interaction.type_arguments_as_vector, resolver.market_id, resolver.market_index, resolver.route, resolver.pool_address, static.true, static.false, or source 'static' with value (string/number/boolean) for literals (e.g. min liquidity 0).",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": { "type": "string", "description": "Move type (e.g. u64, vector<address>, vector<u8>, bool, u8)" },
+              "source": { "type": "string", "description": "Source: user.primary, user.secondary, interaction.type_arguments_as_vector, resolver.market_id, resolver.market_index, resolver.route, resolver.pool_address, static.true, static.false, or static (use value for literal)" },
+              "name": { "type": "string", "description": "Optional argument name for documentation; align with Move/IL" },
+              "value": { "description": "When source is 'static', the literal value (string, number, or boolean); e.g. '0' for min amounts" }
+            },
+            "required": ["type", "source"]
+          }
         }
       },
       "required": ["name", "visibility", "is_entry", "params", "return"]

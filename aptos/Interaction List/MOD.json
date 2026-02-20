@@ -114,18 +114,18 @@
           "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
       "function": "borrow",
       "receiptToken": {
         "symbol": "thMOD-DEBT",
-        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault::Vault"
       },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2300,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }
@@ -140,14 +140,14 @@
           "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
       "function": "repay",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }

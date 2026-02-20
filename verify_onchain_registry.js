@@ -185,7 +185,7 @@ function splitModuleId(moduleId) {
 }
 
 async function checkModuleExistence({ rpc, modules }) {
-  const accountModulesCache = new Map();
+  const accountModulesCache = new Map(); // accountKey -> { names: Set, abiList: array of { name, exposed_functions } }
   const moduleResults = [];
   const fetchErrors = [];
 
@@ -202,11 +202,16 @@ async function checkModuleExistence({ rpc, modules }) {
       try {
         const modulesResponse = await fetchJson(url);
         const names = new Set();
+        const abiList = [];
         for (const mod of modulesResponse) {
           const name = mod?.abi?.name || mod?.name || "";
           if (name) names.add(name);
+          abiList.push({
+            name,
+            exposed_functions: mod?.abi?.exposed_functions || [],
+          });
         }
-        accountModulesCache.set(accountKey, names);
+        accountModulesCache.set(accountKey, { names, abiList });
       } catch (error) {
         fetchErrors.push({
           account: accountKey,
@@ -216,19 +221,88 @@ async function checkModuleExistence({ rpc, modules }) {
       }
     }
 
-    const known = accountModulesCache.get(accountKey);
-    if (known === null) {
+    const cached = accountModulesCache.get(accountKey);
+    if (cached === null) {
       moduleResults.push({ module: moduleId, exists: false, reason: "account_modules_fetch_failed" });
       continue;
     }
     moduleResults.push({
       module: moduleId,
-      exists: known.has(moduleName),
-      reason: known.has(moduleName) ? "ok" : "module_not_found",
+      exists: cached.names.has(moduleName),
+      reason: cached.names.has(moduleName) ? "ok" : "module_not_found",
     });
   }
 
-  return { moduleResults, fetchErrors };
+  return { moduleResults, fetchErrors, accountModulesCache };
+}
+
+/**
+ * For each IL module::function, check that the function exists on the module ABI and is_entry === true.
+ * Uses the same account/modules cache as checkModuleExistence.
+ */
+function checkFunctionEntry(moduleFunctionPairs, accountModulesCache) {
+  const functionResults = [];
+  for (const { moduleId, functionName } of moduleFunctionPairs) {
+    const { account, moduleName } = splitModuleId(moduleId);
+    if (!account || !functionName) {
+      functionResults.push({
+        module: moduleId,
+        function: functionName,
+        ok: false,
+        reason: "invalid_module_or_function",
+      });
+      continue;
+    }
+    const accountKey = normalizeAddress(account);
+    const cached = accountModulesCache.get(accountKey);
+    if (!cached) {
+      functionResults.push({
+        module: moduleId,
+        function: functionName,
+        ok: false,
+        reason: "account_modules_fetch_failed",
+      });
+      continue;
+    }
+    const modAbi = cached.abiList.find((m) => m.name === moduleName);
+    if (!modAbi) {
+      functionResults.push({
+        module: moduleId,
+        function: functionName,
+        ok: false,
+        reason: "module_not_found",
+      });
+      continue;
+    }
+    const exposed = modAbi.exposed_functions || [];
+    const fn = exposed.find((f) => (f.name || f) === functionName);
+    if (!fn) {
+      functionResults.push({
+        module: moduleId,
+        function: functionName,
+        ok: false,
+        reason: "function_not_found",
+      });
+      continue;
+    }
+    const isEntry = typeof fn.is_entry === "boolean" ? fn.is_entry : fn.is_entry === true;
+    if (!isEntry) {
+      functionResults.push({
+        module: moduleId,
+        function: functionName,
+        ok: false,
+        reason: "not_entry",
+      });
+      continue;
+    }
+    functionResults.push({
+      module: moduleId,
+      function: functionName,
+      ok: true,
+      reason: "ok",
+    });
+  }
+  return functionResults;
 }
 
 function ensureDirForFile(filePath) {
@@ -277,6 +351,18 @@ async function main() {
     .filter((item) => !item.exists)
     .map((item) => item.module);
 
+  const moduleFunctionPairs = Array.from(functionSet).map((mf) => {
+    const idx = mf.lastIndexOf("::");
+    const moduleId = idx >= 0 ? mf.slice(0, idx) : mf;
+    const functionName = idx >= 0 ? mf.slice(idx + 2) : "";
+    return { moduleId, functionName };
+  });
+  const functionCheck = checkFunctionEntry(
+    moduleFunctionPairs,
+    moduleCheck.accountModulesCache || new Map()
+  );
+  const missingOrNotEntry = functionCheck.filter((item) => !item.ok);
+
   const report = {
     generatedAt: new Date().toISOString(),
     network,
@@ -307,14 +393,27 @@ async function main() {
       missingModules,
       accountFetchErrors: moduleCheck.fetchErrors,
     },
+    functionEntry: {
+      checked: functionCheck.length,
+      missingOrNotEntryCount: missingOrNotEntry.length,
+      missingOrNotEntry: missingOrNotEntry.map((item) => ({
+        module: item.module,
+        function: item.function,
+        reason: item.reason,
+      })),
+      results: functionCheck,
+    },
   };
 
   ensureDirForFile(outputPath);
   fs.writeFileSync(outputPath, `${JSON.stringify(report, null, 2)}\n`);
   console.log(`report written: ${outputPath}`);
 
-  if (strict && (missingModules.length > 0 || observed.fetchErrors.length > 0)) {
-    console.error("strict mode failed due to module/wallet fetch errors.");
+  if (missingOrNotEntry.length > 0) {
+    console.log(`function entry check: ${missingOrNotEntry.length} missing or not_entry`);
+  }
+  if (strict && (missingModules.length > 0 || missingOrNotEntry.length > 0 || observed.fetchErrors.length > 0)) {
+    console.error("strict mode failed: missing modules, function_not_found/not_entry, or wallet fetch errors.");
     process.exit(1);
   }
 }

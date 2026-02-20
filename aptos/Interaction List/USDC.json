@@ -235,18 +235,18 @@
           "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
-      "function": "deposit",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
+      "function": "deposit_collateral",
       "receiptToken": {
-        "symbol": "thUSDC-LEND",
-        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
+        "symbol": "thUSDC-CDP",
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault::Vault"
       },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }
@@ -261,14 +261,14 @@
           "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
       "function": "borrow",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2300,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }
@@ -328,6 +328,7 @@
       "module": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller",
       "function": "deposit",
       "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
+      "arguments": { "resolver": { "id": "aries.market_id", "inputs": { "symbol": "{token.symbol}" } } },
       "receiptToken": {
         "symbol": "arUSDC-SUPPLY",
         "address": "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::ProfilePosition"
@@ -398,6 +399,7 @@
       "module": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts",
       "function": "supply",
       "type_arguments": ["0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"],
+      "arguments": { "resolver": { "id": "echelon.market_index", "inputs": { "symbol": "{token.symbol}" } } },
       "receiptToken": {
         "symbol": "ecUSDC-MARKET",
         "address": "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba::scripts::MarketPosition"
@@ -470,18 +472,18 @@
           "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
-      "function": "withdraw",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
+      "function": "withdraw_collateral",
       "receiptToken": {
-        "symbol": "thUSDC-LEND",
-        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
+        "symbol": "thUSDC-CDP",
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault::Vault"
       },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2050,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }
@@ -496,14 +498,14 @@
           "address": "0x7777777777777777777777777777777777777777777777777777777777777777::usdc::USDC"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
       "function": "repay",
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2000,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "fungibleAsset"
       }

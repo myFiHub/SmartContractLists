@@ -189,18 +189,18 @@
           "address": "0x1::aptos_coin::AptosCoin"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
-      "function": "deposit",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
+      "function": "deposit_collateral",
       "receiptToken": {
-        "symbol": "thAPT-LEND",
-        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
+        "symbol": "thAPT-CDP",
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault::Vault"
       },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2100,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "coin"
       }
@@ -382,18 +382,18 @@
           "address": "0x1::aptos_coin::AptosCoin"
         }
       ],
-      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending",
-      "function": "withdraw",
+      "module": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault_scripts",
+      "function": "withdraw_collateral",
       "receiptToken": {
-        "symbol": "thAPT-LEND",
-        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::lending::Position"
+        "symbol": "thAPT-CDP",
+        "address": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::vault::Vault"
       },
       "entryPoint": true,
       "visibility": "public",
       "gasEstimate": 2050,
       "moveSpecific": {
         "acquires": [
-          "Position"
+          "Vault"
         ],
         "resourceHandling": "coin"
       }
