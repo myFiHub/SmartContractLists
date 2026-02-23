@@ -1,0 +1,900 @@
+{
+  "contractMetadata": {
+    "0x0000000000000000000000000000000000000000000000000000000000000001": {
+      "platform": "Movement",
+      "website": "https://movementlabs.xyz/",
+      "description": "Core framework modules and system contracts for the Movement blockchain",
+      "auditors": ["Movement Labs"],
+      "auditScore": 95,
+      "lastAuditDate": "2024-01-01",
+      "securityLevel": "critical",
+      "penetrationTested": true,
+      "formalVerification": true,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 0,
+        "governanceType": "system",
+        "multisigRequired": false,
+        "multisigThreshold": 0,
+        "timelockDelay": 0
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "system",
+        "freezeCapable": true,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "transfer": 100,
+          "deploy": 1000
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["Native"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["native", "framework"]
+    },
+    "0x0000000000000000000000000000000000000000000000000000000000000003": {
+      "platform": "Movement",
+      "website": "https://movementlabs.xyz/",
+      "description": "Legacy token contracts and deprecated protocols for backward compatibility",
+      "auditors": ["Movement Labs"],
+      "auditScore": 90,
+      "lastAuditDate": "2024-01-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": false,
+        "upgradeDelay": 0,
+        "governanceType": "immutable",
+        "multisigRequired": false,
+        "multisigThreshold": 0,
+        "timelockDelay": 0
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "legacy",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": false,
+        "parallelExecutable": true,
+        "resourceEfficient": false,
+        "estimatedGasCost": {
+          "transfer": 200,
+          "mint": 500
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": false,
+        "bridgeProtocols": [],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["native", "legacy"]
+    },
+    "0x0000000000000000000000000000000000000000000000000000000000000004": {
+      "platform": "Movement",
+      "website": "https://movementlabs.xyz/",
+      "description": "Digital asset contracts and NFT infrastructure for the Movement ecosystem",
+      "auditors": ["Movement Labs"],
+      "auditScore": 92,
+      "lastAuditDate": "2024-01-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": true
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "mint": 1500,
+          "transfer": 300,
+          "burn": 200
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero", "Wormhole"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["native", "digitalAsset"]
+    },
+    "0x000000000000000000000000000000000000000000000000000000000000000A": {
+      "platform": "Movement",
+      "website": "https://movementlabs.xyz/",
+      "description": "MOVE Coin Fungible Asset implementation using the FA standard",
+      "auditors": ["Movement Labs"],
+      "auditScore": 95,
+      "lastAuditDate": "2024-01-01",
+      "securityLevel": "critical",
+      "penetrationTested": true,
+      "formalVerification": true,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 0,
+        "governanceType": "system",
+        "multisigRequired": false,
+        "multisigThreshold": 0,
+        "timelockDelay": 0
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "system",
+        "freezeCapable": true,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "transfer": 100,
+          "mint": 500,
+          "burn": 200
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["Native", "LayerZero"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["native", "fungibleAsset"]
+    },
+    "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf": {
+      "platform": "MovePosition",
+      "website": "https://www.moveposition.xyz/",
+      "description": "Advanced cross-chain lending protocol built on Concordia's OmniRisk layer with intelligent leverage optimization and bespoke risk calculations",
+      "auditors": ["MoveBit"],
+      "auditScore": 90,
+      "lastAuditDate": "2024-12-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": true,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "lend": 2000,
+          "repay": 1800,
+          "borrow": 2200,
+          "liquidate": 2500
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["Concordia", "LayerZero"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "modules": {
+        "lend": {
+          "description": "Cross-chain lending with intelligent leverage optimization",
+          "documentation": "https://docs.moveposition.xyz/lending",
+          "estimatedGasCost": {
+            "deposit": 2000,
+            "withdraw": 1800,
+            "claim_rewards": 1500
+          }
+        },
+        "vault": {
+          "description": "Secure vault management with resource account integration",
+          "documentation": "https://docs.moveposition.xyz/vault",
+          "estimatedGasCost": {
+            "create_vault": 3000,
+            "deposit_to_vault": 2000,
+            "withdraw_from_vault": 1800
+          }
+        },
+        "borrow": {
+          "description": "Intelligent borrowing with leverage optimization",
+          "documentation": "https://docs.moveposition.xyz/borrowing",
+          "estimatedGasCost": {
+            "borrow": 2200,
+            "repay": 1800,
+            "liquidate": 2500
+          }
+        },
+        "coin_to_fa": {
+          "description": "Coin to Fungible Asset conversion utilities",
+          "documentation": "https://docs.moveposition.xyz/coin-to-fa",
+          "estimatedGasCost": {
+            "convert": 1500,
+            "revert": 1200
+          }
+        },
+        "concbox": {
+          "description": "Concordia integration for cross-chain operations",
+          "documentation": "https://docs.moveposition.xyz/concordia",
+          "estimatedGasCost": {
+            "bridge": 3000,
+            "sync": 1000
+          }
+        },
+        "hocket": {
+          "description": "High-performance socket connections for real-time data",
+          "documentation": "https://docs.moveposition.xyz/hocket",
+          "estimatedGasCost": {
+            "connect": 500,
+            "disconnect": 200
+          }
+        },
+        "superposition": {
+          "description": "Advanced mathematical operations for risk calculations",
+          "documentation": "https://docs.moveposition.xyz/superposition",
+          "estimatedGasCost": {
+            "calculate": 800,
+            "optimize": 1200
+          }
+        }
+      },
+      "tags": ["lending", "vault", "crossChain", "gasOptimized", "formallyVerified"]
+    },
+    "0x31d0a30ae53e2ae852fcbdd1fce75a4ea6ad81417739ef96883eba9574ffe31e": {
+      "platform": "MovePosition",
+      "website": "https://www.moveposition.xyz/",
+      "description": "MovePosition Vault 1 - Primary vault implementation for asset management",
+      "auditors": ["MoveBit"],
+      "auditScore": 90,
+      "lastAuditDate": "2024-12-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": true,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "deposit": 2000,
+          "withdraw": 1800,
+          "rebalance": 3000
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["Concordia"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["vault", "lending", "gasOptimized"]
+    },
+    "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233": {
+      "platform": "Echelon",
+      "website": "https://echelon.finance/",
+      "description": "Echelon Vault 1 - Advanced DeFi vault with yield optimization strategies",
+      "auditors": ["Echelon Team"],
+      "lastAuditDate": "2024-11-15",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 1728000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 2,
+        "timelockDelay": 43200
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "deposit": 1800,
+          "withdraw": 1600,
+          "harvest": 2000
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": false,
+        "bridgeProtocols": [],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["vault", "yield", "gasOptimized"]
+    },
+    "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae": {
+      "platform": "Layerbank",
+      "website": "https://layerbank.finance/",
+      "description": "Layerbank Vault 1 - Multi-layer lending protocol with advanced risk management",
+      "auditors": ["Layerbank Team"],
+      "lastAuditDate": "2024-11-20",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": true,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": true
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "lend": 2000,
+          "borrow": 2200,
+          "repay": 1800,
+          "liquidate": 2500
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero", "Wormhole"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["lending", "vault", "crossChain", "gasOptimized"]
+    },
+    "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d": {
+      "platform": "Mosaic",
+      "website": "https://mosaic.finance/",
+      "description": "Mosaic - Comprehensive DeFi protocol with multiple financial primitives",
+      "auditors": ["MoveBit"],
+      "lastAuditDate": "2024-11-10",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 1728000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 2,
+        "timelockDelay": 43200
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "swap": 1500,
+          "add_liquidity": 2000,
+          "remove_liquidity": 1800
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["AMM", "lending", "crossChain", "gasOptimized"]
+    },
+    "0x26a95d4bd7d7fc3debf6469ff94837e03e887088bef3a3f2d08d1131141830d3": {
+      "platform": "Mosaic",
+      "website": "https://mosaic.finance/",
+      "description": "Mosaic AMM - Automated Market Maker with concentrated liquidity",
+      "auditors": ["MoveBit"],
+      "lastAuditDate": "2024-11-10",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 1728000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 2,
+        "timelockDelay": 43200
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "swap": 1500,
+          "add_liquidity": 2000,
+          "remove_liquidity": 1800,
+          "collect_fees": 1000
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["AMM", "liquidity", "gasOptimized"]
+    },
+    "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241": {
+      "platform": "Interest DEX",
+      "website": "https://interest.finance/",
+      "description": "Interest DEX - Decentralized exchange with interest-bearing assets",
+      "auditors": ["Interest DEX Team"],
+      "lastAuditDate": "2024-11-05",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 1296000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 2,
+        "timelockDelay": 21600
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "swap": 1400,
+          "add_liquidity": 1900,
+          "remove_liquidity": 1700,
+          "claim_interest": 1200
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": false,
+        "bridgeProtocols": [],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["AMM", "interest", "gasOptimized"]
+    },
+    "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a": {
+      "platform": "YUZU",
+      "website": "https://yuzu.exchange/",
+      "description": "YUZU - Decentralized exchange with concentrated liquidity and advanced AMM features",
+      "auditors": ["MoveBit"],
+      "lastAuditDate": "2024-11-15",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 1728000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 2,
+        "timelockDelay": 43200
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "swap": 1300,
+          "add_liquidity": 1800,
+          "remove_liquidity": 1600,
+          "collect_fees": 900
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "modules": {
+        "liquidity_pool": {
+          "description": "Concentrated liquidity pools with tick-based pricing",
+          "documentation": "https://docs.yuzu.exchange/pools",
+          "estimatedGasCost": {
+            "create_pool": 2500,
+            "add_liquidity": 1800,
+            "remove_liquidity": 1600,
+            "swap": 1300
+          }
+        }
+      },
+      "tags": ["AMM", "liquidity", "crossChain", "gasOptimized"]
+    },
+    "0x4c5058bc4cd77fe207b8b9990e8af91e1055b814073f0596068e3b95a7ccd31a": {
+      "platform": "Move.Fun",
+      "website": "https://move.fun/",
+      "description": "Move.Fun - Fun and gamified DeFi platform with social features",
+      "auditors": ["MoveBit"],
+      "lastAuditDate": "2024-11-01",
+      "securityLevel": "medium",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 864000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 2,
+        "timelockDelay": 14400
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "play": 1000,
+          "claim_rewards": 800,
+          "social_interaction": 500
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": false,
+        "bridgeProtocols": [],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": ["gamified", "social", "gasOptimized"]
+    },
+    "0x83121c9f9b0527d1f056e21a950d6bf3b9e9e2e8353d0e95ccea726713cbea39": {
+      "platform": "USD Coin",
+      "website": "https://www.centre.io/",
+      "description": "USDC.e - USD Coin bridged to Movement from Ethereum, a fully-backed U.S. dollar stablecoin",
+      "auditors": ["Centre", "Coinbase"],
+      "lastAuditDate": "2024-01-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": true,
+        "amlRequired": true,
+        "jurisdiction": "United States",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": true
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "transfer": 200,
+          "mint": 1000,
+          "burn": 800
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero", "Wormhole", "Native Bridge"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Ethereum Mainnet",
+            "isNative": true
+          },
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": false
+          }
+        ]
+      },
+      "tags": ["stablecoin", "bridged", "usd", "erc20"]
+    },
+    "0x447721a30109c662dde9c73a0c2c9c9c459fb5e5a9c92f03c50fa69737f5d08d": {
+      "platform": "Tether",
+      "website": "https://tether.to/",
+      "description": "USDT.e - Tether USD bridged to Movement from Ethereum, a stablecoin pegged to the US dollar",
+      "auditors": ["Tether Limited"],
+      "lastAuditDate": "2024-01-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": true,
+        "amlRequired": true,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": true
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "transfer": 200,
+          "mint": 1000,
+          "burn": 800
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero", "Wormhole", "Native Bridge"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Ethereum Mainnet",
+            "isNative": true
+          },
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": false
+          }
+        ]
+      },
+      "tags": ["stablecoin", "bridged", "usd", "erc20"]
+    },
+    "0x4d2969d384e440db9f1a51391cfc261d1ec08ee1bdf7b9711a6c05d485a4110a": {
+      "platform": "USD Coin",
+      "website": "https://www.centre.io/",
+      "description": "USDC.e - USD Coin bridged to Movement via LayerZero OFT (Omnichain Fungible Token), a fully-backed U.S. dollar stablecoin with cross-chain capabilities",
+      "auditors": ["Centre", "Coinbase", "LayerZero"],
+      "lastAuditDate": "2024-01-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 2592000,
+        "governanceType": "multisig",
+        "multisigRequired": true,
+        "multisigThreshold": 3,
+        "timelockDelay": 86400
+      },
+      "compliance": {
+        "kycRequired": true,
+        "amlRequired": true,
+        "jurisdiction": "United States",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": true
+      },
+      "performance": {
+        "gasOptimized": true,
+        "parallelExecutable": true,
+        "resourceEfficient": true,
+        "estimatedGasCost": {
+          "transfer": 200,
+          "mint": 1000,
+          "burn": 800,
+          "crossChainSend": 5000
+        }
+      },
+      "interoperability": {
+        "crossChainCapable": true,
+        "bridgeProtocols": ["LayerZero", "OFT", "Native Bridge"],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Ethereum Mainnet",
+            "isNative": true
+          },
+          {
+            "chainId": 1,
+            "chainName": "Movement Mainnet",
+            "isNative": false
+          }
+        ]
+      },
+      "bridgeImplementation": {
+        "protocol": "LayerZero",
+        "type": "OFT",
+        "version": "v2",
+        "sourceChain": "Ethereum"
+      },
+      "tags": ["stablecoin", "bridged", "fungibleAsset", "crossChain", "bridge"]
+    }
+  },
+  "apiVerification": {
+    "rpcEndpoint": "https://full.mainnet.movementinfra.xyz/v1",
+    "alternativeEndpoints": [
+      "https://mainnet.movementlabs.xyz/v1",
+      "https://movement-mainnet.infura.io/v1"
+    ],
+    "verificationInstructions": {
+      "curlCommand": "curl -s \"https://full.mainnet.movementinfra.xyz/v1/accounts/{address}/modules\"",
+      "expectedFields": ["bytecode", "abi", "exposed_functions", "structs"],
+      "verificationSteps": [
+        "1. Make API call to fetch module data",
+        "2. Verify module exists in response",
+        "3. Check function signatures match schema",
+        "4. Validate struct definitions",
+        "5. Confirm address matches expected contract"
+      ]
+    },
+    "dataIntegrity": {
+      "functionsVerified": true,
+      "structsVerified": true,
+      "moduleExists": true,
+      "checksumMatch": true
+    }
+  }
+}

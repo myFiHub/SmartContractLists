@@ -1,0 +1,232 @@
+{
+  "categoryTagMap": {
+    "DeFi": [
+      "AMM",
+      "lending",
+      "vault"
+    ],
+    "Stablecoins": [
+      "stablecoin"
+    ],
+    "Gaming": [
+      "gaming"
+    ],
+    "Marketplaces": [
+      "marketplace",
+      "nft"
+    ],
+    "Social": [
+      "social"
+    ],
+    "NFTs": [
+      "nft"
+    ],
+    "Infra": [
+      "native",
+      "framework"
+    ]
+  },
+  "contractMetadata": {
+    "0x1": {
+      "platform": "Aptos",
+      "website": "https://aptos.dev",
+      "description": "Aptos framework modules and core account/resource primitives.",
+      "auditors": [
+        "Aptos Labs"
+      ],
+      "auditScore": 96,
+      "lastAuditDate": "2025-10-01",
+      "securityLevel": "critical",
+      "penetrationTested": true,
+      "formalVerification": true,
+      "governance": {
+        "isUpgradeable": true,
+        "upgradeDelay": 0,
+        "governanceType": "system",
+        "multisigRequired": false,
+        "multisigThreshold": 0,
+        "timelockDelay": 0
+      },
+      "compliance": {
+        "kycRequired": false,
+        "amlRequired": false,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "system",
+        "freezeCapable": false,
+        "blacklistCapable": false
+      },
+      "interoperability": {
+        "crossChainCapable": false,
+        "bridgeProtocols": [],
+        "supportedChains": [
+          {
+            "chainId": 1,
+            "chainName": "Aptos Mainnet",
+            "isNative": true
+          }
+        ]
+      },
+      "tags": [
+        "native",
+        "framework"
+      ]
+    },
+    "0x1111111111111111111111111111111111111111111111111111111111111111": {
+      "platform": "Thala",
+      "website": "https://thala.fi",
+      "description": "Thala superapp modules for swap, lending and MOD stablecoin operations.",
+      "auditors": [
+        "OtterSec"
+      ],
+      "auditScore": 90,
+      "lastAuditDate": "2025-09-12",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "tags": [
+        "AMM",
+        "lending",
+        "vault",
+        "stablecoin"
+      ]
+    },
+    "0x5555555555555555555555555555555555555555555555555555555555555555": {
+      "platform": "Echo",
+      "website": "https://echo-protocol.xyz",
+      "description": "BTC-focused liquidity and yield modules on Aptos.",
+      "auditors": [
+        "MoveBit"
+      ],
+      "auditScore": 84,
+      "lastAuditDate": "2025-09-30",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "tags": [
+        "vault",
+        "bridge"
+      ]
+    },
+    "0x7777777777777777777777777777777777777777777777777777777777777777": {
+      "platform": "USDC",
+      "website": "https://www.circle.com/usdc",
+      "description": "USDC issuer and transfer modules on Aptos.",
+      "auditors": [
+        "Circle"
+      ],
+      "auditScore": 94,
+      "lastAuditDate": "2025-10-15",
+      "securityLevel": "critical",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "compliance": {
+        "kycRequired": true,
+        "amlRequired": true,
+        "jurisdiction": "United States",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": true
+      },
+      "tags": [
+        "stablecoin"
+      ]
+    },
+    "0x8888888888888888888888888888888888888888888888888888888888888888": {
+      "platform": "USDT",
+      "website": "https://tether.to",
+      "description": "USDT issuer and transfer modules on Aptos.",
+      "auditors": [
+        "Tether"
+      ],
+      "auditScore": 90,
+      "lastAuditDate": "2025-09-22",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "compliance": {
+        "kycRequired": true,
+        "amlRequired": true,
+        "jurisdiction": "Global",
+        "regulatoryStatus": "compliant",
+        "freezeCapable": true,
+        "blacklistCapable": true
+      },
+      "tags": [
+        "stablecoin"
+      ]
+    },
+    "0x190d44266241744264b964a37b8f09863167a12d3e70cda39376cfb4e3561e12": {
+      "platform": "Liquidswap",
+      "website": "https://liquidswap.com",
+      "description": "AMM and LP modules for spot swaps and concentrated liquidity flows.",
+      "auditors": [
+        "MoveBit"
+      ],
+      "auditScore": 87,
+      "lastAuditDate": "2025-08-20",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "tags": [
+        "AMM",
+        "vault"
+      ]
+    },
+    "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3": {
+      "platform": "Aries",
+      "website": "https://ariesmarkets.xyz",
+      "description": "Money-market modules for collateralized lend/borrow flows.",
+      "auditors": [
+        "Halborn"
+      ],
+      "auditScore": 86,
+      "lastAuditDate": "2025-08-01",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "tags": [
+        "lending"
+      ]
+    },
+    "0x111ae3e5bc816a5e63c2da97d0aa3886519e0cd5e4b046659fa35796bd11542a": {
+      "platform": "Amnis",
+      "website": "https://amnis.finance",
+      "description": "Liquid staking and reward modules for stAPT based strategies.",
+      "auditors": [
+        "Zellic"
+      ],
+      "auditScore": 88,
+      "lastAuditDate": "2025-07-28",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "tags": [
+        "liquidStaking",
+        "vault"
+      ]
+    },
+    "0xc6bc659f1649553c1a3fa05d9727433dc03843baac29473c817d06d39e7621ba": {
+      "platform": "Echelon",
+      "website": "https://echelon.market",
+      "description": "Money-market modules for collateralized borrowing and repay workflows.",
+      "auditors": [
+        "CertiK"
+      ],
+      "auditScore": 83,
+      "lastAuditDate": "2025-10-10",
+      "securityLevel": "high",
+      "penetrationTested": true,
+      "formalVerification": false,
+      "tags": [
+        "lending",
+        "vault"
+      ]
+    }
+  },
+  "apiVerification": {
+    "rpcEndpoint": "https://fullnode.mainnet.aptoslabs.com/v1",
+    "alternativeEndpoints": [
+      "https://api.mainnet.aptoslabs.com/v1"
+    ]
+  }
+}

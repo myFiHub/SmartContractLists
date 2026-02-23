@@ -1,0 +1,650 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FiHub Aptos-Movement Interaction List Schema",
+  "description": "Schema for DeFi interaction lists on Aptos-Movement blockchain with Move VM specific features. Each interaction may include an Interface List (params) and/or a Tx Construction Spec (typeArguments, arguments, runtimeDeps, preflight) for deterministic build of type args and function args. See docs/INTERACTION_LIST_INTERFACE.md and docs/CONSTRUCTION_SPEC.md.",
+  "type": "object",
+  "required": ["chainId", "token", "interactions", "platforms"],
+  "properties": {
+    "chainId": {
+      "type": "integer",
+      "description": "Chain ID for Aptos-Movement blockchain (1 for mainnet)"
+    },
+    "token": {
+      "type": "object",
+      "description": "Primary token information for the interaction list",
+      "required": ["symbol", "address", "platform", "description"],
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "description": "Token symbol (e.g., MOVE, USDC)"
+        },
+        "address": {
+          "type": "string",
+          "description": "Token address on Aptos-Movement blockchain"
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform that issued the token"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the token"
+        }
+      }
+    },
+    "routes": {
+      "type": "object",
+      "description": "Predefined routes for common DeFi operations",
+      "patternProperties": {
+        "^[a-zA-Z][a-zA-Z0-9_]*$": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "platform"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn"]
+              },
+              "platform": {
+                "type": "string",
+                "description": "Platform name for the operation"
+              },
+              "counterpartRouteKey": {
+                "type": "string",
+                "description": "Optional inverse route key for wind/unwind pairing"
+              }
+            }
+          }
+        }
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "description": "List of available DeFi interactions",
+      "items": {
+        "type": "object",
+        "required": ["type", "platform", "tokens", "module", "function"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn"]
+          },
+          "platform": {
+            "type": "string",
+            "description": "Platform providing the interaction"
+          },
+          "tokens": {
+            "type": "array",
+            "description": "Tokens involved in the interaction",
+            "items": {
+              "type": "object",
+              "required": ["symbol", "address"],
+              "properties": {
+                "symbol": {
+                  "type": "string",
+                  "description": "Token symbol"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "Token address on Aptos-Movement blockchain"
+                }
+              }
+            }
+          },
+          "module": {
+            "type": "string",
+            "description": "Move module address and name (e.g., 0x...::module_name)"
+          },
+          "function": {
+            "type": "string",
+            "description": "Move function name"
+          },
+          "params": {
+            "type": "array",
+            "description": "Interface List: parameter specification for this interaction. Defines argument order, types, and how each value is obtained (user input, static, or runtime). When present, consumers use this to build the function arguments array for the chain; when absent, fall back to type/platform defaults or SCL.",
+            "items": {
+              "type": "object",
+              "required": ["name", "type", "source"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Parameter name (matches Move/SCL when available)"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Move type string (e.g. address, u64, vector<u8>, bool)"
+                },
+                "source": {
+                  "type": "string",
+                  "enum": ["user", "static", "runtime"],
+                  "description": "Where the value comes from: user (form input), static (fixed value), runtime (e.g. pool/market resolver)"
+                },
+                "inputKind": {
+                  "type": "string",
+                  "enum": ["primary", "secondary"],
+                  "description": "When source is user, which form field (primary amount or secondary amount)"
+                },
+                "value": {
+                  "description": "When source is static, the literal value (string, boolean, or number)"
+                },
+                "hint": {
+                  "type": "string",
+                  "description": "Human-readable hint for runtime source (e.g. 'Aries market id from API')"
+                }
+              }
+            },
+            "maxItems": 20
+          },
+          "sclFunctionRef": {
+            "type": "string",
+            "description": "Optional reference to SCL function for ABI alignment: normalized address::moduleName::functionName. Used by validators to ensure params match SCL."
+          },
+          "type_arguments": {
+            "type": "array",
+            "description": "Move type strings for generic entry functions (e.g. coin type). Length must match SCL function generic_type_params when referential checks run.",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Move type (e.g. 0x1::aptos_coin::AptosCoin)"
+            },
+            "maxItems": 20
+          },
+          "type_arguments_source": {
+            "type": "string",
+            "enum": ["static", "runtime"],
+            "description": "When 'runtime', type_arguments are built at runtime (e.g. from user selection); semantic checks may allow missing type_arguments for this interaction. Deprecated in favor of typeArguments when construction spec is used."
+          },
+          "typeArguments": {
+            "type": "object",
+            "description": "Tx Construction Spec: how to deterministically build type arguments. When present, takes precedence over type_arguments/type_arguments_source.",
+            "required": ["mode"],
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": ["static", "template", "resolver"],
+                "description": "static: use literal list. template: substitute placeholders like {fromType},{toType}. resolver: call a named resolver with inputs."
+              },
+              "static": {
+                "type": "array",
+                "description": "When mode is static: literal type strings (e.g. 0x1::aptos_coin::AptosCoin).",
+                "items": { "type": "string", "minLength": 1 },
+                "maxItems": 20
+              },
+              "template": {
+                "type": "array",
+                "description": "When mode is template: strings with placeholders {fromType}, {toType}, {curveType}, {tokenType} substituted at runtime.",
+                "items": { "type": "string" },
+                "maxItems": 20
+              },
+              "resolver": {
+                "type": "object",
+                "description": "When mode is resolver: named resolver and its inputs (placeholder keys reference context).",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Resolver identifier (e.g. thala.v1.weightedPool)"
+                  },
+                  "inputs": {
+                    "type": "object",
+                    "description": "Key-value map; values may be placeholders like {fromType}, {toType}, {poolId}",
+                    "additionalProperties": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "arguments": {
+            "type": "object",
+            "description": "Tx Construction Spec: how to deterministically build function arguments. When present, consumers use this (and optional resolver) instead of params/legacy buildArgs. When only resolver is set, argument values are resolved at runtime (e.g. aries.market_id, echelon.market_index) and SCL argumentSchema may be used for the shape.",
+            "properties": {
+              "schema": {
+                "type": "array",
+                "description": "Ordered list of argument specs. source: user.primary, user.secondary, user.min_out, resolver.market_id, resolver.market_index, resolver.route, interaction.type_arguments_as_vector, static.true, static.false, or static with value for literals.",
+                "items": {
+                  "type": "object",
+                  "required": ["type", "source"],
+                  "properties": {
+                    "name": { "type": "string", "description": "Optional argument name (align with Move/SCL)" },
+                    "type": { "type": "string", "description": "Move type (e.g. u64, vector<address>, vector<u8>, bool, u8)" },
+                    "source": { "type": "string", "description": "Dot path: user.primary, user.secondary, resolver.market_id, resolver.market_index, resolver.route, interaction.type_arguments_as_vector, static.true, static.false, or static" },
+                    "value": { "description": "When source is static: literal value (string, number, boolean); e.g. '0' for min amounts" }
+                  }
+                },
+                "maxItems": 20
+              },
+              "resolver": {
+                "type": "object",
+                "description": "Optional: named resolver for runtime values used in function args. When present, consumers call the resolver before build (e.g. aries.market_id, echelon.market_index). Resolver id examples: aries.market_id (inputs: symbol / {token.symbol}), echelon.market_index (inputs: symbol / {token.symbol}), thala.v1.weightedPool (for swap/LP type args and route).",
+                "required": ["id"],
+                "properties": {
+                  "id": { "type": "string", "description": "Resolver identifier (e.g. aries.market_id, echelon.market_index, thala.v1.weightedPool)" },
+                  "inputs": {
+                    "type": "object",
+                    "description": "Key-value map; values may be placeholders like {token.symbol}",
+                    "additionalProperties": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "runtimeDeps": {
+            "type": "array",
+            "description": "Required runtime lookups (pool registry, market registry, lens). Consumers must have this data before building the tx.",
+            "items": {
+              "type": "object",
+              "required": ["kind", "platform"],
+              "properties": {
+                "kind": { "type": "string", "description": "e.g. poolRegistry, marketRegistry, lens" },
+                "platform": { "type": "string", "description": "Platform name (e.g. Thala)" },
+                "version": { "type": "string", "description": "Optional protocol version (e.g. v1)" },
+                "source": { "type": "string", "description": "Optional: lens, api, static" },
+                "contractRef": { "type": "string", "description": "When source is contract-scoped: parent address and module (e.g. 0x...::module)" },
+                "sourceType": { "type": "string", "enum": ["standalone", "contractView", "indexer", "api"], "description": "How to load: standalone (file/API), contractView (view on contractRef), indexer (script output), api" }
+              }
+            },
+            "maxItems": 10
+          },
+          "preflight": {
+            "type": "array",
+            "description": "Deterministic checks before build/simulate (pool exists, balance sufficient, etc.).",
+            "items": {
+              "type": "object",
+              "required": ["check"],
+              "properties": {
+                "check": { "type": "string", "description": "e.g. poolExists, balanceSufficient, positionExists" },
+                "resolver": { "type": "string", "description": "Resolver id when check depends on it (e.g. thala.v1.weightedPool)" },
+                "token": { "type": "string", "description": "Placeholder or type for balance check" },
+                "amount": { "type": "string", "description": "Placeholder for amount (e.g. {amountIn})" }
+              }
+            },
+            "maxItems": 10
+          },
+          "platformParamRef": {
+            "type": "object",
+            "description": "Where to resolve a platform-specific parameter (e.g. market_id, market_index) for building function args. Resolves to SCL extensions or API.",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": ["scl", "api", "runtime"],
+                "description": "scl = from SCL contract extensions; api = from app API; runtime = from pool/market resolver"
+              },
+              "extensionKey": {
+                "type": "string",
+                "description": "When source is scl: extension key (e.g. marketIdsBySymbol, marketIndicesBySymbol)"
+              },
+              "symbolFromToken": {
+                "type": "boolean",
+                "description": "When true, lookup key is the interaction primary token symbol"
+              },
+              "contractRef": {
+                "type": "string",
+                "description": "Optional. When source is scl: address::module of contract; if omitted, use interaction module"
+              }
+            },
+            "required": ["source"]
+          },
+          "entryPoint": {
+            "type": "boolean",
+            "description": "Whether the function is a transaction entry point",
+            "default": true
+          },
+          "visibility": {
+            "type": "string",
+            "enum": ["public", "private", "friend"],
+            "description": "Function visibility level",
+            "default": "public"
+          },
+          "gasEstimate": {
+            "type": "integer",
+            "description": "Estimated gas cost for the operation"
+          },
+          "receiptToken": {
+            "type": "object",
+            "description": "Optional receipt/position token for wind and unwind accounting",
+            "required": ["symbol", "address"],
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "Receipt or position token symbol"
+              },
+              "address": {
+                "type": "string",
+                "description": "Receipt or position token address"
+              }
+            }
+          },
+          "claimContext": {
+            "type": "object",
+            "description": "Optional reward claim context",
+            "properties": {
+              "rewardToken": {
+                "type": "object",
+                "required": ["symbol", "address"],
+                "properties": {
+                  "symbol": {
+                    "type": "string",
+                    "description": "Reward token symbol"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "Reward token address"
+                  }
+                }
+              },
+              "sourceType": {
+                "type": "string",
+                "description": "Source interaction class (stake, vault, lp, farm)"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable claim context label"
+              }
+            }
+          },
+          "moveSpecific": {
+            "type": "object",
+            "description": "Move VM specific properties",
+            "properties": {
+              "acquires": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Resources acquired by the function"
+              },
+              "resourceHandling": {
+                "type": "string",
+                "enum": ["fungibleAsset", "coin", "coinToFungibleAsset", "fungibleAssetToCoin", "calculation", "resource"],
+                "description": "Type of resource handling"
+              },
+              "crossChainCapable": {
+                "type": "boolean",
+                "description": "Whether the operation supports cross-chain functionality"
+              },
+              "leverageOptimization": {
+                "type": "boolean",
+                "description": "Whether the operation includes leverage optimization"
+              },
+              "yieldOptimization": {
+                "type": "boolean",
+                "description": "Whether the operation includes yield optimization"
+              },
+              "strategyManagement": {
+                "type": "boolean",
+                "description": "Whether the operation involves strategy management"
+              },
+              "liquidityProvision": {
+                "type": "boolean",
+                "description": "Whether the operation involves liquidity provision"
+              },
+              "farming": {
+                "type": "boolean",
+                "description": "Whether the operation involves farming"
+              },
+              "rewardClaiming": {
+                "type": "boolean",
+                "description": "Whether the operation involves reward claiming"
+              },
+              "strategyCreation": {
+                "type": "boolean",
+                "description": "Whether the operation involves strategy creation"
+              },
+              "conversionType": {
+                "type": "string",
+                "enum": ["coin_to_fa", "fa_to_coin"],
+                "description": "Type of conversion operation"
+              },
+              "bridgeProtocol": {
+                "type": "string",
+                "enum": ["Concordia", "LayerZero", "Wormhole", "Native"],
+                "description": "Bridge protocol used for cross-chain operations"
+              },
+              "autoCompound": {
+                "type": "boolean",
+                "description": "Whether the operation includes auto-compounding"
+              }
+            }
+          }
+        }
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "description": "Information about DeFi platforms",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "link"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Platform name"
+          },
+          "token": {
+            "type": "string",
+            "description": "Platform's native token symbol"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed platform description"
+          },
+          "link": {
+            "type": "string",
+            "format": "uri",
+            "description": "Platform website URL"
+          },
+          "moveSpecific": {
+            "type": "object",
+            "description": "Move VM specific platform properties",
+            "properties": {
+              "modules": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of Move modules provided by the platform"
+              },
+              "crossChainProtocols": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["Concordia", "LayerZero", "Wormhole", "Native"]
+                },
+                "description": "Supported cross-chain protocols"
+              },
+              "resourceTypes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["fungibleAsset", "coin", "resource"]
+                },
+                "description": "Types of resources handled by the platform"
+              },
+              "parallelExecution": {
+                "type": "boolean",
+                "description": "Whether the platform supports parallel execution"
+              },
+              "gasOptimized": {
+                "type": "boolean",
+                "description": "Whether the platform is gas optimized"
+              },
+              "crossChainCapable": {
+                "type": "boolean",
+                "description": "Whether the platform supports cross-chain operations"
+              },
+              "yieldOptimization": {
+                "type": "boolean",
+                "description": "Whether the platform provides yield optimization"
+              },
+              "strategyManagement": {
+                "type": "boolean",
+                "description": "Whether the platform provides strategy management"
+              },
+              "nativeChain": {
+                "type": "boolean",
+                "description": "Whether this is the native chain"
+              },
+              "vmType": {
+                "type": "string",
+                "enum": ["AptosMoveVM", "EVM"],
+                "description": "Virtual machine type"
+              },
+              "assetStandard": {
+                "type": "string",
+                "enum": ["FungibleAsset", "ERC20", "ERC721", "ERC1155"],
+                "description": "Asset standard used"
+              },
+              "resourceModel": {
+                "type": "boolean",
+                "description": "Whether the platform uses resource model"
+              }
+            }
+          }
+        }
+      }
+    },
+    "yieldStrategies": {
+      "type": "array",
+      "description": "Available yield optimization strategies",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "riskLevel", "expectedAPY", "strategies"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Strategy name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Strategy description"
+          },
+          "riskLevel": {
+            "type": "string",
+            "enum": ["low", "medium", "high"],
+            "description": "Risk level of the strategy"
+          },
+          "expectedAPY": {
+            "type": "string",
+            "description": "Expected annual percentage yield"
+          },
+          "strategies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of strategies used"
+          }
+        }
+      }
+    },
+    "moveVmConsiderations": {
+      "type": "object",
+      "description": "Key considerations for Move VM DeFi interactions",
+      "properties": {
+        "resourceModel": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of the resource model"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "moduleSystem": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of the module system"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "fungibleAssets": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of fungible assets"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "crossChainArchitecture": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of cross-chain architecture"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "gasOptimization": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of gas optimization"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        },
+        "yieldOptimization": {
+          "type": "object",
+          "required": ["description", "implications"],
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of yield optimization"
+            },
+            "implications": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Implications for DeFi operations"
+            }
+          }
+        }
+      }
+    }
+  }
+}

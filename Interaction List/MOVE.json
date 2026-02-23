@@ -1,0 +1,888 @@
+{
+  "chainId": 1,
+  "token": {
+    "symbol": "MOVE",
+    "address": "0x000000000000000000000000000000000000000000000000000000000000000A",
+    "platform": "Movement",
+    "description": "MOVE Coin is the native fungible asset of the Movement blockchain, implemented using the FA (Fungible Asset) standard. It serves as the primary currency for gas fees, staking, and DeFi operations within the Movement ecosystem."
+  },
+  "routes": {
+    "movePositionLending": [
+      {
+        "type": "lend",
+        "platform": "MovePosition"
+      }
+    ],
+    "movePositionVault": [
+      {
+        "type": "vault",
+        "platform": "MovePosition"
+      }
+    ],
+    "movePositionVaultWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "MovePosition",
+        "counterpartRouteKey": "movePositionVault"
+      }
+    ],
+    "movePositionBorrowing": [
+      {
+        "type": "borrow",
+        "platform": "MovePosition"
+      }
+    ],
+    "layerbankLending": [
+      {
+        "type": "lend",
+        "platform": "Layerbank"
+      }
+    ],
+    "layerbankWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Layerbank",
+        "counterpartRouteKey": "layerbankLending"
+      }
+    ],
+    "echelonVault": [
+      {
+        "type": "vault",
+        "platform": "Echelon"
+      }
+    ],
+    "echelonWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Echelon",
+        "counterpartRouteKey": "echelonVault"
+      }
+    ],
+    "echelonClaim": [
+      {
+        "type": "claim",
+        "platform": "Echelon",
+        "counterpartRouteKey": "echelonYieldFarming"
+      }
+    ],
+    "echelonYieldFarming": [
+      {
+        "type": "vault",
+        "platform": "Echelon"
+      },
+      {
+        "type": "harvest",
+        "platform": "Echelon"
+      }
+    ],
+    "echelonAutoCompound": [
+      {
+        "type": "vault",
+        "platform": "Echelon"
+      },
+      {
+        "type": "compound",
+        "platform": "Echelon"
+      }
+    ],
+    "moveUsdcYuzuLiquidity": [
+      {
+        "type": "lp",
+        "platform": "YUZU",
+        "pair": "MOVE/USDC"
+      }
+    ],
+    "moveUsdtYuzuLiquidity": [
+      {
+        "type": "lp",
+        "platform": "YUZU",
+        "pair": "MOVE/USDT"
+      }
+    ],
+    "moveUsdcMosaicLiquidity": [
+      {
+        "type": "lp",
+        "platform": "Mosaic",
+        "pair": "MOVE/USDC"
+      }
+    ],
+    "moveUsdtMosaicLiquidity": [
+      {
+        "type": "lp",
+        "platform": "Mosaic",
+        "pair": "MOVE/USDT"
+      }
+    ],
+    "moveUsdcInterestDexLiquidity": [
+      {
+        "type": "lp",
+        "platform": "Interest DEX",
+        "pair": "MOVE/USDC"
+      }
+    ],
+    "yuzuSwap": [
+      {
+        "type": "swap",
+        "platform": "YUZU"
+      }
+    ],
+    "mosaicSwap": [
+      {
+        "type": "swap",
+        "platform": "Mosaic"
+      }
+    ],
+    "interestDexSwap": [
+      {
+        "type": "swap",
+        "platform": "Interest DEX"
+      }
+    ],
+    "interestDexYield": [
+      {
+        "type": "lp",
+        "platform": "Interest DEX"
+      }
+    ],
+    "mosaicSwapLpStake": [
+      {
+        "type": "swap",
+        "platform": "Mosaic"
+      },
+      {
+        "type": "lp",
+        "platform": "Mosaic",
+        "pair": "MOVE/USDC"
+      },
+      {
+        "type": "stake",
+        "platform": "Mosaic"
+      }
+    ],
+    "yuzuSwapLp": [
+      {
+        "type": "swap",
+        "platform": "YUZU"
+      },
+      {
+        "type": "lp",
+        "platform": "YUZU",
+        "pair": "MOVE/USDC"
+      }
+    ],
+    "mosaicStake": [
+      {
+        "type": "stake",
+        "platform": "Mosaic"
+      }
+    ]
+  },
+  "interactions": [
+    {
+      "type": "lend",
+      "platform": "MovePosition",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::lend",
+      "function": "lend_to_portfolio",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset",
+        "crossChainCapable": true
+      }
+    },
+    {
+      "type": "borrow",
+      "platform": "MovePosition",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0xccd2621d2897d407e06d18e6ebe3be0e6d9b61f1e809dd49360522b9105812cf::borrow",
+      "function": "borrow_v2",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "vault",
+      "platform": "MovePosition",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x31d0a30ae53e2ae852fcbdd1fce75a4ea6ad81417739ef96883eba9574ffe31e::vault",
+      "function": "deposit",
+      "receiptToken": {
+        "symbol": "mpMOVE-VAULT",
+        "address": "0x31d0a30ae53e2ae852fcbdd1fce75a4ea6ad81417739ef96883eba9574ffe31e::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "lend",
+      "platform": "Layerbank",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault",
+      "function": "deposit",
+      "receiptToken": {
+        "symbol": "lbMOVE-POS",
+        "address": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault::LendingPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [
+          "LendingPosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "crossChainCapable": true
+      }
+    },
+    {
+      "type": "vault",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "deposit",
+      "receiptToken": {
+        "symbol": "ecMOVE-VAULT",
+        "address": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1800,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "yieldOptimization": true
+      }
+    },
+    {
+      "type": "harvest",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "deposit",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition",
+          "YieldStrategy"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "yieldOptimization": true
+      }
+    },
+    {
+      "type": "compound",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "deposit",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition",
+          "YieldStrategy"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "yieldOptimization": true,
+        "autoCompound": true
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "MovePosition",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x31d0a30ae53e2ae852fcbdd1fce75a4ea6ad81417739ef96883eba9574ffe31e::vault",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "mpMOVE-VAULT",
+        "address": "0x31d0a30ae53e2ae852fcbdd1fce75a4ea6ad81417739ef96883eba9574ffe31e::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2100,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Layerbank",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "lbMOVE-POS",
+        "address": "0x574ecf25ca263b4d9cbd43ded90bba6a52309e0cba2213f9606e4b4a3a20ffae::vault::LendingPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [
+          "LendingPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "withdraw",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "withdraw",
+      "receiptToken": {
+        "symbol": "ecMOVE-VAULT",
+        "address": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault::VaultPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1900,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition"
+        ],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "claim",
+      "platform": "Echelon",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        }
+      ],
+      "module": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::vault",
+      "function": "harvest",
+      "claimContext": {
+        "rewardToken": {
+          "symbol": "ECH",
+          "address": "0x58739edcac2f86e62342466f20809b268430aedf32937eba32eaac7e0bbf5233::reward::ECH"
+        },
+        "sourceType": "vault",
+        "label": "Echelon vault rewards"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1800,
+      "moveSpecific": {
+        "acquires": [
+          "VaultPosition",
+          "YieldStrategy"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "rewardClaiming": true
+      }
+    },
+    {
+      "type": "swap",
+      "platform": "YUZU",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        },
+        {
+          "symbol": "USDC",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000B"
+        }
+      ],
+      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::yuzu",
+      "function": "swap",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1300,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset",
+        "crossChainCapable": true
+      }
+    },
+    {
+      "type": "lp",
+      "platform": "YUZU",
+      "pair": "MOVE/USDC",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        },
+        {
+          "symbol": "USDC",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000B"
+        }
+      ],
+      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::scripts",
+      "function": "add_liquidity_one_coin",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1800,
+      "moveSpecific": {
+        "acquires": [
+          "LiquidityPosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "liquidityProvision": true
+      },
+      "receiptToken": {
+        "symbol": "yzMOVE-USDC-LP",
+        "address": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::scripts::LiquidityPosition"
+      }
+    },
+    {
+      "type": "lp",
+      "platform": "YUZU",
+      "pair": "MOVE/USDT",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        },
+        {
+          "symbol": "USDT",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000C"
+        }
+      ],
+      "module": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::scripts",
+      "function": "add_liquidity_one_coin",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1800,
+      "moveSpecific": {
+        "acquires": [
+          "LiquidityPosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "liquidityProvision": true
+      },
+      "receiptToken": {
+        "symbol": "yzMOVE-USDT-LP",
+        "address": "0x46566b4a16a1261ab400ab5b9067de84ba152b5eb4016b217187f2a2ca980c5a::scripts::LiquidityPosition"
+      }
+    },
+    {
+      "type": "swap",
+      "platform": "Mosaic",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        },
+        {
+          "symbol": "USDC",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000B"
+        }
+      ],
+      "module": "0x03f7399a0d3d646ce94ee0badf16c4c3f3c656fe3a5e142e83b5ebc011aa8b3d::router",
+      "function": "swap",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1700,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "lp",
+      "platform": "Mosaic",
+      "pair": "MOVE/USDC",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        },
+        {
+          "symbol": "USDC",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000B"
+        }
+      ],
+      "module": "0xfbdb3da73efcfa742d542f152d65fc6da7b55dee864cd66475213e4be18c9d54::pool",
+      "function": "add_liquidity_weighted_entry",
+      "receiptToken": {
+        "symbol": "mosMOVE-USDC-LP",
+        "address": "0xfbdb3da73efcfa742d542f152d65fc6da7b55dee864cd66475213e4be18c9d54::pool::PoolPosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2900,
+      "moveSpecific": {
+        "acquires": [
+          "PoolPosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "liquidityProvision": true
+      }
+    },
+    {
+      "type": "swap",
+      "platform": "Interest DEX",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        },
+        {
+          "symbol": "USDC",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000B"
+        }
+      ],
+      "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::interest_dex",
+      "function": "swap",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1400,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset"
+      }
+    },
+    {
+      "type": "lp",
+      "platform": "Interest DEX",
+      "tokens": [
+        {
+          "symbol": "MOVE",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000A"
+        },
+        {
+          "symbol": "USDC",
+          "address": "0x000000000000000000000000000000000000000000000000000000000000000B"
+        }
+      ],
+      "module": "0x373aab3f20ef3c31fc4caa287b0f18170f4a0b4a28c80f7ee79434458f70f241::interest_dex",
+      "function": "swap",
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1900,
+      "moveSpecific": {
+        "acquires": [
+          "LiquidityPosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "liquidityProvision": true
+      }
+    },
+    {
+      "type": "stake",
+      "platform": "Mosaic",
+      "tokens": [
+        {
+          "symbol": "mosMOVE-USDC-LP",
+          "address": "0xfbdb3da73efcfa742d542f152d65fc6da7b55dee864cd66475213e4be18c9d54::pool::PoolPosition"
+        }
+      ],
+      "module": "0x78cc27a51d18877acf616d5f432c23851f8689183ad56f3ddf690bb3d372ca39::farming_fa_wrapper",
+      "function": "stake",
+      "receiptToken": {
+        "symbol": "mosMOVE-USDC-STAKED",
+        "address": "0x78cc27a51d18877acf616d5f432c23851f8689183ad56f3ddf690bb3d372ca39::farming_fa_wrapper::StakePosition"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2200,
+      "moveSpecific": {
+        "acquires": [
+          "StakePosition"
+        ],
+        "resourceHandling": "fungibleAsset",
+        "farming": true
+      }
+    }
+  ],
+  "platforms": [
+    {
+      "name": "MovePosition",
+      "token": "MP",
+      "description": "Advanced cross-chain lending protocol built on Concordia's OmniRisk layer with intelligent leverage optimization and bespoke risk calculations. MovePosition provides sophisticated DeFi primitives including lending, borrowing, vault management, and cross-chain operations specifically designed for the Movement ecosystem.",
+      "link": "https://www.moveposition.xyz/",
+      "moveSpecific": {
+        "modules": [
+          "lend",
+          "vault",
+          "borrow",
+          "coin_to_fa",
+          "concbox",
+          "hocket",
+          "superposition"
+        ],
+        "crossChainProtocols": [
+          "Concordia",
+          "LayerZero"
+        ],
+        "resourceTypes": [
+          "fungibleAsset",
+          "coin"
+        ],
+        "parallelExecution": true,
+        "gasOptimized": true
+      }
+    },
+    {
+      "name": "Echelon",
+      "token": "ECHELON",
+      "description": "Advanced DeFi vault platform with sophisticated yield optimization strategies. Echelon provides automated yield farming, liquidity provision, and portfolio management services specifically designed for the Movement ecosystem.",
+      "link": "https://echelon.finance/",
+      "moveSpecific": {
+        "modules": [
+          "vault",
+          "yield",
+          "strategy",
+          "liquidity",
+          "farming"
+        ],
+        "yieldOptimization": true,
+        "strategyManagement": true,
+        "resourceTypes": [
+          "fungibleAsset"
+        ],
+        "parallelExecution": true,
+        "gasOptimized": true
+      }
+    },
+    {
+      "name": "Layerbank",
+      "token": "LAB",
+      "description": "Multi-layer lending protocol with advanced risk management and cross-chain capabilities. Layerbank provides comprehensive lending and borrowing services across multiple chains.",
+      "link": "https://layerbank.finance/",
+      "moveSpecific": {
+        "modules": [
+          "vault",
+          "risk_management"
+        ],
+        "crossChainCapable": true,
+        "bridgeProtocols": [
+          "LayerZero",
+          "Wormhole"
+        ],
+        "resourceTypes": [
+          "fungibleAsset"
+        ],
+        "parallelExecution": true,
+        "gasOptimized": true
+      }
+    },
+    {
+      "name": "YUZU",
+      "token": "YUZU",
+      "description": "Decentralized exchange with concentrated liquidity and advanced AMM features. YUZU provides efficient trading and liquidity provision with tick-based pricing and cross-chain support.",
+      "link": "https://yuzu.exchange/",
+      "moveSpecific": {
+        "modules": [
+          "yuzu",
+          "farming"
+        ],
+        "crossChainCapable": true,
+        "bridgeProtocols": [
+          "LayerZero"
+        ],
+        "resourceTypes": [
+          "fungibleAsset"
+        ],
+        "parallelExecution": true,
+        "gasOptimized": true
+      }
+    },
+    {
+      "name": "Mosaic",
+      "token": "MOS",
+      "description": "Comprehensive DeFi protocol with multiple financial primitives including AMM, lending, and cross-chain operations. Mosaic provides a unified platform for various DeFi activities.",
+      "link": "https://mosaic.finance/",
+      "moveSpecific": {
+        "modules": [
+          "mosaic",
+          "amm"
+        ],
+        "crossChainCapable": true,
+        "bridgeProtocols": [
+          "LayerZero"
+        ],
+        "resourceTypes": [
+          "fungibleAsset"
+        ],
+        "parallelExecution": true,
+        "gasOptimized": true
+      }
+    },
+    {
+      "name": "Interest DEX",
+      "token": "INT",
+      "description": "Decentralized exchange with interest-bearing assets and yield generation capabilities. Interest DEX combines trading with yield optimization for enhanced returns.",
+      "link": "https://interest.finance/",
+      "moveSpecific": {
+        "modules": [
+          "interest_dex"
+        ],
+        "resourceTypes": [
+          "fungibleAsset"
+        ],
+        "parallelExecution": true,
+        "gasOptimized": true
+      }
+    },
+    {
+      "name": "Move.Fun",
+      "token": "FUN",
+      "description": "Fun and gamified DeFi platform with social features and reward mechanisms. Move.Fun combines DeFi with gaming elements for an engaging user experience.",
+      "link": "https://move.fun/",
+      "moveSpecific": {
+        "modules": [
+          "game",
+          "rewards",
+          "social"
+        ],
+        "resourceTypes": [
+          "fungibleAsset"
+        ],
+        "parallelExecution": true,
+        "gasOptimized": true
+      }
+    },
+    {
+      "name": "Concordia",
+      "token": "CONC",
+      "description": "Cross-chain infrastructure protocol that enables secure asset transfers and state synchronization across multiple blockchains. Concordia provides the underlying infrastructure for cross-chain DeFi operations.",
+      "link": "https://concordia.xyz/",
+      "moveSpecific": {
+        "crossChainCapable": true,
+        "bridgeProtocols": [
+          "Native",
+          "LayerZero"
+        ],
+        "resourceTypes": [
+          "fungibleAsset"
+        ],
+        "parallelExecution": true
+      }
+    },
+    {
+      "name": "Movement",
+      "token": "MOVE",
+      "description": "The native blockchain platform built on Aptos Move VM, providing high-performance, parallel execution capabilities with advanced DeFi primitives. Movement serves as the foundation for all DeFi protocols in the ecosystem.",
+      "link": "https://movementlabs.xyz/",
+      "moveSpecific": {
+        "nativeChain": true,
+        "vmType": "AptosMoveVM",
+        "assetStandard": "FungibleAsset",
+        "parallelExecution": true,
+        "gasOptimized": true,
+        "resourceModel": true
+      }
+    }
+  ],
+  "moveVmConsiderations": {
+    "resourceModel": {
+      "description": "Move uses a resource-based model where assets are stored as resources with specific abilities (key, store, copy, drop)",
+      "implications": [
+        "Assets cannot be duplicated or lost",
+        "Explicit resource handling required",
+        "Type safety enforced at compile time"
+      ]
+    },
+    "moduleSystem": {
+      "description": "Instead of contracts, Move uses modules with specific functions and visibility",
+      "implications": [
+        "Functions have visibility levels (public, private, friend)",
+        "Entry points are explicitly marked",
+        "Module-based organization"
+      ]
+    },
+    "fungibleAssets": {
+      "description": "Movement uses the FA standard instead of ERC-20 tokens",
+      "implications": [
+        "Native support for fungible assets",
+        "Built-in transfer and balance management",
+        "Integration with Move VM primitives"
+      ]
+    },
+    "crossChainArchitecture": {
+      "description": "Built-in support for cross-chain operations through Concordia and LayerZero",
+      "implications": [
+        "Native cross-chain asset transfers",
+        "State synchronization capabilities",
+        "Reduced complexity for cross-chain DeFi"
+      ]
+    },
+    "gasOptimization": {
+      "description": "Parallel execution and resource efficiency",
+      "implications": [
+        "Lower gas costs for complex operations",
+        "Parallel transaction processing",
+        "Resource-efficient execution"
+      ]
+    }
+  }
+}
