@@ -169,7 +169,6 @@
           "is_entry": true,
           "generic_type_params": 11,
           "params": [
-            "vector<address>",
             "u64",
             "u64"
           ],
@@ -187,8 +186,6 @@
           "is_entry": true,
           "generic_type_params": 8,
           "params": [
-            "address",
-            "address",
             "u64",
             "u64"
           ],
