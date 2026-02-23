@@ -26,6 +26,10 @@ The IL is a transaction/intent catalog per token/platform: interaction type, inv
 
 > The AI concierge **plans from IL** (user workflows and routing) and **validates/trust-checks from SCL** (modules and truth). Everything the user can execute must be represented as an IL entry **AND** SCL module/function metadata.
 
+### Schema data required for the website
+
+The frontend needs specific SCL and IL fields to build transactions, show positions, pool ratios, and receipts. See **[docs/FRONTEND_SCHEMA_REQUIREMENTS.md](docs/FRONTEND_SCHEMA_REQUIREMENTS.md)** for a concise list of required and optional schema data. **[docs/SCHEMA_EXTENSIONS.md](docs/SCHEMA_EXTENSIONS.md)** defines extension keys (market IDs, receipt, position, pool state, APY) and how they resolve in the app.
+
 ---
 
 ## Current Implementation
@@ -69,7 +73,9 @@ interaction_id = hash(chainId, type, platform, module_id, functionName, tokens[]
 | `GET /api/tracks?network=movement|aptos` | IL directory index | Available token symbols with interaction type summaries |
 | `GET /api/tracks/[token]?network=movement|aptos` | IL per-token JSON | Interaction List for a specific token (e.g. MOVE, USDC, APT) |
 | `GET /api/registry/search?q=...` | SCL + IL | Full-text search across contracts and interactions |
-| `GET /api/opportunities?token=...` | IL + APY data | Computed opportunities (IL routes joined with yield data) |
+| `GET /api/opportunities?token=...` | IL + APY data | Computed opportunities (IL routes joined with yield data; APY is static per platform/type in MVP) |
+| `GET /api/position?action=...&network=...&address=...&protocol=...&token=...` | SCL extensions or mock | User position (supplied, health, LP, etc.); live when SCL has positionSource/positionView, else mock |
+| `GET /api/pool-state?network=...&module=...&args=...` | SCL extensions | Pool reserves/ratio for LP ratio suggestion |
 | `POST /api/tx/build` | IL allowlist | Build tx payload — **only** registered module::function pairs allowed |
 
 ### Data Flow
@@ -343,6 +349,7 @@ SmartContractLists/
 │   ├── observed_functions_movement.json                 # Movement observed entry functions report
 │   ├── observed_functions_aptos.json                    # Aptos observed entry functions report
 │   ├── PROTOCOL_GAP_RESEARCH.md                         # Follow-up protocol research backlog
+│   ├── FRONTEND_SCHEMA_REQUIREMENTS.md                 # Data required in SCL/IL for website operation
 │   └── FUTURE_DEVELOPMENT_ARCHITECTURE.md               # Data-driven SCL/IL argument construction (future)
 ├── LICENSE
 └── README.md                                            # This file
