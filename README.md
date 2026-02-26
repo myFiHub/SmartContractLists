@@ -12,7 +12,7 @@ Inspired by the success of token lists in wallets like Uniswap, FiHub's **Smart 
 
 ### Layer A: Smart Contract List (SCL) — "What exists + how risky it is"
 
-The SCL is the canonical inventory of Move modules and their affordances: `moduleName`, `functions`, `structs`, plus rich "trust surface" metadata (audit score, governance, upgradeability, security level, compliance, interoperability).
+The SCL is the canonical inventory of Move modules and their affordances: `moduleName`, `functions`, `structs`, plus rich "trust surface" metadata (audit score, governance, upgradeability, security level, compliance, interoperability). **Token contracts** (used in swap/LP and amount conversion) should include `symbol` and `decimals` so the app can convert human amounts to raw units and compute pool ratios correctly.
 
 **Schema:** [`FiHub Aptos-Movement Smart Contract List Schema.json`]
 

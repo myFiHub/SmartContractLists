@@ -202,7 +202,16 @@
       "extensions": {
         "audited": true,
         "verified": true,
-        "friends": []
+        "friends": [],
+        "poolStateSource": "view",
+        "poolStateView": {
+          "entry": "get_reserves",
+          "args": ["pool_type_args"]
+        },
+        "poolStateViewModuleRef": "0x48271d39d0b05bd6efca2278f22277d6fcc375504f9839fd73f74ace240861af::weighted_pool",
+        "receiptType": "LPPosition",
+        "receiptStructName": "LPPosition",
+        "receiptTypeNote": "LP position receipt in weighted_pool module."
       }
     },
     {
@@ -554,6 +563,8 @@
       "moduleName": "usdc",
       "platform": "USDC",
       "name": "USDC",
+      "symbol": "USDC",
+      "decimals": 6,
       "description": "USDC transfer and mint module.",
       "website": "https://www.circle.com/usdc",
       "tags": [
@@ -590,6 +601,8 @@
       "moduleName": "usdt",
       "platform": "USDT",
       "name": "USDT",
+      "symbol": "USDT",
+      "decimals": 6,
       "description": "USDT transfer and mint module.",
       "website": "https://tether.to",
       "tags": [
@@ -744,6 +757,11 @@
         "audited": true,
         "verified": true,
         "friends": [],
+        "poolStateSource": "view",
+        "poolStateView": {
+          "entry": "get_pool_reserves",
+          "args": ["pool_type_args"]
+        },
         "receiptType": "LPToken",
         "receiptAddress": "0x05a97986a9d031c4567e15b797be516910cfcb4156312482efc6a19c0a30c948::lp_coin::LP",
         "lpResourceOwner": "0x05a97986a9d031c4567e15b797be516910cfcb4156312482efc6a19c0a30c948",
@@ -1127,6 +1145,8 @@
       "moduleName": "aptos_coin",
       "platform": "Aptos",
       "name": "Aptos Coin",
+      "symbol": "APT",
+      "decimals": 8,
       "description": "Native Aptos coin module (aptos_coin::AptosCoin). Referenced in Thala V1 pool registry.",
       "website": "https://aptos.dev",
       "tags": [
