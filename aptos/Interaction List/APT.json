@@ -83,19 +83,6 @@
         "counterpartRouteKey": "amnisStake"
       }
     ],
-    "echoVault": [
-      {
-        "type": "vault",
-        "platform": "Echo"
-      }
-    ],
-    "echoWithdraw": [
-      {
-        "type": "withdraw",
-        "platform": "Echo",
-        "counterpartRouteKey": "echoVault"
-      }
-    ],
     "thalaSwapLpLend": [
       {
         "type": "swap",
@@ -347,32 +334,6 @@
       }
     },
     {
-      "type": "vault",
-      "platform": "Echo",
-      "type_arguments": ["0x1::aptos_coin::AptosCoin"],
-      "tokens": [
-        {
-          "symbol": "APT",
-          "address": "0x1::aptos_coin::AptosCoin"
-        }
-      ],
-      "module": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault",
-      "function": "deposit",
-      "receiptToken": {
-        "symbol": "eAPT-VAULT",
-        "address": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault::VaultPosition"
-      },
-      "entryPoint": true,
-      "visibility": "public",
-      "gasEstimate": 2100,
-      "moveSpecific": {
-        "acquires": [
-          "VaultPosition"
-        ],
-        "resourceHandling": "coin"
-      }
-    },
-    {
       "type": "withdraw",
       "platform": "Thala",
       "type_arguments": ["0x1::aptos_coin::AptosCoin"],
@@ -447,32 +408,6 @@
         ],
         "resourceHandling": "coin"
       }
-    },
-    {
-      "type": "withdraw",
-      "platform": "Echo",
-      "type_arguments": ["0x1::aptos_coin::AptosCoin"],
-      "tokens": [
-        {
-          "symbol": "APT",
-          "address": "0x1::aptos_coin::AptosCoin"
-        }
-      ],
-      "module": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault",
-      "function": "withdraw",
-      "receiptToken": {
-        "symbol": "eAPT-VAULT",
-        "address": "0xb2c7780f0a255a6137e5b39733f5a4c85fe093c549de5c359c1232deef57d1b7::vault::VaultPosition"
-      },
-      "entryPoint": true,
-      "visibility": "public",
-      "gasEstimate": 2050,
-      "moveSpecific": {
-        "acquires": [
-          "VaultPosition"
-        ],
-        "resourceHandling": "coin"
-      }
     }
   ],
   "platforms": [
@@ -495,11 +430,6 @@
       "name": "Amnis",
       "description": "Aptos liquid staking protocol.",
       "link": "https://amnis.finance"
-    },
-    {
-      "name": "Echo",
-      "description": "BTC-focused Aptos vault protocol.",
-      "link": "https://echo-protocol.xyz"
     }
   ]
 }

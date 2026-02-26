@@ -1,0 +1,37 @@
+{
+  "description": "FiHub MOD (Move Dollar) track configuration. MOD is Thala's collateralized stablecoin on Aptos. This file documents how MOD is wired for construction, resolvers, and testing. NOTE: The MOD Interaction List (MOD.json) has been removed from the website; only APT, USDC, USDT tracks are shown. This config is kept for reference if MOD is re-added later.",
+  "token": {
+    "symbol": "MOD",
+    "chainId": 1,
+    "network": "aptos",
+    "moveType": "0x6f986d146e4a90b828d8c12c14b6f4e003fdff11a8eecceceb63744363eaac01::mod_stablecoin::MOD",
+    "ilFile": "MOD.json",
+    "ilPath": "aptos/Interaction List/MOD.json"
+  },
+  "platforms": ["Thala"],
+  "routes": {
+    "thalaSwap": { "steps": ["swap"], "runtimeDeps": "Thala pool resolver (thala-pools.json)" },
+    "thalaLp": { "steps": ["lp"], "runtimeDeps": "Thala pool resolver" },
+    "thalaBorrow": { "steps": ["borrow"], "runtimeDeps": "none (type_arguments in IL)" },
+    "thalaRepay": { "steps": ["repay"], "runtimeDeps": "none" },
+    "thalaModMint": { "steps": ["mint"], "runtimeDeps": "none" },
+    "thalaModRedeem": { "steps": ["redeem"], "runtimeDeps": "none" },
+    "thalaAptModPair": { "steps": ["mint", "lp"], "runtimeDeps": "Thala pool resolver for LP step" }
+  },
+  "construction": {
+    "swap": "Same as APT/USDC: type_arguments_source runtime, resolve Thala pool via resolveThalaV1Pool(MOD, other). getAptosTokenType('MOD') in lib/aptosTokenTypes.ts.",
+    "lp": "Same as Thala APT/USDC: context.selectedPairTokens or fromToken/toToken; Thala pool resolver.",
+    "mint": "mod_stablecoin::mint — type_arguments from IL; no resolver.",
+    "redeem": "mod_stablecoin::redeem — type_arguments from IL; no resolver.",
+    "borrow": "vault_scripts::borrow — type_arguments from IL; no resolver.",
+    "repay": "vault_scripts::repay — type_arguments from IL; no resolver."
+  },
+  "featuredTracks": {
+    "aptos": true,
+    "description": "Mint, CDP, Swap",
+    "source": "containers/portfolio/featuredTracks.ts APTOS_FEATURED"
+  },
+  "tokenTypeConfig": "MOD is registered in lib/aptosTokenTypes.ts SYMBOL_TO_TYPE so swap/LP pool resolution works for pairs like MOD/APT, MOD/USDC.",
+  "canonicalToThala": "MOD (mod_stablecoin::MOD) is identical in Thala registry; no entry needed in canonical-to-thala-asset-types.json (see notes there).",
+  "forkliftVerification": "Optional: add MOD Thala swap or mint to __tests__/forklift/track-verification.test.ts (featured-tracks step) to include MOD in balance report. Requires Thala pool for MOD pair in thala-pools.json."
+}

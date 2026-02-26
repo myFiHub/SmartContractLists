@@ -413,13 +413,19 @@ See:
 
 ## Data sync
 
-The FiHub app uses registry data from `fihub/data/SmartContractLists/`. To update that copy from this canonical source, run (from repo root):
+The FiHub app uses registry data from `fihub/data/SmartContractLists/`. Sync is **bidirectional**:
 
-```bash
-node SmartContractLists/scripts/refresh_registry_data.js
-```
+- **Canonical → fihub/data:** After editing SmartContractLists (SCL, IL, docs), push the copy used by the app:
+  ```bash
+  node SmartContractLists/scripts/refresh_registry_data.js
+  ```
+  This copies Aptos IL, SCL, and docs (e.g. Thala pools, Aries market IDs) from SmartContractLists into `fihub/data/SmartContractLists/`. Run before fihub tests or deploy so unit/integration tests and production use the same data. CI should run this step before fihub tests.
 
-This copies Aptos IL, SCL, and docs (e.g. Thala pools, Aries market IDs) from SmartContractLists into `fihub/data/SmartContractLists/`. Run before running fihub tests or deploy so unit/integration tests and production use the same data as the canonical list. CI should run this step before fihub tests.
+- **fihub/data → Canonical:** When edits were made in `fihub/data/SmartContractLists/` (e.g. SCL extensions, new IL entries, poolStateView) and the canonical repo should reflect them:
+  ```bash
+  node SmartContractLists/scripts/sync_data_to_canonical.js
+  ```
+  This copies Aptos SCL/IL, docs, and Movement SCL/IL from `fihub/data/SmartContractLists/` back into SmartContractLists. Run after curating data in fihub/data so the canonical list stays in sync; then run validations and `refresh_registry_data.js` as needed.
 
 ## Entry-point verification
 
