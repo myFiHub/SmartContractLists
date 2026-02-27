@@ -116,6 +116,25 @@
         "type": "claim",
         "platform": "Amnis"
       }
+    ],
+    "decibelTrade": [
+      {
+        "type": "trade",
+        "platform": "Decibel"
+      }
+    ],
+    "decibelDeposit": [
+      {
+        "type": "vault",
+        "platform": "Decibel"
+      }
+    ],
+    "decibelWithdraw": [
+      {
+        "type": "withdraw",
+        "platform": "Decibel",
+        "counterpartRouteKey": "decibelDeposit"
+      }
     ]
   },
   "interactions": [
@@ -408,6 +427,98 @@
         ],
         "resourceHandling": "coin"
       }
+    },
+    {
+      "type": "trade",
+      "platform": "Decibel",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts_entry",
+      "function": "place_order_to_subaccount",
+      "runtimeDeps": [
+        { "kind": "marketRegistry", "platform": "Decibel", "sourceType": "api" }
+      ],
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 2000,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset",
+        "perpTrading": true,
+        "leverageOptimization": true,
+        "reduceOnly": true
+      },
+      "accountManagement": {
+        "createFunction": "0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts_entry::create_new_subaccount",
+        "accountType": "subaccount"
+      },
+      "status": "live"
+    },
+    {
+      "type": "vault",
+      "platform": "Decibel",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts_entry",
+      "function": "deposit_to_subaccount_at",
+      "runtimeDeps": [
+        { "kind": "accountRegistry", "platform": "Decibel", "sourceType": "api" }
+      ],
+      "receiptToken": {
+        "symbol": "dcblAPT-MARGIN",
+        "address": "0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts::Subaccount"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1500,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset",
+        "perpTrading": true
+      },
+      "accountManagement": {
+        "accountType": "subaccount"
+      },
+      "status": "coming_soon"
+    },
+    {
+      "type": "withdraw",
+      "platform": "Decibel",
+      "tokens": [
+        {
+          "symbol": "APT",
+          "address": "0x1::aptos_coin::AptosCoin"
+        }
+      ],
+      "module": "0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts_entry",
+      "function": "withdraw_from_cross_collateral",
+      "runtimeDeps": [
+        { "kind": "accountRegistry", "platform": "Decibel", "sourceType": "api" }
+      ],
+      "receiptToken": {
+        "symbol": "dcblAPT-MARGIN",
+        "address": "0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts::Subaccount"
+      },
+      "entryPoint": true,
+      "visibility": "public",
+      "gasEstimate": 1500,
+      "moveSpecific": {
+        "acquires": [],
+        "resourceHandling": "fungibleAsset",
+        "perpTrading": true
+      },
+      "accountManagement": {
+        "accountType": "subaccount"
+      },
+      "status": "coming_soon"
     }
   ],
   "platforms": [
@@ -430,6 +541,16 @@
       "name": "Amnis",
       "description": "Aptos liquid staking protocol.",
       "link": "https://amnis.finance"
+    },
+    {
+      "name": "Decibel",
+      "description": "Fully on-chain perpetual futures trading engine on Aptos with deep liquidity, cross-margin, and multi-collateral support.",
+      "link": "https://decibel.trade",
+      "moveSpecific": {
+        "modules": ["0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts_entry"],
+        "resourceTypes": ["fungibleAsset"],
+        "gasOptimized": true
+      }
     }
   ]
 }

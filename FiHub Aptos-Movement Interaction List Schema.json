@@ -44,7 +44,7 @@
             "properties": {
               "type": {
                 "type": "string",
-                "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn"]
+                "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn", "trade"]
               },
               "platform": {
                 "type": "string",
@@ -68,7 +68,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn"]
+            "enum": ["lend", "borrow", "vault", "swap", "lp", "farm", "stake", "bridge", "harvest", "compound", "rebalance", "optimize", "convert", "sync", "claim", "strategy", "withdraw", "redeem", "repay", "liquidate", "mint", "burn", "trade"]
           },
           "platform": {
             "type": "string",
@@ -404,8 +404,36 @@
               "autoCompound": {
                 "type": "boolean",
                 "description": "Whether the operation includes auto-compounding"
+              },
+              "perpTrading": {
+                "type": "boolean",
+                "description": "Whether the interaction involves perpetual futures trading (distinguishes perp-deposit from lending-deposit)"
+              },
+              "reduceOnly": {
+                "type": "boolean",
+                "description": "Whether the interaction supports reduce-only orders that can only decrease position size"
               }
             }
+          },
+          "accountManagement": {
+            "type": "object",
+            "description": "Protocol-specific account management. Required when the protocol needs a dedicated account (e.g. Decibel subaccount) before deposit or trade.",
+            "properties": {
+              "createFunction": {
+                "type": "string",
+                "description": "Module::function to create the protocol account (e.g. 0x...::dex_accounts_entry::create_new_subaccount). Optional for coming_soon interactions."
+              },
+              "accountType": {
+                "type": "string",
+                "enum": ["subaccount", "profile", "vault"],
+                "description": "Type of protocol account: subaccount (Decibel trading account), profile (Aries), vault (vault manager)"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["live", "coming_soon"],
+            "description": "Availability status. When 'coming_soon', the interaction is surfaced in the UI but the primary action is disabled with an informational tooltip."
           }
         }
       }

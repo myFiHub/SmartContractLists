@@ -36,6 +36,10 @@
     "native": {
       "name": "Native",
       "description": "Aptos native module"
+    },
+    "perpDex": {
+      "name": "Perpetuals DEX",
+      "description": "On-chain perpetual futures exchange with CLOB"
     }
   },
   "timestamp": "2026-02-13T00:00:00Z",
@@ -15454,6 +15458,115 @@
       "extensions": {
         "audited": false,
         "verified": true
+      }
+    },
+    {
+      "chainId": 1,
+      "address": "0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06",
+      "moduleName": "dex_accounts_entry",
+      "platform": "Decibel",
+      "name": "Decibel Perpetuals DEX",
+      "description": "Fully on-chain perpetual futures CLOB on Aptos with cross-margin. Only USDC deposits are currently supported as collateral; APT, USDT, BTC, ETH and others are planned (multi-collateral coming soon). See https://docs.decibel.trade/developer-hub/on-chain/overview/contract-reference",
+      "website": "https://decibel.trade",
+      "tags": [
+        "perpDex"
+      ],
+      "functions": [
+        {
+          "name": "create_new_subaccount",
+          "visibility": "public",
+          "is_entry": true,
+          "params": [
+            "&signer"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Zellic", "OtterSec"]
+        },
+        {
+          "name": "deposit_to_subaccount_at",
+          "visibility": "public",
+          "is_entry": true,
+          "params": [
+            "&signer",
+            "address",
+            "0x1::object::Object<0x1::fungible_asset::Metadata>",
+            "u64"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Zellic", "OtterSec"]
+        },
+        {
+          "name": "withdraw_from_cross_collateral",
+          "visibility": "public",
+          "is_entry": true,
+          "params": [
+            "&signer",
+            "0x1::object::Object<0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts::Subaccount>",
+            "0x1::object::Object<0x1::fungible_asset::Metadata>",
+            "u64"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Zellic", "OtterSec"]
+        },
+        {
+          "name": "place_order_to_subaccount",
+          "visibility": "public",
+          "is_entry": true,
+          "params": [
+            "&signer",
+            "0x1::object::Object<0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::dex_accounts::Subaccount>",
+            "0x1::object::Object<0x50ead22afd6ffd9769e3b3d6e0e64a2a350d68e8b102c4e72e33d0b8cfdfdb06::perp_market::PerpMarket>",
+            "u64",
+            "u64",
+            "bool",
+            "u8",
+            "bool",
+            "0x1::option::Option<0x1::string::String>",
+            "0x1::option::Option<u64>",
+            "0x1::option::Option<u64>",
+            "0x1::option::Option<u64>",
+            "0x1::option::Option<u64>",
+            "0x1::option::Option<u64>",
+            "0x1::option::Option<address>",
+            "0x1::option::Option<u64>"
+          ],
+          "return": [],
+          "acquires": [],
+          "audited": true,
+          "verified": true,
+          "auditors": ["Zellic", "OtterSec"]
+        }
+      ],
+      "structs": [],
+      "extensions": {
+        "audited": true,
+        "verified": true,
+        "friends": [],
+        "collateralStatus": {
+          "USDC": "live",
+          "APT": "coming_soon",
+          "USDT": "coming_soon",
+          "BTC": "coming_soon",
+          "ETH": "coming_soon"
+        }
+      },
+      "security": {
+        "auditScore": 85,
+        "securityLevel": "audited",
+        "formalVerification": false
+      },
+      "governance": {
+        "isUpgradeable": true,
+        "multisigRequired": true
       }
     }
   ]
